@@ -1,0 +1,704 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "titolo",
+        "type": "string",
+        "title": "Titolo Principale"
+      },
+      {
+        "name": "sottotitolo",
+        "type": "string",
+        "title": "Sottotitolo (es. Ruolo)"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "descrizione",
+        "type": "array",
+        "title": "Descrizione / Biografia"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Testo Alternativo"
+          }
+        ],
+        "name": "fotoProfilo",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "anno",
+                "type": "string"
+              },
+              {
+                "name": "titolo",
+                "type": "string"
+              },
+              {
+                "name": "luogo",
+                "type": "string",
+                "title": "Luogo (Opzionale)"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "esperienze",
+        "type": "array",
+        "title": "Esperienze e Mostre"
+      }
+    ],
+    "name": "chiSono",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "name": "telefono",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "instagram",
+        "type": "url",
+        "title": "Link Instagram"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "linkedin",
+        "type": "url",
+        "title": "Link LinkedIn"
+      },
+      {
+        "name": "indirizzoStudio",
+        "type": "text"
+      }
+    ],
+    "name": "contatti",
+    "type": "document",
+    "title": "Contatti Generali"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "titolo",
+        "type": "string",
+        "title": "Titolo Categoria"
+      },
+      {
+        "options": {
+          "source": "titolo",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug",
+        "title": "Identificativo URL (Slug)"
+      },
+      {
+        "description": "Testo mostrato sopra la galleria dei lavori per questa categoria",
+        "name": "descrizione",
+        "type": "text",
+        "title": "Descrizione Categoria"
+      },
+      {
+        "initialValue": 0,
+        "description": "Es: 1 apparirà prima di 2",
+        "name": "ordine",
+        "type": "number",
+        "title": "Ordine di visualizzazione"
+      }
+    ],
+    "name": "categoria",
+    "type": "document",
+    "title": "Categorie"
+  },
+  {
+    "fields": [
+      {
+        "name": "titolo",
+        "type": "string",
+        "title": "Titolo (Opzionale)"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "fields": [
+          {
+            "description": "Importante per accessibilità e SEO",
+            "name": "alt",
+            "type": "string",
+            "title": "Testo Alternativo"
+          }
+        ],
+        "name": "immagine",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "categoria"
+          }
+        ],
+        "name": "categoria",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "dateFormat": "YYYY-MM-DD"
+        },
+        "name": "dataScatto",
+        "type": "date",
+        "title": "Data dello Scatto"
+      },
+      {
+        "description": "Numero più basso = compare prima. Lasciare vuoto per ordine per data.",
+        "name": "ordine",
+        "type": "number",
+        "title": "Ordine in Galleria"
+      }
+    ],
+    "name": "fotografia",
+    "type": "document",
+    "title": "Lavori / Fotografie"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "titolo",
+        "type": "string",
+        "title": "Titolo del Progetto"
+      },
+      {
+        "options": {
+          "source": "titolo",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Genera automaticamente dal titolo (es. \"titolo-progetto\" creerà /progetti/titolo-progetto)",
+        "name": "slug",
+        "type": "slug",
+        "title": "Identificativo URL (Slug)"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Assegna a \"Regia\", \"Videomaking\", ecc.",
+        "to": [
+          {
+            "type": "categoria"
+          }
+        ],
+        "name": "categoria",
+        "type": "reference",
+        "title": "Categoria Principale"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "L'immagine mostrata nella griglia del Portfolio",
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Testo Alternativo"
+          }
+        ],
+        "name": "thumbnail",
+        "type": "image",
+        "title": "Immagine di Copertina (Thumbnail)"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ],
+            "level": "warning",
+            "message": "Si consiglia di mantenere la logline sotto i 200 caratteri"
+          }
+        ],
+        "description": "Testo breve (1-2 righe) mostrato nella card in Home/Regia",
+        "name": "logline",
+        "type": "text",
+        "title": "Logline / Breve Riassunto"
+      },
+      {
+        "description": "Es. 2025",
+        "name": "anno",
+        "type": "string",
+        "title": "Anno di Realizzazione"
+      },
+      {
+        "description": "Es. 15 Min, 60 Sec",
+        "name": "durata",
+        "type": "string"
+      },
+      {
+        "description": "Es. Cortometraggio, Documentario, Commercial",
+        "name": "tipo",
+        "type": "string",
+        "title": "Tipologia / Genere"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Link a YouTube o Vimeo da inserire nella pagina (embed automatico)",
+        "name": "videoPrincipaleUrl",
+        "type": "url",
+        "title": "URL Video Principale"
+      },
+      {
+        "description": "Il testo lungo visibile nella pagina di dettaglio dedicata al progetto",
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "descrizioneEstesa",
+        "type": "array",
+        "title": "Testo Descrittivo del Progetto"
+      },
+      {
+        "description": "Foto BTS collegate al progetto da mostrare sotto al video",
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "galleriaBackstage",
+        "type": "array",
+        "title": "Galleria di immagini (Backstage / Set)"
+      },
+      {
+        "description": "Numero più basso = compare prima in alto. Utile per fissare i lavori migliori.",
+        "name": "ordine",
+        "type": "number",
+        "title": "Ordine in Galleria"
+      }
+    ],
+    "name": "progettoVideo",
+    "type": "document",
+    "title": "Progetti Video (Regia / Videomaking)"
+  }
+]
