@@ -26,11 +26,13 @@
                 <span class="nav-separator">&bull;</span>
                 <a href="portfolio.html" id="portfolio-toggle" class="active">Portfolio</a>
                 <span class="nav-separator">&bull;</span>
-                <a href="blog.html">Blog</a>
+                <a href="#">Blog</a>
                 <span class="nav-separator">&bull;</span>
                 <a href="about.html">Chi Sono</a>
                 <span class="nav-separator">&bull;</span>
                 <a href="contact.html">Contatti</a>
+                <span class="nav-separator">&bull;</span>
+                <a href="#">Cerca</a>
             </nav>
             <div class="header-social">
                 <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
@@ -60,18 +62,6 @@
                 <span class="nav-separator">&bull;</span>
                 <a href="#mosaico" class="portfolio-tab-link" data-tab="mosaico">Mosaico</a>
             </nav>
-            <div id="tertiary-fotografia" class="tertiary-submenu-nav">
-                <a href="#fotografia" class="tertiary-link active filter-btn" data-filter="ritratti">Ritratti</a>
-                <span class="nav-separator">&bull;</span>
-                <a href="#fotografia" class="tertiary-link filter-btn" data-filter="narrazione">Narrazione</a>
-            </div>
-            <div id="tertiary-videomaking" class="tertiary-submenu-nav">
-                <a href="#videomaking" class="tertiary-link active filter-btn" data-filter="all">Tutto</a>
-                <span class="nav-separator">&bull;</span>
-                <a href="#videomaking" class="tertiary-link filter-btn" data-filter="reportage">Reportage</a>
-                <span class="nav-separator">&bull;</span>
-                <a href="#videomaking" class="tertiary-link filter-btn" data-filter="ricerca">Ricerca</a>
-            </div>
         </div>
     </header>
 
@@ -97,19 +87,31 @@
         </div>
 
         <div class="fotografia-main" id="fotografia-main" style="display: none; transition: opacity 0.5s;">
+            <nav class="tertiary-nav" id="fotografia-tertiary">
+                <button class="tertiary-btn active" data-filter="ritratti">Ritratti</button>
+                <span class="nav-separator">&bull;</span>
+                <button class="tertiary-btn" data-filter="narrazione">Narrazione</button>
+            </nav>
             <div class="masonry-grid" id="masonry-grid-fotografia"></div>
         </div>
     </section>
 
     <!-- VIDEOMAKING -->
     <section class="portfolio-tab-panel section" id="tab-videomaking" style="display:none">
+        <nav class="tertiary-nav reveal">
+            <button class="tertiary-btn active filter-btn" data-filter="all">Tutto</button>
+            <span class="nav-separator">&bull;</span>
+            <button class="tertiary-btn filter-btn" data-filter="reportage">Reportage</button>
+            <span class="nav-separator">&bull;</span>
+            <button class="tertiary-btn filter-btn" data-filter="ricerca">Ricerca</button>
+        </nav>
         <div class="ordered-grid" id="masonry-grid-videomaking"></div>
     </section>
 
     <!-- REGIA -->
     <section class="portfolio-tab-panel section" id="tab-regia" style="display:none">
         <div class="project-video-wrapper reveal active" style="margin-bottom: 4rem;">
-            <!-- Placeholder for showreel video embed -->
+            <!-- Placeholder for Showreel -->
             <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1&rel=0" allowfullscreen></iframe>
         </div>
         <div class="ordered-grid" id="masonry-grid-regia"></div>
@@ -121,11 +123,9 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="site-footer" style="padding: 2.5rem; text-align: center; border-top: 1px solid var(--border);">
-        <div
-            style="font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text); margin-bottom: 2rem;">
-            info@davidevassallo.net <span style="margin: 0 0.8rem; color: var(--muted)">&bull;</span> +39 333 217 4750
-            <span style="margin: 0 0.8rem; color: var(--muted)">&bull;</span> Milano, Italia
+    <footer class="site-footer">
+        <div class="footer-contact-info">
+            info@davidevassallo.net <span>&bull;</span> +39 333 217 4750 <span>&bull;</span> Milano, Italia
         </div>
         <div class="footer-content">
             <div class="footer-bottom">&copy; 2026 Davide Vassallo. All rights reserved.</div>
@@ -136,6 +136,7 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="script.js?v=11"></script>
 </body>
 

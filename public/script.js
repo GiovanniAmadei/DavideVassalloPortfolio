@@ -29,8 +29,8 @@
     top: 0; left: 0;
     width: 100vw; height: 100vh;
     pointer-events: none;
-    z-index: 10;
-    opacity: 0.15;
+    z-index: 1;
+    opacity: 0.02;
     mix-blend-mode: multiply;
     background-image: url(${canvas.toDataURL()});
     background-repeat: repeat;
@@ -63,15 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const portfolioToggle = document.getElementById('portfolio-toggle');
   const siteHeader = document.querySelector('.site-header');
   const currentPageInfo = (window.location.pathname.split('/').pop() || 'index.html').split('?')[0];
-  const isPortfolioPage = currentPageInfo === 'portfolio.html' || currentPageInfo === 'project-detail.html';
-
-  if (isPortfolioPage) {
+  if (currentPageInfo === 'portfolio.html') {
     if (submenuPortfolio) submenuPortfolio.classList.add('open');
     if (portfolioToggle) portfolioToggle.classList.add('active');
   }
 
   // Smooth desktop hover handling for portfolio submenu
-  if (siteHeader && submenuPortfolio && portfolioToggle && !isPortfolioPage) {
+  if (siteHeader && submenuPortfolio && portfolioToggle && currentPageInfo !== 'portfolio.html') {
     let closeTimer;
 
     const clearCloseTimer = () => {
@@ -91,13 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
       closeTimer = window.setTimeout(() => {
         siteHeader.classList.remove('is-portfolio-open');
         closeTimer = undefined;
-      }, 90);
+      }, 350);
     };
 
-    portfolioToggle.addEventListener('mouseenter', openPortfolioSubmenu);
-    submenuPortfolio.addEventListener('mouseenter', openPortfolioSubmenu);
-    portfolioToggle.addEventListener('mouseleave', closePortfolioSubmenu);
-    submenuPortfolio.addEventListener('mouseleave', closePortfolioSubmenu);
+    if (window.matchMedia('(hover: hover)').matches) {
+      portfolioToggle.addEventListener('mouseenter', openPortfolioSubmenu);
+      submenuPortfolio.addEventListener('mouseenter', openPortfolioSubmenu);
+      portfolioToggle.addEventListener('mouseleave', closePortfolioSubmenu);
+      submenuPortfolio.addEventListener('mouseleave', closePortfolioSubmenu);
+    }
 
     portfolioToggle.addEventListener('focus', openPortfolioSubmenu);
     siteHeader.addEventListener('focusout', event => {
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentPage = (window.location.pathname.split('/').pop() || 'index.html').split('?')[0];
   navLinks.forEach(link => {
     const linkPage = link.getAttribute('href').split('?')[0];
-    if (linkPage === currentPage && !isPortfolioPage) link.classList.add('active');
+    if (linkPage === currentPage && currentPage !== 'portfolio.html') link.classList.add('active');
   });
 
   // ============================================================
@@ -147,26 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeLabel) activeLabel.textContent = label;
     if (activeTitle) activeTitle.textContent = label;
 
-    // Show/hide tertiary submenus in the header
-    const tertFoto = document.getElementById('tertiary-fotografia');
-    const tertVideo = document.getElementById('tertiary-videomaking');
-    const fotoMain = document.getElementById('fotografia-main');
-    
-    if (tertFoto) {
-      if (tabId === 'fotografia' && fotoMain && fotoMain.style.display !== 'none') {
-        tertFoto.classList.add('open');
-      } else {
-        tertFoto.classList.remove('open');
-      }
-    }
-    if (tertVideo) {
-      if (tabId === 'videomaking') {
-        tertVideo.classList.add('open');
-      } else {
-        tertVideo.classList.remove('open');
-      }
-    }
-
     // Update active class on submenu links
     tabLinks.forEach(l => {
       l.classList.toggle('active', l.dataset.tab === tabId);
@@ -179,26 +159,23 @@ document.addEventListener('DOMContentLoaded', () => {
   if (tabLinks.length > 0) {
     tabLinks.forEach(link => {
       link.addEventListener('click', e => {
-        if (currentPageInfo !== 'portfolio.html') return;
         e.preventDefault();
         switchTab(link.dataset.tab);
       });
     });
 
     // Activate the correct tab based on URL hash (or default to fotografia)
-    if (currentPageInfo === 'portfolio.html') {
-      const hash = (window.location.hash || '#fotografia').replace('#', '');
-      const validTabs = ['fotografia', 'videomaking', 'regia', 'mosaico'];
-      const initialTab = validTabs.includes(hash) ? hash : 'fotografia';
-      switchTab(initialTab);
-    }
+    const hash = (window.location.hash || '#fotografia').replace('#', '');
+    const validTabs = ['fotografia', 'videomaking', 'regia', 'mosaico'];
+    const initialTab = validTabs.includes(hash) ? hash : 'fotografia';
+    switchTab(initialTab);
   }
 
   // Highlight active submenu link based on hash (non-portfolio pages fallback)
   const submenuLinks = document.querySelectorAll('.submenu-nav a:not(.portfolio-tab-link)');
   function updateSubmenuActive() {
     const currentHash = window.location.hash || '#mosaico';
-    if (isPortfolioPage) {
+    if (currentPageInfo === 'portfolio.html') {
       submenuLinks.forEach(link => {
         if (link.getAttribute('href').includes(currentHash)) {
           link.classList.add('active');
@@ -312,14 +289,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let dataToRender = [...items];
     if (shuffle) dataToRender = shuffleArray(dataToRender);
-    dataToRender = dataToRender.slice(0, isPreview ? 32 : items.length);
+    dataToRender = dataToRender.slice(0, isPreview ? 8 : items.length);
 
     dataToRender.forEach((item, index) => {
       const div = document.createElement('div');
       div.className = `masonry-item reveal active`;
-      if (item.aspectRatio && item.aspectRatio < 1) {
-        div.classList.add('portrait');
-      }
       div.dataset.category = item.category;
 
       let innerStrc = `
@@ -345,6 +319,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       div.innerHTML = innerStrc;
+
+      // GSAP Animations for hover
+      if (typeof gsap !== 'undefined') {
+        const imgEl = div.querySelector('img');
+        const scaleHover = item.isPreviewCard ? 1.02 : 1.06;
+        div.addEventListener('mouseenter', () => {
+          gsap.to(imgEl, { scale: scaleHover, duration: 0.6, ease: "back.out(1.2)", overwrite: "auto" });
+        });
+        div.addEventListener('mouseleave', () => {
+          gsap.to(imgEl, { scale: 1, duration: 0.8, delay: 0.15, ease: "power2.out", overwrite: "auto" });
+        });
+      }
 
       div.addEventListener('click', () => {
         if (item.url) {
@@ -453,7 +439,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const queryFotografia = encodeURIComponent(`*[_type == "fotografia"] | order(ordine asc, _createdAt desc) {
         "src": src.asset->url,
-        "aspectRatio": src.asset->metadata.dimensions.aspectRatio,
         "category": categoriaString,
         title,
         description,
@@ -471,29 +456,19 @@ document.addEventListener('DOMContentLoaded', () => {
         isPreviewCard
       }`);
 
-      const queryBlog = encodeURIComponent(`*[_type == "post"] | order(publishedAt desc) {
-        title,
-        "slug": slug.current,
-        "src": mainImage.asset->url,
-        publishedAt,
-        "excerpt": array::join(body[0].children[].text, "")
-      }`);
-
-      const [resFoto, resVideo, resBlog] = await Promise.all([
+      const [resFoto, resVideo] = await Promise.all([
         fetch(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${queryFotografia}`).then(r => r.json()),
-        fetch(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${queryVideo}`).then(r => r.json()),
-        fetch(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${queryBlog}`).then(r => r.json())
+        fetch(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${queryVideo}`).then(r => r.json())
       ]);
 
       const fotografiaData = resFoto.result || [];
       const videoData = resVideo.result || [];
-      const blogData = resBlog.result || [];
 
       // Divide backend video data loosely as it was previously split in script.js
       const videomakingData = videoData.slice(0, 5);
       const regiaData = videoData.slice(5) || videoData;
 
-      const baseMosaicoData = [...fotografiaData];
+      const baseMosaicoData = [...fotografiaData, ...videoData];
       
       // Duplicazione delle foto per formare una griglia mosaico più densa ed impattante
       const mosaicoData = [
@@ -512,50 +487,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Legacy grids (home preview + old portfolio page se still referenced)
       renderMasonryGrid(document.getElementById('masonry-grid'), mosaicoData, false, true);
-      renderMasonryGrid(document.getElementById('mosaico-grid-preview'), mosaicoData, true, true);
-
-      // Render Blog Grids
-      renderBlogGrid(document.getElementById('blog-grid'), blogData);
-      renderBlogGrid(document.getElementById('blog-grid-preview'), blogData.slice(0, 3));
+      renderMasonryGrid(document.getElementById('mosaico-grid-preview'), mosaicoData, false, true);
       
     } catch (err) {
       console.error("Errore di caricamento da Sanity:", err);
     }
-  }
-
-  function renderBlogGrid(container, posts) {
-    if (!container) return;
-    container.innerHTML = '';
-    
-    if (!posts || posts.length === 0) {
-      container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 2rem;">Nessun articolo trovato.</p>';
-      return;
-    }
-
-    posts.forEach(post => {
-      const date = new Date(post.publishedAt).toLocaleDateString('it-IT', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-      });
-
-      const card = document.createElement('a');
-      card.className = 'blog-card reveal active';
-      card.href = `post-detail.html?slug=${post.slug}`; // Assuming this will exist soon or use as template
-      
-      card.innerHTML = `
-        <div class="blog-card-image">
-          <img src="${post.src || 'assets/placeholder-blog.jpg'}" alt="${post.title}">
-        </div>
-        <div class="blog-card-content">
-          <span class="blog-card-date">${date}</span>
-          <h3 class="blog-card-title">${post.title}</h3>
-          <p class="blog-card-excerpt">${post.excerpt || ''}</p>
-        </div>
-      `;
-      
-      container.appendChild(card);
-    });
   }
 
   // Avvia il rendering dinamico
@@ -563,15 +499,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // 5. Gallery filtering — scoped to each tab panel
-  // Re-wired to explicitly check the new global tertiary menus since they are no longer inside the panels
-  const setupTertiaryFilter = (menuId, gridId) => {
-    const btns = document.querySelectorAll(`#${menuId} .filter-btn`);
-    const grid = document.getElementById(gridId);
+  document.querySelectorAll('.portfolio-tab-panel').forEach(panel => {
+    const btns = panel.querySelectorAll('.filter-btn');
+    const grid = panel.querySelector('.masonry-grid');
     if (!btns.length || !grid) return;
 
     btns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
+      btn.addEventListener('click', () => {
         btns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const cat = btn.dataset.filter;
@@ -587,15 +521,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     });
-  };
-
-  setupTertiaryFilter('tertiary-videomaking', 'masonry-grid-videomaking');
+  });
 
   // Fotografia specific logic
   const fotoPanels = document.querySelectorAll('.foto-panel');
   const fotoContainer = document.getElementById('foto-panels');
   const fotoMain = document.getElementById('fotografia-main');
-  const tertiaryBtnsFoto = document.querySelectorAll('#tertiary-fotografia .tertiary-link');
+  const tertiaryBtns = document.querySelectorAll('#fotografia-tertiary .tertiary-btn');
 
   function filterFotografiaGrid(filter) {
     const grid = document.getElementById('masonry-grid-fotografia');
@@ -666,11 +598,8 @@ document.addEventListener('DOMContentLoaded', () => {
           fotoMain.style.display = 'block';
           setTimeout(() => fotoMain.style.opacity = '1', 50);
         }
-        const tertFoto = document.getElementById('tertiary-fotografia');
-        if (tertFoto) tertFoto.classList.add('open');
-
         const filter = p.dataset.sub;
-        tertiaryBtnsFoto.forEach(b => {
+        tertiaryBtns.forEach(b => {
           if (b.dataset.filter === filter) {
             b.classList.add('active');
           } else {
@@ -682,22 +611,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  tertiaryBtnsFoto.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      // Hide panels and show grid if not already visible
-      if (fotoContainer && fotoContainer.style.display !== 'none') {
-        fotoContainer.style.opacity = '0';
-        setTimeout(() => fotoContainer.style.display = 'none', 500);
-        setTimeout(() => {
-          if (fotoMain) {
-            fotoMain.style.display = 'block';
-            setTimeout(() => fotoMain.style.opacity = '1', 50);
-          }
-        }, 500);
-      }
-      
-      tertiaryBtnsFoto.forEach(b => b.classList.remove('active'));
+  tertiaryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tertiaryBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       filterFotografiaGrid(btn.dataset.filter);
     });
@@ -714,8 +630,6 @@ document.addEventListener('DOMContentLoaded', () => {
             fotoMain.style.display = 'none';
             fotoMain.style.opacity = '0';
           }
-          const tertFoto = document.getElementById('tertiary-fotografia');
-          if (tertFoto) tertFoto.classList.remove('open');
         }
       });
     });
@@ -758,50 +672,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     mosaicoGrid.addEventListener('touchcancel', () => {
-      if (lastHoveredItem) {
-        lastHoveredItem.classList.remove('hover-trail');
-        lastHoveredItem = null;
-      }
-    });
-  }
-
-  // Mosaico Preview Touch Dragging Effect
-  const mosaicoGridPreview = document.getElementById('mosaico-grid-preview');
-  if (mosaicoGridPreview) {
-    let lastHoveredItem = null;
-
-    mosaicoGridPreview.addEventListener('touchmove', (e) => {
-      const touch = e.touches[0];
-      const element = document.elementFromPoint(touch.clientX, touch.clientY);
-
-      if (element) {
-        const item = element.closest('.masonry-item');
-        if (item && item.parentElement === mosaicoGridPreview) {
-          e.preventDefault();
-          if (lastHoveredItem !== item) {
-            if (lastHoveredItem) {
-              lastHoveredItem.classList.remove('hover-trail');
-            }
-            item.classList.add('hover-trail');
-            lastHoveredItem = item;
-          }
-        } else {
-          if (lastHoveredItem) {
-            lastHoveredItem.classList.remove('hover-trail');
-            lastHoveredItem = null;
-          }
-        }
-      }
-    }, { passive: false });
-
-    mosaicoGridPreview.addEventListener('touchend', () => {
-      if (lastHoveredItem) {
-        lastHoveredItem.classList.remove('hover-trail');
-        lastHoveredItem = null;
-      }
-    });
-
-    mosaicoGridPreview.addEventListener('touchcancel', () => {
       if (lastHoveredItem) {
         lastHoveredItem.classList.remove('hover-trail');
         lastHoveredItem = null;
