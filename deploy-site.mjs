@@ -3,7 +3,7 @@ import { createReadStream, statSync } from 'fs';
 import { readdir } from 'fs/promises';
 import path from 'path';
 
-const FTP_HOST = 'ftp.davidevassallo.net';
+const FTP_HOST = '82.25.102.89';
 const FTP_USER = 'u432430416.GiovanniAmadevs2';
 const FTP_PASS = 'Siummone25@';
 const FTP_PORT = 21;
