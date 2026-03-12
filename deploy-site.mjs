@@ -17,6 +17,8 @@ const ALLOWED_FILES = [
   'portfolio.html',
   'project-detail.html',
   'contact.html',
+  'blog.html',
+  'post-detail.html',
   'script.js',
   'styles.css',
   '.htaccess',
@@ -57,7 +59,7 @@ try {
     }
   }
 
-  // Upload the assets directory recursively
+  // Upload the assets directory recursively from public/assets
   for (const dir of ALLOWED_DIRS) {
     console.log(`\nCaricamento cartella: ${dir}/`);
     await client.ensureDir(dir);
