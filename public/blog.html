@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Chi è Davide Vassallo — Fotografo editoriale milanese. Biografia, filosofia di scatto e percorso professionale.">
-    <title>Chi Sono | Davide Vassallo</title>
+        content="Blog di Davide Vassallo — Riflessioni sulla fotografia, tecnica, visione e racconti dai set.">
+    <title>Blog | Davide Vassallo</title>
     <link rel="stylesheet" href="styles.css?v=11">
 </head>
 
@@ -26,9 +26,9 @@
                 <span class="nav-separator">&bull;</span>
                 <a href="portfolio.html" id="portfolio-toggle">Portfolio</a>
                 <span class="nav-separator">&bull;</span>
-                <a href="blog.html">Blog</a>
+                <a href="blog.html" class="active">Blog</a>
                 <span class="nav-separator">&bull;</span>
-                <a href="about.html" class="active">Chi Sono</a>
+                <a href="about.html">Chi Sono</a>
                 <span class="nav-separator">&bull;</span>
                 <a href="contact.html">Contatti</a>
             </nav>
@@ -65,65 +65,17 @@
 
     <!-- PAGE HERO -->
     <div class="page-hero">
-        <p class="page-hero-label reveal">Il Fotografo</p>
-        <h1 class="page-hero-title reveal">Chi Sono</h1>
+        <p class="page-hero-label reveal">Editoriale</p>
+        <h1 class="page-hero-title reveal">Blog</h1>
     </div>
 
-    <!-- BIO GRID -->
+    <!-- BLOG GRID -->
     <section class="section">
-        <div class="about-grid">
-            <div class="about-image reveal">
-                <img src="assets/DSC_0222-Enhanced-NR-2-2.jpg" alt="Davide Vassallo — Fotografo">
+        <div class="blog-grid" id="blog-grid">
+            <!-- JS will populate posts here -->
+            <div class="loading-shimmer" style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--muted);">
+                Caricamento articoli...
             </div>
-            <div class="about-text reveal" style="transition-delay:.15s">
-                <h2>Davide<br>Vassallo</h2>
-                <p>Sono Davide Vassallo, fotografo con base a Milano. Definisco il mio linguaggio attraverso
-                    sottrazione, rigore geometrico e una costante ricerca sull'identità e lo spazio.</p>
-                <p>Con oltre dieci anni di esperienza tra editoria e set commerciali, intreccio il candore della
-                    fotografia documentaristica al rigore del ritratto in studio. Il mio sguardo è plasmato dalla
-                    tradizione del fotogiornalismo europeo e dall'estetica minimalista giapponese.</p>
-                <p>Collaboro con agenzie di comunicazione, brand di lusso, istituzioni culturali e testate editoriali.
-                    Ogni progetto è un dialogo aperto tra chi sono e chi mi guarda.</p>
-
-                <div class="about-details">
-                    <div class="about-detail-row">
-                        <span class="about-detail-label">Base</span>
-                        <span>Milano, Italia</span>
-                    </div>
-                    <div class="about-detail-row">
-                        <span class="about-detail-label">Specializzazione</span>
-                        <span>Ritratto, Reportage, Ricerca</span>
-                    </div>
-                    <div class="about-detail-row">
-                        <span class="about-detail-label">Attrezzatura</span>
-                        <span>Nikon Z Series, Leica M</span>
-                    </div>
-                    <div class="about-detail-row">
-                        <span class="about-detail-label">Disponibilità</span>
-                        <span>Italia &amp; Europa</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FILOSOFIA -->
-    <section class="philosophy">
-        <div class="philosophy-inner">
-            <div class="section-header reveal" style="margin-bottom:3rem">
-                <span class="section-label">Filosofia di Scatto</span>
-                <div class="section-rule"></div>
-            </div>
-            <blockquote class="philosophy-quote reveal">
-                "Fotografare non significa catturare ciò che c'è, ma decidere rigorosamente cosa lasciare fuori
-                dall'inquadratura. L'essenza si trova nell'ombra."
-            </blockquote>
-            <p class="philosophy-attr reveal" style="transition-delay:.15s">— Davide Vassallo</p>
-            <p class="reveal"
-                style="font-size:1.05rem; color:var(--muted); max-width:640px; margin-top:2.5rem; transition-delay:.25s">
-                La mia ricerca si muove tra il documento e la costruzione, tra il paesaggio urbano e il corpo. Cerco la
-                tensione nello spazio bianco, il significato nella pausa.
-            </p>
         </div>
     </section>
 
