@@ -62,7 +62,7 @@ try {
     console.log(`\nCaricamento cartella: ${dir}/`);
     await client.ensureDir(dir);
     await client.cd("/");
-    await client.uploadFromDir(path.join(LOCAL_ROOT, dir), dir);
+    await client.uploadFromDir(path.join(LOCAL_ROOT, 'public', dir), dir);
   }
 
   console.log('\n✅ Deployment completato con successo!');
