@@ -1692,7 +1692,7 @@ button {
     z-index: 999;
   }
 
-  .header-nav .nav-separator {
+  .nav-separator {
     display: none;
   }
 
