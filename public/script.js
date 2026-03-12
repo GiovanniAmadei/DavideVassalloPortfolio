@@ -89,15 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
       closeTimer = window.setTimeout(() => {
         siteHeader.classList.remove('is-portfolio-open');
         closeTimer = undefined;
-      }, 350);
+      }, 90);
     };
 
-    if (window.matchMedia('(hover: hover)').matches) {
-      portfolioToggle.addEventListener('mouseenter', openPortfolioSubmenu);
-      submenuPortfolio.addEventListener('mouseenter', openPortfolioSubmenu);
-      portfolioToggle.addEventListener('mouseleave', closePortfolioSubmenu);
-      submenuPortfolio.addEventListener('mouseleave', closePortfolioSubmenu);
-    }
+    portfolioToggle.addEventListener('mouseenter', openPortfolioSubmenu);
+    submenuPortfolio.addEventListener('mouseenter', openPortfolioSubmenu);
+    portfolioToggle.addEventListener('mouseleave', closePortfolioSubmenu);
+    submenuPortfolio.addEventListener('mouseleave', closePortfolioSubmenu);
 
     portfolioToggle.addEventListener('focus', openPortfolioSubmenu);
     siteHeader.addEventListener('focusout', event => {
@@ -320,18 +318,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       div.innerHTML = innerStrc;
 
-      // GSAP Animations for hover
-      if (typeof gsap !== 'undefined') {
-        const imgEl = div.querySelector('img');
-        const scaleHover = item.isPreviewCard ? 1.02 : 1.06;
-        div.addEventListener('mouseenter', () => {
-          gsap.to(imgEl, { scale: scaleHover, duration: 0.6, ease: "back.out(1.2)", overwrite: "auto" });
-        });
-        div.addEventListener('mouseleave', () => {
-          gsap.to(imgEl, { scale: 1, duration: 0.8, delay: 0.15, ease: "power2.out", overwrite: "auto" });
-        });
-      }
-
       div.addEventListener('click', () => {
         if (item.url) {
           window.location.href = item.url;
@@ -487,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Legacy grids (home preview + old portfolio page se still referenced)
       renderMasonryGrid(document.getElementById('masonry-grid'), mosaicoData, false, true);
-      renderMasonryGrid(document.getElementById('mosaico-grid-preview'), mosaicoData, false, true);
+      renderMasonryGrid(document.getElementById('mosaico-grid-preview'), mosaicoData, true, true);
       
     } catch (err) {
       console.error("Errore di caricamento da Sanity:", err);

@@ -50,7 +50,7 @@ body {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 1;
+  z-index: 9999;
   opacity: 0.02;
   mix-blend-mode: multiply;
 }
@@ -112,11 +112,11 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2.5rem;
+  padding: 1.2rem 2.5rem 0.8rem;
 }
 
 .header-logo {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   /* Exactly 2x the nav item size */
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -247,7 +247,7 @@ button {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  padding: 1.5rem 0;
+  padding: 0;
   opacity: 0;
   transform: translateY(5px);
   transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1),
@@ -302,25 +302,11 @@ button {
    FOOTER
    ============================================ */
 .site-footer {
-  padding: 2.5rem 2.5rem 2rem;
+  padding: var(--gap-lg) 2.5rem 2rem;
   background: var(--bg);
   border-top: 1px solid var(--border);
   overflow: hidden;
   margin-top: auto;
-  text-align: center;
-}
-
-.footer-contact-info {
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text);
-  margin-bottom: 2rem;
-}
-
-.footer-contact-info span {
-  margin: 0 0.8rem;
-  color: var(--muted);
 }
 
 .footer-content {
@@ -681,7 +667,6 @@ button {
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  z-index: 2;
 }
 
 .masonry-item.hidden {
@@ -690,8 +675,7 @@ button {
 
 .masonry-item img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
   display: block;
   transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -861,8 +845,7 @@ button {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  margin-bottom: 2rem;
-  padding: 1.5rem 0;
+  margin-bottom: 3rem;
   align-items: center;
 }
 
@@ -1350,10 +1333,6 @@ button {
    RESPONSIVE
    ============================================ */
 @media (max-width: 900px) {
-  .nav-separator {
-    display: none;
-  }
-
   .header-main {
     padding: 1.2rem 1.2rem 0.8rem;
   }
@@ -1367,8 +1346,7 @@ button {
   }
 
   .header-logo {
-    font-size: clamp(1.6rem, 5vw, 2.0rem);
-    font-weight: 500;
+    font-size: clamp(2.2rem, 6vw, 2.6rem);
     z-index: 1000;
   }
 
