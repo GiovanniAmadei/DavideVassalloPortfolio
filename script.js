@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let dataToRender = [...items];
     if (shuffle) dataToRender = shuffleArray(dataToRender);
-    dataToRender = dataToRender.slice(0, isPreview ? 16 : items.length);
+    dataToRender = dataToRender.slice(0, isPreview ? 32 : items.length);
 
     dataToRender.forEach((item, index) => {
       const div = document.createElement('div');
@@ -758,6 +758,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     mosaicoGrid.addEventListener('touchcancel', () => {
+      if (lastHoveredItem) {
+        lastHoveredItem.classList.remove('hover-trail');
+        lastHoveredItem = null;
+      }
+    });
+  }
+
+  // Mosaico Preview Touch Dragging Effect
+  const mosaicoGridPreview = document.getElementById('mosaico-grid-preview');
+  if (mosaicoGridPreview) {
+    let lastHoveredItem = null;
+
+    mosaicoGridPreview.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const element = document.elementFromPoint(touch.clientX, touch.clientY);
+
+      if (element) {
+        const item = element.closest('.masonry-item');
+        if (item && item.parentElement === mosaicoGridPreview) {
+          e.preventDefault();
+          if (lastHoveredItem !== item) {
+            if (lastHoveredItem) {
+              lastHoveredItem.classList.remove('hover-trail');
+            }
+            item.classList.add('hover-trail');
+            lastHoveredItem = item;
+          }
+        } else {
+          if (lastHoveredItem) {
+            lastHoveredItem.classList.remove('hover-trail');
+            lastHoveredItem = null;
+          }
+        }
+      }
+    }, { passive: false });
+
+    mosaicoGridPreview.addEventListener('touchend', () => {
+      if (lastHoveredItem) {
+        lastHoveredItem.classList.remove('hover-trail');
+        lastHoveredItem = null;
+      }
+    });
+
+    mosaicoGridPreview.addEventListener('touchcancel', () => {
       if (lastHoveredItem) {
         lastHoveredItem.classList.remove('hover-trail');
         lastHoveredItem = null;

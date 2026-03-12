@@ -992,11 +992,50 @@ button {
 }
 
 #mosaico-grid-preview {
-  columns: 4 250px;
-  column-gap: 12px;
+  columns: 8 100px;
+  column-gap: 6px;
   margin-top: 1.5rem;
   padding-left: 3px;
   padding-right: 3px;
+}
+
+@media (max-width: 900px) {
+  #mosaico-grid-preview {
+    columns: 4 60px;
+  }
+}
+
+#mosaico-grid-preview .masonry-item {
+  margin-bottom: 6px;
+  overflow: visible;
+  z-index: 1;
+  position: relative;
+  transition: z-index 0s 0.3s;
+}
+
+#mosaico-grid-preview .masonry-item:hover,
+#mosaico-grid-preview .masonry-item.hover-trail {
+  z-index: 50;
+  transition: z-index 0s;
+}
+
+#mosaico-grid-preview .masonry-item img {
+  transform: scale(1);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+  will-change: transform, box-shadow;
+  border-radius: 2px;
+}
+
+#mosaico-grid-preview .masonry-item:hover img,
+#mosaico-grid-preview .masonry-item.hover-trail img {
+  transform: scale(1.15);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+}
+
+#mosaico-grid-preview .masonry-caption {
+  display: none !important;
 }
 
 @media (max-width: 900px) {
