@@ -30,7 +30,7 @@
     width: 100vw; height: 100vh;
     pointer-events: none;
     z-index: 10;
-    opacity: 0.02;
+    opacity: 0.15;
     mix-blend-mode: multiply;
     background-image: url(${canvas.toDataURL()});
     background-repeat: repeat;
@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let dataToRender = [...items];
     if (shuffle) dataToRender = shuffleArray(dataToRender);
-    dataToRender = dataToRender.slice(0, isPreview ? 8 : items.length);
+    dataToRender = dataToRender.slice(0, isPreview ? 32 : items.length);
 
     dataToRender.forEach((item, index) => {
       const div = document.createElement('div');
@@ -471,13 +471,23 @@ document.addEventListener('DOMContentLoaded', () => {
         isPreviewCard
       }`);
 
-      const [resFoto, resVideo] = await Promise.all([
+      const queryBlog = encodeURIComponent(`*[_type == "post"] | order(publishedAt desc) {
+        title,
+        "slug": slug.current,
+        "src": mainImage.asset->url,
+        publishedAt,
+        "excerpt": array::join(body[0].children[].text, "")
+      }`);
+
+      const [resFoto, resVideo, resBlog] = await Promise.all([
         fetch(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${queryFotografia}`).then(r => r.json()),
-        fetch(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${queryVideo}`).then(r => r.json())
+        fetch(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${queryVideo}`).then(r => r.json()),
+        fetch(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${queryBlog}`).then(r => r.json())
       ]);
 
       const fotografiaData = resFoto.result || [];
       const videoData = resVideo.result || [];
+      const blogData = resBlog.result || [];
 
       // Divide backend video data loosely as it was previously split in script.js
       const videomakingData = videoData.slice(0, 5);
@@ -503,10 +513,49 @@ document.addEventListener('DOMContentLoaded', () => {
       // Legacy grids (home preview + old portfolio page se still referenced)
       renderMasonryGrid(document.getElementById('masonry-grid'), mosaicoData, false, true);
       renderMasonryGrid(document.getElementById('mosaico-grid-preview'), mosaicoData, true, true);
+
+      // Render Blog Grids
+      renderBlogGrid(document.getElementById('blog-grid'), blogData);
+      renderBlogGrid(document.getElementById('blog-grid-preview'), blogData.slice(0, 3));
       
     } catch (err) {
       console.error("Errore di caricamento da Sanity:", err);
     }
+  }
+
+  function renderBlogGrid(container, posts) {
+    if (!container) return;
+    container.innerHTML = '';
+    
+    if (!posts || posts.length === 0) {
+      container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 2rem;">Nessun articolo trovato.</p>';
+      return;
+    }
+
+    posts.forEach(post => {
+      const date = new Date(post.publishedAt).toLocaleDateString('it-IT', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      });
+
+      const card = document.createElement('a');
+      card.className = 'blog-card reveal active';
+      card.href = `post-detail.html?slug=${post.slug}`; // Assuming this will exist soon or use as template
+      
+      card.innerHTML = `
+        <div class="blog-card-image">
+          <img src="${post.src || 'assets/placeholder-blog.jpg'}" alt="${post.title}">
+        </div>
+        <div class="blog-card-content">
+          <span class="blog-card-date">${date}</span>
+          <h3 class="blog-card-title">${post.title}</h3>
+          <p class="blog-card-excerpt">${post.excerpt || ''}</p>
+        </div>
+      `;
+      
+      container.appendChild(card);
+    });
   }
 
   // Avvia il rendering dinamico
@@ -709,6 +758,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     mosaicoGrid.addEventListener('touchcancel', () => {
+      if (lastHoveredItem) {
+        lastHoveredItem.classList.remove('hover-trail');
+        lastHoveredItem = null;
+      }
+    });
+  }
+
+  // Mosaico Preview Touch Dragging Effect
+  const mosaicoGridPreview = document.getElementById('mosaico-grid-preview');
+  if (mosaicoGridPreview) {
+    let lastHoveredItem = null;
+
+    mosaicoGridPreview.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const element = document.elementFromPoint(touch.clientX, touch.clientY);
+
+      if (element) {
+        const item = element.closest('.masonry-item');
+        if (item && item.parentElement === mosaicoGridPreview) {
+          e.preventDefault();
+          if (lastHoveredItem !== item) {
+            if (lastHoveredItem) {
+              lastHoveredItem.classList.remove('hover-trail');
+            }
+            item.classList.add('hover-trail');
+            lastHoveredItem = item;
+          }
+        } else {
+          if (lastHoveredItem) {
+            lastHoveredItem.classList.remove('hover-trail');
+            lastHoveredItem = null;
+          }
+        }
+      }
+    }, { passive: false });
+
+    mosaicoGridPreview.addEventListener('touchend', () => {
+      if (lastHoveredItem) {
+        lastHoveredItem.classList.remove('hover-trail');
+        lastHoveredItem = null;
+      }
+    });
+
+    mosaicoGridPreview.addEventListener('touchcancel', () => {
       if (lastHoveredItem) {
         lastHoveredItem.classList.remove('hover-trail');
         lastHoveredItem = null;

@@ -1627,7 +1627,7 @@ button {
   }
 
   .header-logo {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     z-index: 1000;
   }
 
@@ -1733,7 +1733,7 @@ button {
     z-index: 999;
   }
 
-  .header-nav .nav-separator {
+  .nav-separator {
     display: none;
   }
 
@@ -1783,7 +1783,7 @@ button {
   }
 
   .header-logo {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
   }
 
   .header-nav {
