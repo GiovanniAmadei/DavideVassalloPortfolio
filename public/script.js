@@ -29,7 +29,7 @@
     top: 0; left: 0;
     width: 100vw; height: 100vh;
     pointer-events: none;
-    z-index: 1;
+    z-index: 10;
     opacity: 0.02;
     mix-blend-mode: multiply;
     background-image: url(${canvas.toDataURL()});
@@ -63,13 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const portfolioToggle = document.getElementById('portfolio-toggle');
   const siteHeader = document.querySelector('.site-header');
   const currentPageInfo = (window.location.pathname.split('/').pop() || 'index.html').split('?')[0];
-  if (currentPageInfo === 'portfolio.html') {
+  const isPortfolioPage = currentPageInfo === 'portfolio.html' || currentPageInfo === 'project-detail.html';
+
+  if (isPortfolioPage) {
     if (submenuPortfolio) submenuPortfolio.classList.add('open');
     if (portfolioToggle) portfolioToggle.classList.add('active');
   }
 
   // Smooth desktop hover handling for portfolio submenu
-  if (siteHeader && submenuPortfolio && portfolioToggle && currentPageInfo !== 'portfolio.html') {
+  if (siteHeader && submenuPortfolio && portfolioToggle && !isPortfolioPage) {
     let closeTimer;
 
     const clearCloseTimer = () => {
@@ -108,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentPage = (window.location.pathname.split('/').pop() || 'index.html').split('?')[0];
   navLinks.forEach(link => {
     const linkPage = link.getAttribute('href').split('?')[0];
-    if (linkPage === currentPage && currentPage !== 'portfolio.html') link.classList.add('active');
+    if (linkPage === currentPage && !isPortfolioPage) link.classList.add('active');
   });
 
   // ============================================================
@@ -145,6 +147,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeLabel) activeLabel.textContent = label;
     if (activeTitle) activeTitle.textContent = label;
 
+    // Show/hide tertiary submenus in the header
+    const tertFoto = document.getElementById('tertiary-fotografia');
+    const tertVideo = document.getElementById('tertiary-videomaking');
+    const fotoMain = document.getElementById('fotografia-main');
+    
+    if (tertFoto) {
+      if (tabId === 'fotografia' && fotoMain && fotoMain.style.display !== 'none') {
+        tertFoto.classList.add('open');
+      } else {
+        tertFoto.classList.remove('open');
+      }
+    }
+    if (tertVideo) {
+      if (tabId === 'videomaking') {
+        tertVideo.classList.add('open');
+      } else {
+        tertVideo.classList.remove('open');
+      }
+    }
+
     // Update active class on submenu links
     tabLinks.forEach(l => {
       l.classList.toggle('active', l.dataset.tab === tabId);
@@ -157,23 +179,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (tabLinks.length > 0) {
     tabLinks.forEach(link => {
       link.addEventListener('click', e => {
+        if (currentPageInfo !== 'portfolio.html') return;
         e.preventDefault();
         switchTab(link.dataset.tab);
       });
     });
 
     // Activate the correct tab based on URL hash (or default to fotografia)
-    const hash = (window.location.hash || '#fotografia').replace('#', '');
-    const validTabs = ['fotografia', 'videomaking', 'regia', 'mosaico'];
-    const initialTab = validTabs.includes(hash) ? hash : 'fotografia';
-    switchTab(initialTab);
+    if (currentPageInfo === 'portfolio.html') {
+      const hash = (window.location.hash || '#fotografia').replace('#', '');
+      const validTabs = ['fotografia', 'videomaking', 'regia', 'mosaico'];
+      const initialTab = validTabs.includes(hash) ? hash : 'fotografia';
+      switchTab(initialTab);
+    }
   }
 
   // Highlight active submenu link based on hash (non-portfolio pages fallback)
   const submenuLinks = document.querySelectorAll('.submenu-nav a:not(.portfolio-tab-link)');
   function updateSubmenuActive() {
     const currentHash = window.location.hash || '#mosaico';
-    if (currentPageInfo === 'portfolio.html') {
+    if (isPortfolioPage) {
       submenuLinks.forEach(link => {
         if (link.getAttribute('href').includes(currentHash)) {
           link.classList.add('active');
@@ -292,6 +317,9 @@ document.addEventListener('DOMContentLoaded', () => {
     dataToRender.forEach((item, index) => {
       const div = document.createElement('div');
       div.className = `masonry-item reveal active`;
+      if (item.aspectRatio && item.aspectRatio < 1) {
+        div.classList.add('portrait');
+      }
       div.dataset.category = item.category;
 
       let innerStrc = `
@@ -425,6 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const queryFotografia = encodeURIComponent(`*[_type == "fotografia"] | order(ordine asc, _createdAt desc) {
         "src": src.asset->url,
+        "aspectRatio": src.asset->metadata.dimensions.aspectRatio,
         "category": categoriaString,
         title,
         description,
@@ -454,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const videomakingData = videoData.slice(0, 5);
       const regiaData = videoData.slice(5) || videoData;
 
-      const baseMosaicoData = [...fotografiaData, ...videoData];
+      const baseMosaicoData = [...fotografiaData];
       
       // Duplicazione delle foto per formare una griglia mosaico più densa ed impattante
       const mosaicoData = [
@@ -485,13 +514,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // 5. Gallery filtering — scoped to each tab panel
-  document.querySelectorAll('.portfolio-tab-panel').forEach(panel => {
-    const btns = panel.querySelectorAll('.filter-btn');
-    const grid = panel.querySelector('.masonry-grid');
+  // Re-wired to explicitly check the new global tertiary menus since they are no longer inside the panels
+  const setupTertiaryFilter = (menuId, gridId) => {
+    const btns = document.querySelectorAll(`#${menuId} .filter-btn`);
+    const grid = document.getElementById(gridId);
     if (!btns.length || !grid) return;
 
     btns.forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
         btns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const cat = btn.dataset.filter;
@@ -507,13 +538,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     });
-  });
+  };
+
+  setupTertiaryFilter('tertiary-videomaking', 'masonry-grid-videomaking');
 
   // Fotografia specific logic
   const fotoPanels = document.querySelectorAll('.foto-panel');
   const fotoContainer = document.getElementById('foto-panels');
   const fotoMain = document.getElementById('fotografia-main');
-  const tertiaryBtns = document.querySelectorAll('#fotografia-tertiary .tertiary-btn');
+  const tertiaryBtnsFoto = document.querySelectorAll('#tertiary-fotografia .tertiary-link');
 
   function filterFotografiaGrid(filter) {
     const grid = document.getElementById('masonry-grid-fotografia');
@@ -584,8 +617,11 @@ document.addEventListener('DOMContentLoaded', () => {
           fotoMain.style.display = 'block';
           setTimeout(() => fotoMain.style.opacity = '1', 50);
         }
+        const tertFoto = document.getElementById('tertiary-fotografia');
+        if (tertFoto) tertFoto.classList.add('open');
+
         const filter = p.dataset.sub;
-        tertiaryBtns.forEach(b => {
+        tertiaryBtnsFoto.forEach(b => {
           if (b.dataset.filter === filter) {
             b.classList.add('active');
           } else {
@@ -597,9 +633,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  tertiaryBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tertiaryBtns.forEach(b => b.classList.remove('active'));
+  tertiaryBtnsFoto.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Hide panels and show grid if not already visible
+      if (fotoContainer && fotoContainer.style.display !== 'none') {
+        fotoContainer.style.opacity = '0';
+        setTimeout(() => fotoContainer.style.display = 'none', 500);
+        setTimeout(() => {
+          if (fotoMain) {
+            fotoMain.style.display = 'block';
+            setTimeout(() => fotoMain.style.opacity = '1', 50);
+          }
+        }, 500);
+      }
+      
+      tertiaryBtnsFoto.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       filterFotografiaGrid(btn.dataset.filter);
     });
@@ -616,6 +665,8 @@ document.addEventListener('DOMContentLoaded', () => {
             fotoMain.style.display = 'none';
             fotoMain.style.opacity = '0';
           }
+          const tertFoto = document.getElementById('tertiary-fotografia');
+          if (tertFoto) tertFoto.classList.remove('open');
         }
       });
     });
