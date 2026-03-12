@@ -40,3 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 public/assets/Showreel 1080p V2.mp4
+.env*.local
