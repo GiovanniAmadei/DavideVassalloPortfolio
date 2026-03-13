@@ -3,9 +3,9 @@ import { defineConfig } from "tinacms";
 var config_default = defineConfig({
   // In locale non serve account TinaCloud.
   // Per la produzione su Vercel, configura clientId e token su app.tina.io
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "",
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "00000000-0000-0000-0000-000000000000",
   branch: process.env.NEXT_PUBLIC_TINA_BRANCH || process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || "main",
-  token: process.env.TINA_TOKEN || "",
+  token: process.env.TINA_TOKEN || "0000000000000000000000000000000000000000",
   build: {
     outputFolder: "admin",
     publicFolder: "public"
