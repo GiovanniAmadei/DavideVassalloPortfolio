@@ -11,9 +11,9 @@ var config_default = defineConfig({
     publicFolder: "public"
   },
   media: {
-    tina: {
-      mediaRoot: "uploads",
-      publicFolder: "public"
+    loadCustomStore: async () => {
+      const pack = await import("next-tinacms-cloudinary");
+      return pack.TinaCloudCloudinaryMediaStore;
     }
   },
   schema: {
