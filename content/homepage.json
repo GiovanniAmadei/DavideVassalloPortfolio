@@ -1,0 +1,39 @@
+{
+  "heroBands": [
+    {
+      "title": "Fotografia",
+      "href": "/portfolio#fotografia",
+      "images": [
+        "/assets/DSC_3667-Enhanced-NR.jpg",
+        "/assets/DSC_3643-Enhanced-NR.jpg",
+        "/assets/DSC_3596-Enhanced-NR-2.jpg"
+      ]
+    },
+    {
+      "title": "Videomaking",
+      "href": "/portfolio#videomaking",
+      "images": [
+        "/assets/DSC_2620-2.jpg",
+        "/assets/DSC_2952-2.jpg",
+        "/assets/DSC_2706-2.jpg"
+      ]
+    },
+    {
+      "title": "Regia",
+      "href": "/portfolio#regia",
+      "images": [
+        "/assets/DSC_9738-Enhanced-NR-2.jpg",
+        "/assets/DSC_9859-Enhanced-NR.jpg",
+        "/assets/DSC_2965.jpg"
+      ]
+    }
+  ],
+  "chiSonoLabel": "Chi sono",
+  "chiSonoPreviewTitle": "Davide\nVassallo",
+  "chiSonoPreviewText1": "Sono Davide Vassallo, fotografo con base a Milano. Il mio linguaggio nasce dalla sottrazione: rigore geometrico e ricerca costante sull'identità e lo spazio.",
+  "chiSonoPreviewText2": "Dieci anni tra editoria e set commerciali, intrecciando reportage e ritratto in studio.",
+  "blogLabel": "Blog",
+  "mosaicoLabel": "Mosaico",
+  "ctaBlog": "Tutte le Riflessioni →",
+  "ctaMosaico": "Esplora il Portfolio Completo →"
+}

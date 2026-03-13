@@ -1,0 +1,132 @@
+fragment PostParts on Post {
+  __typename
+  title
+  slug
+  publishedAt
+  mainImage
+  categories
+  body
+}
+
+fragment ChiSonoParts on ChiSono {
+  __typename
+  titolo
+  sottotitolo
+  descrizione
+  fotoProfilo
+  esperienze {
+    __typename
+    anno
+    titolo
+    luogo
+  }
+  filosofiaTitolo
+  filosofiaCitazione
+  filosofiaAutore
+  filosofiaDescrizione
+}
+
+fragment FotografiaParts on Fotografia {
+  __typename
+  title
+  src
+  categoriaString
+  description
+  metadata
+  ordine
+}
+
+fragment ProgettoVideoParts on ProgettoVideo {
+  __typename
+  title
+  src
+  categoriaString
+  description
+  metadata
+  logline
+  url
+  isPreviewCard
+  ordine
+}
+
+fragment ContattiParts on Contatti {
+  __typename
+  email
+  telefono
+  instagram
+  linkedin
+  indirizzoStudio
+  titoloPagina
+  sottotitoloPagina
+  titoloSezione
+  testoSottoTitolo
+  orariRitratto
+  orariReportage
+  orariRicerca
+  formName
+  formEmail
+  formSubject
+  formMessage
+  formSubmit
+}
+
+fragment GlobalParts on Global {
+  __typename
+  email
+  telefono
+  indirizzo
+  copyright
+  instagram
+  linkedin
+  logoName
+  navHome
+  navPortfolio
+  navBlog
+  navAbout
+  navContact
+  navSubFotografia
+  navSubVideomaking
+  navSubRegia
+  navSubMosaico
+}
+
+fragment HomepageParts on Homepage {
+  __typename
+  heroBands {
+    __typename
+    title
+    href
+    images
+  }
+  chiSonoLabel
+  chiSonoPreviewTitle
+  chiSonoPreviewText1
+  chiSonoPreviewText2
+  blogLabel
+  mosaicoLabel
+  ctaBlog
+  ctaMosaico
+}
+
+fragment PortfolioPageParts on PortfolioPage {
+  __typename
+  tabFotografia
+  tabVideomaking
+  tabRegia
+  tabMosaico
+  filterFoto1
+  filterFoto2
+  filterVideoAll
+  filterVideo1
+  filterVideo2
+  imagesFoto1
+  imagesFoto2
+}
+
+fragment BlogPageParts on BlogPage {
+  __typename
+  label
+  title
+  emptyMessage
+  readMoreLabel
+}

@@ -1,0 +1,12 @@
+{
+  "email": "davide@example.com",
+  "telefono": "+39 000 000 0000",
+  "instagram": "https://instagram.com/",
+  "linkedin": "",
+  "indirizzoStudio": "Milano, Italia",
+  "formName": "Nome",
+  "formEmail": "Email",
+  "formSubject": "Tipo di Progetto",
+  "formMessage": "Messaggio",
+  "formSubmit": "Invia Messaggio"
+}

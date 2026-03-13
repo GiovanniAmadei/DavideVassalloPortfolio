@@ -1,16 +1,34 @@
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import type { Metadata } from 'next'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import PaperGrain from './components/PaperGrain'
+import GlobalDataWrapper from './components/GlobalDataWrapper'
+import client from '@/tina/__generated__/client'
+import '../styles.css'
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Davide Vassallo | Photographer',
+    template: '%s | Davide Vassallo'
+  },
+  description: 'Davide Vassallo — Fotografo professionale a Milano. Portfolio editoriale di ritratto, reportage eventi e ricerca fotografica.',
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const globalRes = await client.queries.global({ relativePath: "global.json" })
+  
   return (
     <html lang="it">
-      <head>
-        <title>Sanity Studio - Davide Vassallo</title>
-      </head>
       <body style={{ margin: 0, padding: 0 }}>
-        {children}
+        <PaperGrain />
+        <GlobalDataWrapper 
+          data={globalRes.data as any} 
+          query={globalRes.query} 
+          variables={globalRes.variables}
+        >
+          {children}
+        </GlobalDataWrapper>
       </body>
     </html>
-  );
+  )
 }

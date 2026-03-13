@@ -3,26 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "tinacms dev -c \"next dev\"",
+    "build": "TINA_PUBLIC_IS_LOCAL=true tinacms build && next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
-    "@portabletext/react": "^6.0.3",
-    "@sanity/icons": "^3.7.4",
-    "@sanity/image-url": "^1.2.0",
-    "@sanity/vision": "^4.22.0",
+    "@tinacms/cli": "^2.1.9",
     "basic-ftp": "^5.2.0",
     "framer-motion": "^12.34.3",
     "lucide-react": "^0.575.0",
     "next": "^16.1.6",
-    "next-sanity": "^11.6.12",
     "playwright": "^1.58.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "sanity": "^4.22.0",
-    "styled-components": "^6.3.11"
+    "tinacms": "^3.6.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

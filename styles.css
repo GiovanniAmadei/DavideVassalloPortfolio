@@ -976,7 +976,7 @@ button {
    ============================================ */
 .mosaico-preview-section {
   padding-top: 1rem !important;
-  /* Reduce space after Chi Sono */
+  /* Restore default section padding for label alignment */
 }
 
 .home-gallery {
@@ -990,21 +990,25 @@ button {
 }
 
 #mosaico-grid-preview {
-  columns: 4 250px;
-  column-gap: 12px;
+  columns: 8 100px;
+  column-gap: 6px;
   margin-top: 1.5rem;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+  width: calc(100% + 5rem); /* Compensate for section padding (2.5rem + 2.5rem) */
+  margin-left: -2.5rem;
 }
 
 @media (max-width: 900px) {
   #mosaico-grid-preview {
-    columns: 2 140px;
+    columns: 4 60px;
+    width: calc(100% + 3rem); /* Compensate for mobile section padding (1.5rem + 1.5rem) */
+    margin-left: -1.5rem;
   }
 }
 
 #mosaico-grid-preview .masonry-item {
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 #mosaico-grid-preview .masonry-item {
