@@ -166,7 +166,6 @@ button {
 
 .header-nav a {
   font-size: 1.1rem;
-  /* Base nav size */
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -175,6 +174,8 @@ button {
   transition: color 0.25s ease;
   padding: 0.2rem 0;
   white-space: nowrap;
+  pointer-events: auto;
+  z-index: 201;
 }
 
 .header-nav a:hover,
@@ -227,37 +228,7 @@ button {
   filter: drop-shadow(0 0 6px rgba(0, 119, 181, 0.5));
 }
 
-/* Submenu Bar */
-.header-submenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  display: block;
-  z-index: 210;
-  opacity: 0;
-  background: var(--bg);
-  transform: translate3d(0, -10px, 0);
-  transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1),
-    transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  border-bottom: none;
-  box-shadow: none;
-  pointer-events: none;
-  will-change: opacity, transform;
-}
-
-.site-header.is-portfolio-open .header-submenu,
-.header-submenu.open {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-  pointer-events: all !important;
-  box-shadow: 0 16px 20px -16px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(0, 0, 0, 0) !important;
-  background: var(--bg) !important;
-  z-index: 210 !important;
-  border: none !important;
-}
-
+/* Submenu Bar — Second nav bar */
 .header-submenu {
   position: absolute;
   top: 100%;
@@ -278,8 +249,56 @@ button {
   padding-bottom: 0.4rem;
 }
 
+.site-header.is-portfolio-open .header-submenu,
+.header-submenu.open {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  pointer-events: all !important;
+  background: var(--bg) !important;
+  z-index: 210 !important;
+  border: none !important;
+}
+
+/* Third bar: sub-filters (fotografia / videomaking) — same style as header-submenu */
+.header-tertiary {
+  position: absolute;
+  /* Will be positioned below the submenu via JS-set class or CSS calc */
+  /* The submenu is ~38px tall when visible; we stack below it */
+  top: calc(100% + 35px);
+  left: 0;
+  right: 0;
+  display: block;
+  z-index: 209;
+  opacity: 0;
+  background: var(--bg);
+  transform: translate3d(0, -10px, 0);
+  transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  border: none;
+  border-bottom: none !important;
+  box-shadow: none;
+  pointer-events: none;
+  will-change: opacity, transform;
+  padding-bottom: 0.4rem;
+}
+
+.header-tertiary.open {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  pointer-events: all !important;
+  background: var(--bg) !important;
+  border: none !important;
+  /* Only show bottom shadow on this lowest bar */
+  box-shadow: 0 16px 20px -16px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* When tertiary is open, suppress submenu shadow so tertiary handles it */
+.site-header.has-tertiary .header-submenu {
+  box-shadow: none !important;
+}
+
 .submenu-nav,
-.tertiary-submenu-nav {
+.header-tertiary .submenu-nav {
   display: flex !important;
   justify-content: center !important;
   gap: 1.5rem !important;
@@ -294,7 +313,7 @@ button {
 
 .site-header.is-portfolio-open .submenu-nav,
 .header-submenu.open .submenu-nav,
-.tertiary-submenu-nav.open {
+.header-tertiary.open .submenu-nav {
   opacity: 1 !important;
   transform: translateY(0) !important;
   padding: 0.2rem 0 !important;
@@ -1466,7 +1485,11 @@ button {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin-top: 1.5rem;
+  margin-top: 0;
+}
+
+#blog-preview .section-header {
+  margin-bottom: 2rem;
 }
 
 .blog-card {
@@ -1632,7 +1655,7 @@ button {
     white-space: nowrap;
     justify-content: flex-start !important;
     gap: 1.5rem !important;
-    padding: 0.6rem 0 0.6rem 1.5rem !important;
+    padding: 0.6rem 1.5rem 0.6rem 1.5rem !important;
     scrollbar-width: none;
   }
 
@@ -1644,12 +1667,13 @@ button {
     white-space: nowrap;
     justify-content: flex-start !important;
     gap: 1.5rem !important;
-    padding: 0 0 0 1.5rem !important;
+    padding: 0 1.5rem 0 1.5rem !important;
     scrollbar-width: none;
+    pointer-events: auto !important;
   }
 
   .tertiary-submenu-nav.open {
-    padding: 0.6rem 0 0.6rem 1.5rem !important;
+    padding: 0.6rem 1.5rem 0.6rem 1.5rem !important;
     max-height: 6rem;
   }
 
@@ -1658,7 +1682,8 @@ button {
   .gallery-filters::after {
     content: "";
     display: inline-block;
-    padding-right: 1.5rem;
+    width: 1.5rem;
+    flex-shrink: 0;
   }
 
   .submenu-nav::-webkit-scrollbar,
@@ -1673,8 +1698,16 @@ button {
     -webkit-overflow-scrolling: touch;
     white-space: nowrap;
     gap: 1.5rem !important;
-    padding: 0 0 0.5rem 1.5rem !important;
+    padding: 0 1.5rem 0.5rem 1.5rem !important;
     scrollbar-width: none;
+  }
+
+  /* Ensure filter buttons are always clickable on mobile */
+  .filter-btn,
+  .tertiary-link {
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
   }
 
   .header-nav {

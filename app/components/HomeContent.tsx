@@ -46,10 +46,10 @@ export default function HomeContent(props: HomeContentProps) {
   const homepageData = homeDataLocal.homepage
 
   // Re-process items
-  const posts = (postsDataLocal.postConnection.edges || []).map(e => e?.node).filter(Boolean) as any[]
+  const posts = (postsDataLocal.postConnection.edges || []).map((e: any) => e?.node).filter(Boolean) as any[]
   posts.sort((a, b) => new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime())
 
-  const fotografiaData = (fotoDataLocal.fotografiaConnection.edges || []).map(e => e?.node).filter(Boolean).sort((a: any, b: any) => (a.ordine || 0) - (b.ordine || 0)) as any[]
+  const fotografiaData = (fotoDataLocal.fotografiaConnection.edges || []).map((e: any) => e?.node).filter(Boolean).sort((a: any, b: any) => (a.ordine || 0) - (b.ordine || 0)) as any[]
   
   // Note: Since MasonryGrid maps over items, to get visual editing on photos we ideally pass the `tinaField` info 
   // into the items array or refactor MasonryGrid. For now we will map the `tinaField` attribute on the objects so MasonryGrid can use it
@@ -68,12 +68,12 @@ export default function HomeContent(props: HomeContentProps) {
 
       {/* CHI SONO PREVIEW */}
       <section className="section" id="chi-sono-preview">
-        <div className="section-header reveal">
+        <Reveal className="section-header">
           <span className="section-label section-label-large" data-tina-field={tinaField(homepageData, 'chiSonoLabel')}>
             {homepageData?.chiSonoLabel || 'Chi sono'}
           </span>
           <div className="section-rule" />
-        </div>
+        </Reveal>
         <div className="about-grid">
           <Reveal className="about-image">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -114,7 +114,7 @@ export default function HomeContent(props: HomeContentProps) {
             )
           })}
         </div>
-        <div className="home-gallery-cta reveal" style={{ marginTop: '3rem' }}>
+        <div className="home-gallery-cta reveal">
           <Link href="/blog" data-tina-field={tinaField(homepageData, 'ctaBlog')}>
             {homepageData?.ctaBlog || 'Tutte le Riflessioni \u2192'}
           </Link>
@@ -129,7 +129,7 @@ export default function HomeContent(props: HomeContentProps) {
           </span>
           <div className="section-rule" />
         </Reveal>
-        <MasonryGrid items={mosaicoData} shuffle limit={32} id="mosaico-grid-preview" />
+        <MasonryGrid items={mosaicoData} shuffle limit={48} id="mosaico-grid-preview" />
         <div className="home-gallery-cta reveal">
           <Link href="/portfolio#mosaico" data-tina-field={tinaField(homepageData, 'ctaMosaico')}>
             {homepageData?.ctaMosaico || 'Esplora il Portfolio Completo \u2192'}

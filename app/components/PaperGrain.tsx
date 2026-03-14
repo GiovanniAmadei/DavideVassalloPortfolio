@@ -21,7 +21,7 @@ export default function PaperGrain() {
     overlay.id = 'paper-grain-overlay'
     overlay.style.cssText = `
       position:fixed;top:0;left:0;width:100vw;height:100vh;
-      pointer-events:none;z-index:10;opacity:0.02;
+      pointer-events:none;z-index:10;opacity:0.06;
       mix-blend-mode:multiply;
       background-image:url(${canvas.toDataURL()});
       background-repeat:repeat;

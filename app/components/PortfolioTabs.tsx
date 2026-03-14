@@ -1,9 +1,8 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
 import MasonryGrid from './MasonryGrid'
-import Link from 'next/link'
+import { usePortfolio } from './PortfolioContext'
 
 interface MediaItem {
   src: string
@@ -53,10 +52,7 @@ function FotoPanelSlider({ images, label }: { images: string[]; label: string })
 }
 
 export default function PortfolioTabs({ fotografiaData, videomakingData, regiaData, mosaicoData, pageData, tinaField }: PortfolioTabsProps) {
-  const [activeTab, setActiveTab] = useState('fotografia')
-  const [fotoFilter, setFotoFilter] = useState('ritratti')
-  const [showFotoGrid, setShowFotoGrid] = useState(false)
-  const [videoFilter, setVideoFilter] = useState('all')
+  const { activeTab, setActiveTab, fotoFilter, setFotoFilter, showFotoGrid, setShowFotoGrid } = usePortfolio()
 
   const tabTitles: Record<string, string> = {
     fotografia: pageData?.tabFotografia || defaultTabTitles.fotografia,
@@ -87,7 +83,7 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
     const hash = window.location.hash.replace('#', '')
     const valid = ['fotografia', 'videomaking', 'regia', 'mosaico']
     if (valid.includes(hash)) setActiveTab(hash)
-  }, [])
+  }, [setActiveTab])
 
   const switchTab = useCallback((tab: string) => {
     setActiveTab(tab)
@@ -95,7 +91,21 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
       setShowFotoGrid(false)
     }
     history.replaceState(null, '', '#' + tab)
-  }, [])
+  }, [setActiveTab, setShowFotoGrid])
+
+  // Keep switchTab callable from hash links in the header - listen to hash changes
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash.replace('#', '')
+      const valid = ['fotografia', 'videomaking', 'regia', 'mosaico']
+      if (valid.includes(hash)) {
+        setActiveTab(hash)
+        if (hash === 'fotografia') setShowFotoGrid(false)
+      }
+    }
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [setActiveTab, setShowFotoGrid])
 
   const mosaicoFull = [...mosaicoData, ...mosaicoData, ...mosaicoData, ...mosaicoData, ...mosaicoData]
 
@@ -126,20 +136,6 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
           </div>
         ) : (
           <div className="fotografia-main" style={{ display: 'block', opacity: 1 }}>
-            {/* Tertiary: Fotografia filters */}
-            <div id="tertiary-fotografia" className="tertiary-submenu-nav open" style={{ marginBottom: '2rem' }}>
-              {fotoPanelsConfig.map((p, i) => (
-                <span key={p.id} style={{ display: 'contents' }}>
-                  {i > 0 && <span className="nav-separator">&bull;</span>}
-                  <a
-                    href="#fotografia"
-                    className={`tertiary-link filter-btn${fotoFilter === p.id ? ' active' : ''}`}
-                    onClick={e => { e.preventDefault(); setFotoFilter(p.id) }}
-                    data-tina-field={tinaField ? tinaField(pageData, p.field) : undefined}
-                  >{p.label}</a>
-                </span>
-              ))}
-            </div>
             <MasonryGrid items={fotografiaData} filter={fotoFilter} />
           </div>
         )}
@@ -147,21 +143,7 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
 
       {/* VIDEOMAKING */}
       <section className="portfolio-tab-panel section" style={{ display: activeTab === 'videomaking' ? '' : 'none' }} id="tab-videomaking">
-        {/* Tertiary: Videomaking filters */}
-        <div id="tertiary-videomaking" className="tertiary-submenu-nav open" style={{ marginBottom: '2rem' }}>
-          {[{ id: 'all', label: pageData?.filterVideoAll || 'Tutto', field: 'filterVideoAll' }, { id: 'reportage', label: pageData?.filterVideo1 || 'Reportage', field: 'filterVideo1' }, { id: 'ricerca', label: pageData?.filterVideo2 || 'Ricerca', field: 'filterVideo2' }].map((f, i) => (
-            <span key={f.id} style={{ display: 'contents' }}>
-              {i > 0 && <span className="nav-separator">&bull;</span>}
-              <a
-                href="#videomaking"
-                className={`tertiary-link filter-btn${videoFilter === f.id ? ' active' : ''}`}
-                onClick={e => { e.preventDefault(); setVideoFilter(f.id) }}
-                data-tina-field={tinaField ? tinaField(pageData, f.field) : undefined}
-              >{f.label}</a>
-            </span>
-          ))}
-        </div>
-        <MasonryGrid items={videomakingData} filter={videoFilter === 'all' ? undefined : videoFilter} />
+        <MasonryGrid items={videomakingData} filter={undefined} />
       </section>
 
       {/* REGIA */}

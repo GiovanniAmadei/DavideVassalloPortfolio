@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useRef } from 'react'
+import { usePortfolio } from './PortfolioContext'
 
 const InstagramIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -26,8 +27,10 @@ export default function Header({ globalSettings, tinaField }: { globalSettings?:
   const [submenuOpen, setSubmenuOpen] = useState(false)
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const isPortfolio = pathname === '/portfolio' || pathname.startsWith('/portfolio/')
-  const isStudio = pathname.startsWith('/studio')
+  const { activeTab, setActiveTab, fotoFilter, setFotoFilter, videoFilter, setVideoFilter, showFotoGrid, setShowFotoGrid } = usePortfolio()
+
+  const isPortfolio = (pathname ?? '').startsWith('/portfolio')
+  const isStudio = (pathname ?? '').startsWith('/studio')
 
   // Don't render header on studio pages
   if (isStudio) return null
@@ -48,8 +51,22 @@ export default function Header({ globalSettings, tinaField }: { globalSettings?:
     closeTimerRef.current = setTimeout(() => setSubmenuOpen(false), 90)
   }
 
+  // Tertiary bar config
+  const fotoPanelsConfig = [
+    { id: 'ritratti', label: globalSettings?.filterFoto1 || 'Ritratti' },
+    { id: 'narrazione', label: globalSettings?.filterFoto2 || 'Narrazione' },
+  ]
+  const videoFiltersConfig = [
+    { id: 'all', label: globalSettings?.filterVideoAll || 'Tutto' },
+    { id: 'reportage', label: globalSettings?.filterVideo1 || 'Reportage' },
+    { id: 'ricerca', label: globalSettings?.filterVideo2 || 'Ricerca' },
+  ]
+
+  // Show tertiary bar when on portfolio page and in fotografia (with grid shown) or videomaking tab
+  const showTertiary = isPortfolio && ((activeTab === 'fotografia' && showFotoGrid) || activeTab === 'videomaking')
+
   return (
-    <header className={`site-header${isPortfolio || submenuOpen ? ' is-portfolio-open' : ''}`}>
+    <header className={`site-header${isPortfolio || submenuOpen ? ' is-portfolio-open' : ''}${showTertiary ? ' has-tertiary' : ''}`}>
       <div className="header-main">
         <Link className="header-logo" href="/" data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'logoName') : undefined}>
           {globalSettings?.logoName || 'Davide Vassallo'}
@@ -68,7 +85,7 @@ export default function Header({ globalSettings, tinaField }: { globalSettings?:
           {navLinks.map((link, i) => {
             const isActive = link.href === '/'
               ? pathname === '/'
-              : pathname.startsWith(link.href)
+              : (pathname ?? '').startsWith(link.href)
 
             if (link.id === 'portfolio-toggle') {
               return (
@@ -80,6 +97,7 @@ export default function Header({ globalSettings, tinaField }: { globalSettings?:
                     className={isActive ? 'active' : ''}
                     onMouseEnter={openSubmenu}
                     onMouseLeave={closeSubmenu}
+                    onClick={() => setMobileOpen(false)}
                     data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, link.field) : undefined}
                   >
                     {link.label}
@@ -91,7 +109,12 @@ export default function Header({ globalSettings, tinaField }: { globalSettings?:
             return (
               <span key={link.href} style={{ display: 'contents' }}>
                 {i > 0 && <span className="nav-separator">&bull;</span>}
-                <Link href={link.href} className={isActive ? 'active' : ''} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, link.field) : undefined}>
+                <Link 
+                  href={link.href} 
+                  className={isActive ? 'active' : ''} 
+                  onClick={() => setMobileOpen(false)}
+                  data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, link.field) : undefined}
+                >
                   {link.label}
                 </Link>
               </span>
@@ -109,6 +132,7 @@ export default function Header({ globalSettings, tinaField }: { globalSettings?:
         </div>
       </div>
 
+      {/* Second bar: portfolio tab links */}
       <div
         id="submenu-portfolio"
         className={`header-submenu${isPortfolio || submenuOpen ? ' open' : ''}`}
@@ -116,13 +140,39 @@ export default function Header({ globalSettings, tinaField }: { globalSettings?:
         onMouseLeave={closeSubmenu}
       >
         <nav className="submenu-nav">
-          <Link href="/portfolio#fotografia" className="portfolio-tab-link" data-tab="fotografia" data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubFotografia') : undefined}>{globalSettings?.navSubFotografia || 'Fotografia'}</Link>
+          <Link href="/portfolio#fotografia" className="portfolio-tab-link" data-tab="fotografia" onClick={() => { setActiveTab('fotografia'); setShowFotoGrid(false); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubFotografia') : undefined}>{globalSettings?.navSubFotografia || 'Fotografia'}</Link>
           <span className="nav-separator">&bull;</span>
-          <Link href="/portfolio#videomaking" className="portfolio-tab-link" data-tab="videomaking" data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubVideomaking') : undefined}>{globalSettings?.navSubVideomaking || 'Videomaking'}</Link>
+          <Link href="/portfolio#videomaking" className="portfolio-tab-link" data-tab="videomaking" onClick={() => { setActiveTab('videomaking'); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubVideomaking') : undefined}>{globalSettings?.navSubVideomaking || 'Videomaking'}</Link>
           <span className="nav-separator">&bull;</span>
-          <Link href="/portfolio#regia" className="portfolio-tab-link" data-tab="regia" data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubRegia') : undefined}>{globalSettings?.navSubRegia || 'Regia'}</Link>
+          <Link href="/portfolio#regia" className="portfolio-tab-link" data-tab="regia" onClick={() => { setActiveTab('regia'); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubRegia') : undefined}>{globalSettings?.navSubRegia || 'Regia'}</Link>
           <span className="nav-separator">&bull;</span>
-          <Link href="/portfolio#mosaico" className="portfolio-tab-link" data-tab="mosaico" data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubMosaico') : undefined}>{globalSettings?.navSubMosaico || 'Mosaico'}</Link>
+          <Link href="/portfolio#mosaico" className="portfolio-tab-link" data-tab="mosaico" onClick={() => { setActiveTab('mosaico'); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubMosaico') : undefined}>{globalSettings?.navSubMosaico || 'Mosaico'}</Link>
+        </nav>
+      </div>
+
+      {/* Third bar: sub-filters for fotografia and videomaking */}
+      <div className={`header-tertiary${showTertiary ? ' open' : ''}`}>
+        <nav className="submenu-nav">
+          {activeTab === 'fotografia' && fotoPanelsConfig.map((p, i) => (
+            <span key={p.id} style={{ display: 'contents' }}>
+              {i > 0 && <span className="nav-separator">&bull;</span>}
+              <button
+                type="button"
+                className={`tertiary-link filter-btn${fotoFilter === p.id ? ' active' : ''}`}
+                onClick={() => setFotoFilter(p.id)}
+              >{p.label}</button>
+            </span>
+          ))}
+          {activeTab === 'videomaking' && videoFiltersConfig.map((f, i) => (
+            <span key={f.id} style={{ display: 'contents' }}>
+              {i > 0 && <span className="nav-separator">&bull;</span>}
+              <button
+                type="button"
+                className={`tertiary-link filter-btn${videoFilter === f.id ? ' active' : ''}`}
+                onClick={() => setVideoFilter(f.id)}
+              >{f.label}</button>
+            </span>
+          ))}
         </nav>
       </div>
     </header>

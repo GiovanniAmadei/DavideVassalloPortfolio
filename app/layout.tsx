@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import PaperGrain from './components/PaperGrain'
 import GlobalDataWrapper from './components/GlobalDataWrapper'
+import { PortfolioProvider } from './components/PortfolioContext'
 import client from '@/tina/__generated__/client'
 import '../styles.css'
 
@@ -21,13 +22,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="it">
       <body style={{ margin: 0, padding: 0 }}>
         <PaperGrain />
-        <GlobalDataWrapper 
-          data={globalRes.data as any} 
-          query={globalRes.query} 
-          variables={globalRes.variables}
-        >
-          {children}
-        </GlobalDataWrapper>
+        <PortfolioProvider>
+          <GlobalDataWrapper 
+            data={globalRes.data as any} 
+            query={globalRes.query} 
+            variables={globalRes.variables}
+          >
+            {children}
+          </GlobalDataWrapper>
+        </PortfolioProvider>
       </body>
     </html>
   )
