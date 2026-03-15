@@ -2,6 +2,7 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['next-tinacms-cloudinary', '@tinacms/auth'],
   typescript: {
     ignoreBuildErrors: true,
   },
