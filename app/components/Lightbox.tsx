@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 
 interface LightboxItem {
   src: string
@@ -35,8 +36,7 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
       window.removeEventListener('keydown', onKey)
     }
   }, [prev, next, onClose])
-
-  return (
+  const content = (
     <div className="lightbox-modal active" id="lightbox-modal">
       <div className="lightbox-close" onClick={onClose}>✕</div>
       <button className="lightbox-nav lightbox-prev" onClick={(e) => { e.stopPropagation(); prev() }} aria-label="Previous image">‹</button>
@@ -54,4 +54,8 @@ export default function Lightbox({ items, initialIndex, onClose }: LightboxProps
       </div>
     </div>
   )
+
+  if (typeof document === 'undefined') return null
+
+  return createPortal(content, document.body)
 }
