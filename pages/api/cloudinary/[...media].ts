@@ -39,16 +39,16 @@ export default async function customMediaHandler(req: any, res: any) {
     };
     
     res.json = (body: any) => {
-      // Se c'è un errore (status >= 400 o body.e) che non sia il classico "Unauthorized"
-      if ((statusCode >= 400 || body?.e) && statusCode !== 401) {
-        const errorMsg = body?.e || body?.message || 'Unknown Error';
+      // Intercettiamo TUTTI gli errori (status >= 400 o body.e)
+      if (statusCode >= 400 || body?.e) {
+        const errorMsg = body?.e || body?.message || `HTTP ${statusCode} Error`;
         // Ritorniamo 200 e forziamo un finto file d'errore così TinaCMS lo mostra nella UI
         res.status(200);
         return originalJson({
           items: [{
             id: 'debug-error',
             type: 'file',
-            filename: `ERROR_LOG: ${typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg)}`,
+            filename: `ERROR_LOG (${statusCode}): ${typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg)}`,
             directory: '/',
             src: 'https://via.placeholder.com/150?text=ERROR',
             thumbnails: {
