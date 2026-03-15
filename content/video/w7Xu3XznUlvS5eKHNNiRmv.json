@@ -1,11 +1,10 @@
 {
-  "title": "Documentario Urbano",
-  "src": "https://cdn.sanity.io/images/lbt74p0a/production/d02c90142d0b44a1a71bd1230e258991a633d42e-5992x3987.jpg",
-  "categoriaString": "reportage",
-  "description": "Regia e montaggio di documentario",
-  "metadata": "2024 • 25 Min • Documentario",
-  "logline": "Un viaggio negli spazi vuoti e nelle identità disperse della metropoli.",
-  "url": "project-detail.html",
-  "isPreviewCard": true,
-  "ordine": 8
+  "title": "Urban Study",
+  "src": "https://cdn.sanity.io/images/lbt74p0a/production/122d76882558a193a8f88a016b34508af69b5b73-5766x3836.jpg",
+  "categoriaString": "regia",
+  "description": "Documentario sperimentale su spazi urbani",
+  "metadata": "2025 • 5 Min • Corto",
+  "logline": "La città che muta sotto la spinta della gentrificazione costante.",
+  "url": "",
+  "ordine": 4
 }

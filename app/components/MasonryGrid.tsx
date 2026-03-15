@@ -13,6 +13,7 @@ interface MasonryItem {
   isPreviewCard?: boolean
   logline?: string
   url?: string
+  slug?: string
   _tinaField?: any
 }
 
@@ -22,6 +23,7 @@ interface MasonryGridProps {
   limit?: number
   filter?: string
   id?: string
+  orderedGrid?: boolean
 }
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -33,7 +35,7 @@ function shuffleArray<T>(array: T[]): T[] {
   return arr
 }
 
-export default function MasonryGrid({ items, shuffle = false, limit, filter, id }: MasonryGridProps) {
+export default function MasonryGrid({ items, shuffle = false, limit, filter, id, orderedGrid = false }: MasonryGridProps) {
   const [lightbox, setLightbox] = useState<{ index: number } | null>(null)
 
   const processed = useCallback(() => {
@@ -49,21 +51,34 @@ export default function MasonryGrid({ items, shuffle = false, limit, filter, id 
 
   return (
     <>
-      <div className="masonry-grid" id={id}>
+      <div className={orderedGrid ? "ordered-grid" : "masonry-grid"} id={id}>
         {data.map((item, index) => (
           <div
             key={`${item.src}-${index}`}
             className={`masonry-item reveal active${item.aspectRatio && item.aspectRatio < 1 ? ' portrait' : ''}${item.isPreviewCard ? ' has-preview' : ''}`}
             data-category={item.category}
             data-tina-field={item._tinaField}
-            onClick={() => {
-              if (item.url) window.location.href = item.url
-              else openLightbox(index)
+            onClick={(e) => {
+              if (orderedGrid && item.slug) {
+                // Video items always navigate to their project page
+                window.location.href = `/portfolio/video/${item.slug}`
+              } else if (item.url) {
+                if (item.url.includes('project-detail.html')) {
+                  e.preventDefault()
+                  openLightbox(index)
+                } else if (item.url.startsWith('http') || item.url.startsWith('www')) {
+                  window.open(item.url.startsWith('http') ? item.url : `https://${item.url}`, '_blank')
+                } else {
+                  window.location.href = item.url
+                }
+              } else {
+                openLightbox(index)
+              }
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={item.src} alt={item.title || ''} />
-            {item.isPreviewCard ? (
+            {(orderedGrid || item.isPreviewCard) ? (
               <div className="project-preview-card">
                 <h3 className="project-preview-title">{item.title}</h3>
                 <p className="project-preview-meta">{item.metadata}</p>

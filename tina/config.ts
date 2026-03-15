@@ -202,7 +202,7 @@ export default defineConfig({
         path: "content/video",
         format: "json",
         ui: {
-          router: () => "/portfolio",
+          router: ({ document }) => `/portfolio/video/${document._sys.filename}`,
         },
         fields: [
           {
@@ -221,8 +221,19 @@ export default defineConfig({
           {
             type: "string",
             name: "categoriaString",
-            label: "Categoria (Tag)",
+            label: "Sezione Portfolio",
             required: true,
+            description: "Scegli in quale sezione del portfolio appare questo progetto.",
+            options: [
+              { value: "videomaking", label: "Videomaking" },
+              { value: "regia", label: "Regia" },
+            ],
+          },
+          {
+            type: "string",
+            name: "sottocategoria",
+            label: "Sottocategoria / Tag Filtro",
+            description: "Opzionale. Usato per i filtri nella pagina portfolio (es. Reportage, Ricerca, Cortometraggio). Lascia vuoto per non filtrare.",
           },
           {
             type: "string",
@@ -244,12 +255,8 @@ export default defineConfig({
           {
             type: "string",
             name: "url",
-            label: "Link (URL)",
-          },
-          {
-            type: "boolean",
-            name: "isPreviewCard",
-            label: "Mostra come Card Dettagliata?",
+            label: "Link Video (URL)",
+            description: "Es. https://vimeo.com/... o https://youtube.com/watch?v=... (lascia vuoto per mostrare solo l'immagine)",
           },
           {
             type: "number",
@@ -480,6 +487,7 @@ export default defineConfig({
         format: "json",
         match: { include: "blog" },
         ui: {
+          global: true,
           router: () => "/blog",
           allowedActions: {
             create: false,
@@ -487,6 +495,7 @@ export default defineConfig({
           },
         },
         fields: [
+          { type: "boolean", name: "attivata", label: "Pagina Blog Attivata?", description: "Se disattivata, la pagina blog non sarà visibile ai visitatori (redirect a /)." },
           { type: "string", name: "label", label: "Label Superiore (es. Editoriale)" },
           { type: "string", name: "title", label: "Titolo Pagina (es. Blog)" },
           { type: "string", name: "emptyMessage", label: "Messaggio se non ci sono articoli" },

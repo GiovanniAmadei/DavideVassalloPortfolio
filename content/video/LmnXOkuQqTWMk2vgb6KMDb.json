@@ -1,11 +1,11 @@
 {
   "title": "Corporate Event",
   "src": "https://cdn.sanity.io/images/lbt74p0a/production/a60aa3f6c705f0108664f520805038d1f76112e2-3873x5809.jpg",
-  "categoriaString": "reportage",
+  "categoriaString": "videomaking",
+  "sottocategoria": "reportage",
   "description": "Video istituzionale per evento aziendale",
   "metadata": "2023 • 2 Min • Corporate",
   "logline": "Sintesi dinamica dei momenti salienti del convegno annuale.",
-  "url": "project-detail.html",
-  "isPreviewCard": true,
+  "url": "https://www.youtube.com/watch?v=9FjGP4t2zKY&pp=ygURY2F0IGVudGVyaW5nIGJvd2w%3D",
   "ordine": 3
 }

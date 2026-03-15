@@ -476,31 +476,26 @@ export type ProgettoVideo = Node & Document & {
   title: Scalars['String']['output'];
   src: Scalars['String']['output'];
   categoriaString: Scalars['String']['output'];
+  sottocategoria?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   metadata?: Maybe<Scalars['String']['output']>;
   logline?: Maybe<Scalars['String']['output']>;
   url?: Maybe<Scalars['String']['output']>;
-  isPreviewCard?: Maybe<Scalars['Boolean']['output']>;
   ordine?: Maybe<Scalars['Float']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
 };
 
-export type BooleanFilter = {
-  eq?: InputMaybe<Scalars['Boolean']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
 export type ProgettoVideoFilter = {
   title?: InputMaybe<StringFilter>;
   src?: InputMaybe<ImageFilter>;
   categoriaString?: InputMaybe<StringFilter>;
+  sottocategoria?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
   metadata?: InputMaybe<StringFilter>;
   logline?: InputMaybe<StringFilter>;
   url?: InputMaybe<StringFilter>;
-  isPreviewCard?: InputMaybe<BooleanFilter>;
   ordine?: InputMaybe<NumberFilter>;
 };
 
@@ -730,6 +725,7 @@ export type PortfolioPageConnection = Connection & {
 
 export type BlogPage = Node & Document & {
   __typename?: 'BlogPage';
+  attivata?: Maybe<Scalars['Boolean']['output']>;
   label?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   emptyMessage?: Maybe<Scalars['String']['output']>;
@@ -739,7 +735,13 @@ export type BlogPage = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type BlogPageFilter = {
+  attivata?: InputMaybe<BooleanFilter>;
   label?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   emptyMessage?: InputMaybe<StringFilter>;
@@ -992,11 +994,11 @@ export type ProgettoVideoMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   src?: InputMaybe<Scalars['String']['input']>;
   categoriaString?: InputMaybe<Scalars['String']['input']>;
+  sottocategoria?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['String']['input']>;
   logline?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
-  isPreviewCard?: InputMaybe<Scalars['Boolean']['input']>;
   ordine?: InputMaybe<Scalars['Float']['input']>;
 };
 
@@ -1072,6 +1074,7 @@ export type PortfolioPageMutation = {
 };
 
 export type BlogPageMutation = {
+  attivata?: InputMaybe<Scalars['Boolean']['input']>;
   label?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   emptyMessage?: InputMaybe<Scalars['String']['input']>;
@@ -1084,7 +1087,7 @@ export type ChiSonoPartsFragment = { __typename: 'ChiSono', titolo: string, sott
 
 export type FotografiaPartsFragment = { __typename: 'Fotografia', title?: string | null, src: string, categoriaString: string, description?: string | null, metadata?: string | null, ordine?: number | null };
 
-export type ProgettoVideoPartsFragment = { __typename: 'ProgettoVideo', title: string, src: string, categoriaString: string, description?: string | null, metadata?: string | null, logline?: string | null, url?: string | null, isPreviewCard?: boolean | null, ordine?: number | null };
+export type ProgettoVideoPartsFragment = { __typename: 'ProgettoVideo', title: string, src: string, categoriaString: string, sottocategoria?: string | null, description?: string | null, metadata?: string | null, logline?: string | null, url?: string | null, ordine?: number | null };
 
 export type ContattiPartsFragment = { __typename: 'Contatti', email: string, telefono?: string | null, instagram?: string | null, linkedin?: string | null, indirizzoStudio?: string | null, titoloPagina?: string | null, sottotitoloPagina?: string | null, titoloSezione?: string | null, testoSottoTitolo?: string | null, orariRitratto?: string | null, orariReportage?: string | null, orariRicerca?: string | null, formName?: string | null, formEmail?: string | null, formSubject?: string | null, formMessage?: string | null, formSubmit?: string | null };
 
@@ -1094,7 +1097,7 @@ export type HomepagePartsFragment = { __typename: 'Homepage', chiSonoLabel?: str
 
 export type PortfolioPagePartsFragment = { __typename: 'PortfolioPage', tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, imagesFoto1?: Array<string | null> | null, imagesFoto2?: Array<string | null> | null };
 
-export type BlogPagePartsFragment = { __typename: 'BlogPage', label?: string | null, title?: string | null, emptyMessage?: string | null, readMoreLabel?: string | null };
+export type BlogPagePartsFragment = { __typename: 'BlogPage', attivata?: boolean | null, label?: string | null, title?: string | null, emptyMessage?: string | null, readMoreLabel?: string | null };
 
 export type PostQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1158,7 +1161,7 @@ export type ProgettoVideoQueryVariables = Exact<{
 }>;
 
 
-export type ProgettoVideoQuery = { __typename?: 'Query', progettoVideo: { __typename: 'ProgettoVideo', id: string, title: string, src: string, categoriaString: string, description?: string | null, metadata?: string | null, logline?: string | null, url?: string | null, isPreviewCard?: boolean | null, ordine?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ProgettoVideoQuery = { __typename?: 'Query', progettoVideo: { __typename: 'ProgettoVideo', id: string, title: string, src: string, categoriaString: string, sottocategoria?: string | null, description?: string | null, metadata?: string | null, logline?: string | null, url?: string | null, ordine?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ProgettoVideoConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1170,7 +1173,7 @@ export type ProgettoVideoConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ProgettoVideoConnectionQuery = { __typename?: 'Query', progettoVideoConnection: { __typename?: 'ProgettoVideoConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProgettoVideoConnectionEdges', cursor: string, node?: { __typename: 'ProgettoVideo', id: string, title: string, src: string, categoriaString: string, description?: string | null, metadata?: string | null, logline?: string | null, url?: string | null, isPreviewCard?: boolean | null, ordine?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ProgettoVideoConnectionQuery = { __typename?: 'Query', progettoVideoConnection: { __typename?: 'ProgettoVideoConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProgettoVideoConnectionEdges', cursor: string, node?: { __typename: 'ProgettoVideo', id: string, title: string, src: string, categoriaString: string, sottocategoria?: string | null, description?: string | null, metadata?: string | null, logline?: string | null, url?: string | null, ordine?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type ContattiQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1253,7 +1256,7 @@ export type BlogPageQueryVariables = Exact<{
 }>;
 
 
-export type BlogPageQuery = { __typename?: 'Query', blogPage: { __typename: 'BlogPage', id: string, label?: string | null, title?: string | null, emptyMessage?: string | null, readMoreLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type BlogPageQuery = { __typename?: 'Query', blogPage: { __typename: 'BlogPage', id: string, attivata?: boolean | null, label?: string | null, title?: string | null, emptyMessage?: string | null, readMoreLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type BlogPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1265,7 +1268,7 @@ export type BlogPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type BlogPageConnectionQuery = { __typename?: 'Query', blogPageConnection: { __typename?: 'BlogPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BlogPageConnectionEdges', cursor: string, node?: { __typename: 'BlogPage', id: string, label?: string | null, title?: string | null, emptyMessage?: string | null, readMoreLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type BlogPageConnectionQuery = { __typename?: 'Query', blogPageConnection: { __typename?: 'BlogPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BlogPageConnectionEdges', cursor: string, node?: { __typename: 'BlogPage', id: string, attivata?: boolean | null, label?: string | null, title?: string | null, emptyMessage?: string | null, readMoreLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const PostPartsFragmentDoc = gql`
     fragment PostParts on Post {
@@ -1314,11 +1317,11 @@ export const ProgettoVideoPartsFragmentDoc = gql`
   title
   src
   categoriaString
+  sottocategoria
   description
   metadata
   logline
   url
-  isPreviewCard
   ordine
 }
     `;
@@ -1403,6 +1406,7 @@ export const PortfolioPagePartsFragmentDoc = gql`
 export const BlogPagePartsFragmentDoc = gql`
     fragment BlogPageParts on BlogPage {
   __typename
+  attivata
   label
   title
   emptyMessage

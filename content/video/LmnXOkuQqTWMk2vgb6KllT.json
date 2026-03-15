@@ -1,11 +1,10 @@
 {
-  "title": "Spot Commerciale",
-  "src": "https://cdn.sanity.io/images/lbt74p0a/production/b70b4f0d93b64e76e4f19a7dbe7e83cf017f9a9d-3779x5668.jpg",
-  "categoriaString": "ricerca",
-  "description": "Direzione artistica per campagna visual",
-  "metadata": "2023 • 60 Sec • Commercial",
-  "logline": "Campagna visiva che sfrutta il netto contrasto e le forme pure.",
-  "url": "project-detail.html",
-  "isPreviewCard": true,
-  "ordine": 7
+  "title": "Teatro",
+  "src": "https://cdn.sanity.io/images/lbt74p0a/production/9c945f68930e7e0d2761c396584650fe5e315624-4024x6048.jpg",
+  "categoriaString": "regia",
+  "description": "Riprese teatrali e performative",
+  "metadata": "2024 • 12 Min • Performanza",
+  "logline": "La cruda espressione fisica ritratta in assenza della quarta parete.",
+  "url": "",
+  "ordine": 5
 }

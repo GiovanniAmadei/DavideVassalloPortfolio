@@ -267,31 +267,26 @@ type ProgettoVideo implements Node & Document {
   title: String!
   src: String!
   categoriaString: String!
+  sottocategoria: String
   description: String
   metadata: String
   logline: String
   url: String
-  isPreviewCard: Boolean
   ordine: Float
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-input BooleanFilter {
-  eq: Boolean
-  exists: Boolean
-}
-
 input ProgettoVideoFilter {
   title: StringFilter
   src: ImageFilter
   categoriaString: StringFilter
+  sottocategoria: StringFilter
   description: StringFilter
   metadata: StringFilter
   logline: StringFilter
   url: StringFilter
-  isPreviewCard: BooleanFilter
   ordine: NumberFilter
 }
 
@@ -505,6 +500,7 @@ type PortfolioPageConnection implements Connection {
 }
 
 type BlogPage implements Node & Document {
+  attivata: Boolean
   label: String
   title: String
   emptyMessage: String
@@ -514,7 +510,13 @@ type BlogPage implements Node & Document {
   _values: JSON!
 }
 
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
 input BlogPageFilter {
+  attivata: BooleanFilter
   label: StringFilter
   title: StringFilter
   emptyMessage: StringFilter
@@ -623,11 +625,11 @@ input ProgettoVideoMutation {
   title: String
   src: String
   categoriaString: String
+  sottocategoria: String
   description: String
   metadata: String
   logline: String
   url: String
-  isPreviewCard: Boolean
   ordine: Float
 }
 
@@ -703,6 +705,7 @@ input PortfolioPageMutation {
 }
 
 input BlogPageMutation {
+  attivata: Boolean
   label: String
   title: String
   emptyMessage: String

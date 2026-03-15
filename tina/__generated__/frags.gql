@@ -41,11 +41,11 @@ fragment ProgettoVideoParts on ProgettoVideo {
   title
   src
   categoriaString
+  sottocategoria
   description
   metadata
   logline
   url
-  isPreviewCard
   ordine
 }
 
@@ -125,6 +125,7 @@ fragment PortfolioPageParts on PortfolioPage {
 
 fragment BlogPageParts on BlogPage {
   __typename
+  attivata
   label
   title
   emptyMessage

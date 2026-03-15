@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import client from '@/tina/__generated__/client'
 import BlogIndexContent from '../components/BlogIndexContent'
 
@@ -10,6 +11,12 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   const postRes = await client.queries.postConnection()
   const pageRes = await client.queries.blogPage({ relativePath: "blog.json" })
+
+  // Blog toggle: if attivata is explicitly false, redirect to home
+  const blogPageData = pageRes.data?.blogPage as any
+  if (blogPageData?.attivata === false) {
+    redirect('/')
+  }
 
   return (
     <BlogIndexContent 

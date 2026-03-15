@@ -9,21 +9,31 @@ interface GlobalDataWrapperProps {
   data: GlobalQuery
   query: string
   variables: object
+  blogData: any
+  blogQuery: string
+  blogVariables: object
   children: React.ReactNode
 }
 
-export default function GlobalDataWrapper({ data, query, variables, children }: GlobalDataWrapperProps) {
+export default function GlobalDataWrapper({ data, query, variables, blogData, blogQuery, blogVariables, children }: GlobalDataWrapperProps) {
   const { data: globalData } = useTina({
     query,
     variables,
     data,
   })
 
+  const { data: bData } = useTina({
+    query: blogQuery,
+    variables: blogVariables,
+    data: blogData,
+  })
+
   const globalSettings = globalData.global
+  const blogSettings = bData?.blogPage
 
   return (
     <>
-      <Header globalSettings={globalSettings} tinaField={tinaField} />
+      <Header globalSettings={globalSettings} blogSettings={blogSettings} tinaField={tinaField} />
       {children}
       <Footer globalSettings={globalSettings} tinaField={tinaField} />
     </>

@@ -21,13 +21,19 @@ const LinkedInIcon = () => (
   </svg>
 )
 
-export default function Header({ globalSettings, tinaField }: { globalSettings?: any, tinaField?: any }) {
+export default function Header({ globalSettings, blogSettings, tinaField }: { globalSettings?: any, blogSettings?: any, tinaField?: any }) {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [submenuOpen, setSubmenuOpen] = useState(false)
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const { activeTab, setActiveTab, fotoFilter, setFotoFilter, videoFilter, setVideoFilter, showFotoGrid, setShowFotoGrid } = usePortfolio()
+  const { 
+    activeTab, setActiveTab, 
+    fotoFilter, setFotoFilter, 
+    videoFilter, setVideoFilter, 
+    videoCategories, regiaCategories,
+    showFotoGrid, setShowFotoGrid 
+  } = usePortfolio()
 
   const isPortfolio = (pathname ?? '').startsWith('/portfolio')
   const isStudio = (pathname ?? '').startsWith('/studio')
@@ -35,13 +41,21 @@ export default function Header({ globalSettings, tinaField }: { globalSettings?:
   // Don't render header on studio pages
   if (isStudio) return null
 
-  const navLinks = [
+  const rawNavLinks = [
     { href: '/', label: globalSettings?.navHome || 'Home', field: 'navHome' },
     { href: '/portfolio', label: globalSettings?.navPortfolio || 'Portfolio', id: 'portfolio-toggle', field: 'navPortfolio' },
     { href: '/blog', label: globalSettings?.navBlog || 'Blog', field: 'navBlog' },
     { href: '/about', label: globalSettings?.navAbout || 'Chi Sono', field: 'navAbout' },
     { href: '/contatti', label: globalSettings?.navContact || 'Contatti', field: 'navContact' },
   ]
+
+  // Hide blog link if attivata is explicitly false
+  const navLinks = rawNavLinks.filter(link => {
+    if (link.href === '/blog' && blogSettings?.attivata === false) {
+      return false
+    }
+    return true
+  })
 
   const openSubmenu = () => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current)
@@ -56,14 +70,16 @@ export default function Header({ globalSettings, tinaField }: { globalSettings?:
     { id: 'ritratti', label: globalSettings?.filterFoto1 || 'Ritratti' },
     { id: 'narrazione', label: globalSettings?.filterFoto2 || 'Narrazione' },
   ]
+  const currentVideoCategories = activeTab === 'videomaking' ? videoCategories : regiaCategories
   const videoFiltersConfig = [
     { id: 'all', label: globalSettings?.filterVideoAll || 'Tutto' },
-    { id: 'reportage', label: globalSettings?.filterVideo1 || 'Reportage' },
-    { id: 'ricerca', label: globalSettings?.filterVideo2 || 'Ricerca' },
+    ...currentVideoCategories
   ]
 
-  // Show tertiary bar when on portfolio page and in fotografia (with grid shown) or videomaking tab
-  const showTertiary = isPortfolio && ((activeTab === 'fotografia' && showFotoGrid) || activeTab === 'videomaking')
+  // Show tertiary bar when on portfolio page and in fotografia (with grid shown) or videomaking/regia (if filters exist)
+  const isVideoOrRegia = activeTab === 'videomaking' || activeTab === 'regia'
+  const hasVideoFilters = currentVideoCategories.length > 0
+  const showTertiary = isPortfolio && ((activeTab === 'fotografia' && showFotoGrid) || (isVideoOrRegia && hasVideoFilters))
 
   return (
     <header className={`site-header${isPortfolio || submenuOpen ? ' is-portfolio-open' : ''}${showTertiary ? ' has-tertiary' : ''}`}>
@@ -163,7 +179,7 @@ export default function Header({ globalSettings, tinaField }: { globalSettings?:
               >{p.label}</button>
             </span>
           ))}
-          {activeTab === 'videomaking' && videoFiltersConfig.map((f, i) => (
+          {(activeTab === 'videomaking' || activeTab === 'regia') && videoFiltersConfig.map((f, i) => (
             <span key={f.id} style={{ display: 'contents' }}>
               {i > 0 && <span className="nav-separator">&bull;</span>}
               <button

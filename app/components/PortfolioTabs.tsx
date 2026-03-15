@@ -52,7 +52,7 @@ function FotoPanelSlider({ images, label }: { images: string[]; label: string })
 }
 
 export default function PortfolioTabs({ fotografiaData, videomakingData, regiaData, mosaicoData, pageData, tinaField }: PortfolioTabsProps) {
-  const { activeTab, setActiveTab, fotoFilter, setFotoFilter, showFotoGrid, setShowFotoGrid } = usePortfolio()
+  const { activeTab, setActiveTab, fotoFilter, setFotoFilter, videoFilter, setVideoFilter, showFotoGrid, setShowFotoGrid } = usePortfolio()
 
   const tabTitles: Record<string, string> = {
     fotografia: pageData?.tabFotografia || defaultTabTitles.fotografia,
@@ -143,7 +143,7 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
 
       {/* VIDEOMAKING */}
       <section className="portfolio-tab-panel section" style={{ display: activeTab === 'videomaking' ? '' : 'none' }} id="tab-videomaking">
-        <MasonryGrid items={videomakingData} filter={undefined} />
+        <MasonryGrid items={videomakingData} filter={videoFilter} orderedGrid={true} />
       </section>
 
       {/* REGIA */}
@@ -151,7 +151,7 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
         <div className="project-video-wrapper reveal active" style={{ marginBottom: '4rem' }}>
           <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1&rel=0" allowFullScreen />
         </div>
-        <MasonryGrid items={regiaData} />
+        <MasonryGrid items={regiaData} orderedGrid={true} />
       </section>
 
       {/* MOSAICO */}

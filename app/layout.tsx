@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const globalRes = await client.queries.global({ relativePath: "global.json" })
+  const blogRes = await client.queries.blogPage({ relativePath: "blog.json" })
   
   return (
     <html lang="it">
@@ -27,6 +28,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             data={globalRes.data as any} 
             query={globalRes.query} 
             variables={globalRes.variables}
+            blogData={blogRes.data as any}
+            blogQuery={blogRes.query}
+            blogVariables={blogRes.variables}
           >
             {children}
           </GlobalDataWrapper>

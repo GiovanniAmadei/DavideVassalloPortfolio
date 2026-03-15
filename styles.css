@@ -766,6 +766,119 @@ button {
   /* Optional subtle rounding */
 }
 
+/* ============================================
+   PROJECT DETAIL PAGE
+   ============================================ */
+.project-hero {
+  padding-top: 140px;
+}
+
+.project-back-link {
+  display: inline-block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  transition: color 0.25s ease;
+  margin-bottom: 1rem;
+}
+
+.project-back-link:hover {
+  color: var(--accent-red);
+}
+
+/* Video + Specifiche side by side on the project page */
+.project-top-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 0;
+}
+
+/* In project-top-row, video wrapper is NOT position-relative/padding % but inline */
+.project-top-row .project-video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  background: #000;
+  margin-bottom: 0;
+}
+
+.project-top-row img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .project-top-row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.project-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+  margin-bottom: var(--gap-xl);
+}
+
+.project-sinossi h2,
+.project-specifiche h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.project-sinossi p {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.project-specs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-specs-list li {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-specs-list li .spec-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+
+@media (max-width: 900px) {
+  .project-hero {
+    padding-top: 110px;
+  }
+
+  .project-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+
 /* Common item wrapper used in both formats */
 .masonry-item {
   break-inside: avoid;
