@@ -130,11 +130,11 @@ export default function HomeContent(props: HomeContentProps) {
           <div className="section-rule" />
         </Reveal>
         <MasonryGrid items={mosaicoData} shuffle limit={48} id="mosaico-grid-preview" />
-        <div className="home-gallery-cta reveal">
+        <Reveal className="home-gallery-cta">
           <Link href="/portfolio#mosaico" data-tina-field={tinaField(homepageData, 'ctaMosaico')}>
-            {homepageData?.ctaMosaico || 'Esplora il Portfolio Completo \u2192'}
+            {homepageData?.ctaMosaico || 'vai al portfolio'}
           </Link>
-        </div>
+        </Reveal>
       </section>
     </>
   )
