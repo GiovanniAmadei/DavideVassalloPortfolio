@@ -362,6 +362,8 @@ type Global implements Node & Document {
   copyright: String
   instagram: String
   linkedin: String
+  youtube: String
+  facebook: String
   logoName: String
   navHome: String
   navPortfolio: String
@@ -384,6 +386,8 @@ input GlobalFilter {
   copyright: StringFilter
   instagram: StringFilter
   linkedin: StringFilter
+  youtube: StringFilter
+  facebook: StringFilter
   logoName: StringFilter
   navHome: StringFilter
   navPortfolio: StringFilter
@@ -660,6 +664,8 @@ input GlobalMutation {
   copyright: String
   instagram: String
   linkedin: String
+  youtube: String
+  facebook: String
   logoName: String
   navHome: String
   navPortfolio: String

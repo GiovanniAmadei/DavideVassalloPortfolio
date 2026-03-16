@@ -80,6 +80,13 @@ a {
 img {
   display: block;
   max-width: 100%;
+  opacity: 1 !important;
+}
+
+/* Except animations that need opacity 0 */
+.hero-band-slider img:not(.active),
+.foto-panel-slider img:not(.active) {
+  opacity: 0 !important;
 }
 
 button {
@@ -226,6 +233,16 @@ button {
 .header-social a[aria-label="LinkedIn"]:hover {
   color: #0077b5;
   filter: drop-shadow(0 0 6px rgba(0, 119, 181, 0.5));
+}
+
+.header-social a[aria-label="YouTube"]:hover {
+  color: #ff0000;
+  filter: drop-shadow(0 0 6px rgba(255, 0, 0, 0.5));
+}
+
+.header-social a[aria-label="Facebook"]:hover {
+  color: #1877f2;
+  filter: drop-shadow(0 0 6px rgba(24, 119, 242, 0.5));
 }
 
 /* Submenu Bar — Second nav bar */
@@ -459,6 +476,28 @@ button {
   letter-spacing: 0.1em;
 }
 
+.footer-social {
+  display: none;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.footer-social a {
+  color: var(--muted);
+  transition: color 0.3s ease, transform 0.25s ease;
+}
+
+.footer-social a:hover {
+  transform: scale(1.15);
+}
+
+.footer-social a[aria-label="Instagram"]:hover { color: #e1306c; }
+.footer-social a[aria-label="LinkedIn"]:hover { color: #0077b5; }
+.footer-social a[aria-label="YouTube"]:hover { color: #ff0000; }
+.footer-social a[aria-label="Facebook"]:hover { color: #1877f2; }
+
 @media (max-width: 900px) {
   .site-footer {
     padding: 3rem 1.5rem 2.5rem !important;
@@ -481,6 +520,10 @@ button {
 
   .footer-bottom {
     text-align: center;
+  }
+
+  .footer-social {
+    display: flex;
   }
 }
 
@@ -1596,7 +1639,8 @@ button {
 
 .blog-preview-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: minmax(auto, 900px);
+  justify-content: start;
   gap: 2rem;
   margin-top: 0;
 }
@@ -1669,9 +1713,7 @@ button {
 }
 
 @media (max-width: 1100px) {
-  .blog-preview-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  /* blog-preview-grid removed since it's 1 col now */
 }
 
 @media (max-width: 900px) {
@@ -1682,10 +1724,7 @@ button {
 }
 
 @media (max-width: 700px) {
-  .blog-preview-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+  /* blog-preview-grid removed since it's 1 col now */
 }
 
 /* ============================================
@@ -1844,6 +1883,10 @@ button {
 
   .nav-separator {
     display: none;
+  }
+
+  .submenu-nav .nav-separator {
+    display: inline !important;
   }
 
   .header-nav.mobile-active {

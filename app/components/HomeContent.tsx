@@ -97,7 +97,7 @@ export default function HomeContent(props: HomeContentProps) {
           <div className="section-rule" />
         </Reveal>
         <div className="blog-preview-grid">
-          {posts.slice(0, 3).map((post) => {
+          {posts.slice(0, 1).map((post) => {
             const date = new Date(post.publishedAt || new Date()).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' })
             return (
               <Link key={post.slug} className="blog-card reveal active" href={`/blog/${post.slug}`} data-tina-field={tinaField(post)}>
@@ -114,9 +114,9 @@ export default function HomeContent(props: HomeContentProps) {
             )
           })}
         </div>
-        <div className="home-gallery-cta reveal">
+        <div className="home-gallery-cta">
           <Link href="/blog" data-tina-field={tinaField(homepageData, 'ctaBlog')}>
-            {homepageData?.ctaBlog || 'Tutte le Riflessioni \u2192'}
+            {homepageData?.ctaBlog || 'Tutte le riflessioni'}
           </Link>
         </div>
       </section>

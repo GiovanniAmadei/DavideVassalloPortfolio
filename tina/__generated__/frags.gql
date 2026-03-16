@@ -78,6 +78,8 @@ fragment GlobalParts on Global {
   copyright
   instagram
   linkedin
+  youtube
+  facebook
   logoName
   navHome
   navPortfolio

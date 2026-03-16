@@ -82,8 +82,11 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
   useEffect(() => {
     const hash = window.location.hash.replace('#', '')
     const valid = ['fotografia', 'videomaking', 'regia', 'mosaico']
-    if (valid.includes(hash)) setActiveTab(hash)
-  }, [setActiveTab])
+    if (valid.includes(hash)) {
+      setActiveTab(hash)
+      if (hash === 'fotografia') setShowFotoGrid(false)
+    }
+  }, [setActiveTab, setShowFotoGrid])
 
   const switchTab = useCallback((tab: string) => {
     setActiveTab(tab)

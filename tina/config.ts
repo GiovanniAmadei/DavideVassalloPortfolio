@@ -396,6 +396,8 @@ export default defineConfig({
             name: "linkedin",
             label: "Link LinkedIn",
           },
+          { type: "string", name: "youtube", label: "Link YouTube" },
+          { type: "string", name: "facebook", label: "Link Facebook" },
           { type: "string", name: "logoName", label: "Nome Logo Header" },
           { type: "string", name: "navHome", label: "Menu: Home" },
           { type: "string", name: "navPortfolio", label: "Menu: Portfolio" },

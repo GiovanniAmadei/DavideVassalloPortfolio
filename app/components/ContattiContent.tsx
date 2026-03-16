@@ -30,7 +30,7 @@ export default function ContattiContent(props: ContattiContentProps) {
       <section className="section">
         <div className="contact-grid">
           <Reveal className="contact-info">
-            <h2 data-tina-field={tinaField(contatti, 'titoloSezione')}>{contatti.titoloSezione ? <span dangerouslySetInnerHTML={{__html: contatti.titoloSezione.replace('\n', '<br />')}} /> : <>Lavoriamo<br />Insieme</>}</h2>
+            <h2 data-tina-field={tinaField(contatti, 'titoloSezione')}>{contatti.titoloSezione ? <span dangerouslySetInnerHTML={{__html: contatti.titoloSezione.replace('\n', '<br />')}} /> : <>Creiamo<br />insieme</>}</h2>
             <p data-tina-field={tinaField(contatti, 'testoSottoTitolo')}>{contatti.testoSottoTitolo || 'Studio Fotografico'}</p>
             <p data-tina-field={tinaField(contatti, 'indirizzoStudio')}>{contatti.indirizzoStudio || 'Via Tortona 31, Milano'}</p>
             

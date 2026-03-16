@@ -577,6 +577,8 @@ export type Global = Node & Document & {
   copyright?: Maybe<Scalars['String']['output']>;
   instagram?: Maybe<Scalars['String']['output']>;
   linkedin?: Maybe<Scalars['String']['output']>;
+  youtube?: Maybe<Scalars['String']['output']>;
+  facebook?: Maybe<Scalars['String']['output']>;
   logoName?: Maybe<Scalars['String']['output']>;
   navHome?: Maybe<Scalars['String']['output']>;
   navPortfolio?: Maybe<Scalars['String']['output']>;
@@ -599,6 +601,8 @@ export type GlobalFilter = {
   copyright?: InputMaybe<StringFilter>;
   instagram?: InputMaybe<StringFilter>;
   linkedin?: InputMaybe<StringFilter>;
+  youtube?: InputMaybe<StringFilter>;
+  facebook?: InputMaybe<StringFilter>;
   logoName?: InputMaybe<StringFilter>;
   navHome?: InputMaybe<StringFilter>;
   navPortfolio?: InputMaybe<StringFilter>;
@@ -1029,6 +1033,8 @@ export type GlobalMutation = {
   copyright?: InputMaybe<Scalars['String']['input']>;
   instagram?: InputMaybe<Scalars['String']['input']>;
   linkedin?: InputMaybe<Scalars['String']['input']>;
+  youtube?: InputMaybe<Scalars['String']['input']>;
+  facebook?: InputMaybe<Scalars['String']['input']>;
   logoName?: InputMaybe<Scalars['String']['input']>;
   navHome?: InputMaybe<Scalars['String']['input']>;
   navPortfolio?: InputMaybe<Scalars['String']['input']>;
@@ -1091,7 +1097,7 @@ export type ProgettoVideoPartsFragment = { __typename: 'ProgettoVideo', title: s
 
 export type ContattiPartsFragment = { __typename: 'Contatti', email: string, telefono?: string | null, instagram?: string | null, linkedin?: string | null, indirizzoStudio?: string | null, titoloPagina?: string | null, sottotitoloPagina?: string | null, titoloSezione?: string | null, testoSottoTitolo?: string | null, orariRitratto?: string | null, orariReportage?: string | null, orariRicerca?: string | null, formName?: string | null, formEmail?: string | null, formSubject?: string | null, formMessage?: string | null, formSubmit?: string | null };
 
-export type GlobalPartsFragment = { __typename: 'Global', email: string, telefono?: string | null, indirizzo?: string | null, copyright?: string | null, instagram?: string | null, linkedin?: string | null, logoName?: string | null, navHome?: string | null, navPortfolio?: string | null, navBlog?: string | null, navAbout?: string | null, navContact?: string | null, navSubFotografia?: string | null, navSubVideomaking?: string | null, navSubRegia?: string | null, navSubMosaico?: string | null };
+export type GlobalPartsFragment = { __typename: 'Global', email: string, telefono?: string | null, indirizzo?: string | null, copyright?: string | null, instagram?: string | null, linkedin?: string | null, youtube?: string | null, facebook?: string | null, logoName?: string | null, navHome?: string | null, navPortfolio?: string | null, navBlog?: string | null, navAbout?: string | null, navContact?: string | null, navSubFotografia?: string | null, navSubVideomaking?: string | null, navSubRegia?: string | null, navSubMosaico?: string | null };
 
 export type HomepagePartsFragment = { __typename: 'Homepage', chiSonoLabel?: string | null, chiSonoPreviewTitle?: string | null, chiSonoPreviewText1?: string | null, chiSonoPreviewText2?: string | null, blogLabel?: string | null, mosaicoLabel?: string | null, ctaBlog?: string | null, ctaMosaico?: string | null, heroBands?: Array<{ __typename: 'HomepageHeroBands', title?: string | null, href?: string | null, images?: Array<string | null> | null } | null> | null };
 
@@ -1199,7 +1205,7 @@ export type GlobalQueryVariables = Exact<{
 }>;
 
 
-export type GlobalQuery = { __typename?: 'Query', global: { __typename: 'Global', id: string, email: string, telefono?: string | null, indirizzo?: string | null, copyright?: string | null, instagram?: string | null, linkedin?: string | null, logoName?: string | null, navHome?: string | null, navPortfolio?: string | null, navBlog?: string | null, navAbout?: string | null, navContact?: string | null, navSubFotografia?: string | null, navSubVideomaking?: string | null, navSubRegia?: string | null, navSubMosaico?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type GlobalQuery = { __typename?: 'Query', global: { __typename: 'Global', id: string, email: string, telefono?: string | null, indirizzo?: string | null, copyright?: string | null, instagram?: string | null, linkedin?: string | null, youtube?: string | null, facebook?: string | null, logoName?: string | null, navHome?: string | null, navPortfolio?: string | null, navBlog?: string | null, navAbout?: string | null, navContact?: string | null, navSubFotografia?: string | null, navSubVideomaking?: string | null, navSubRegia?: string | null, navSubMosaico?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type GlobalConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1211,7 +1217,7 @@ export type GlobalConnectionQueryVariables = Exact<{
 }>;
 
 
-export type GlobalConnectionQuery = { __typename?: 'Query', globalConnection: { __typename?: 'GlobalConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'GlobalConnectionEdges', cursor: string, node?: { __typename: 'Global', id: string, email: string, telefono?: string | null, indirizzo?: string | null, copyright?: string | null, instagram?: string | null, linkedin?: string | null, logoName?: string | null, navHome?: string | null, navPortfolio?: string | null, navBlog?: string | null, navAbout?: string | null, navContact?: string | null, navSubFotografia?: string | null, navSubVideomaking?: string | null, navSubRegia?: string | null, navSubMosaico?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type GlobalConnectionQuery = { __typename?: 'Query', globalConnection: { __typename?: 'GlobalConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'GlobalConnectionEdges', cursor: string, node?: { __typename: 'Global', id: string, email: string, telefono?: string | null, indirizzo?: string | null, copyright?: string | null, instagram?: string | null, linkedin?: string | null, youtube?: string | null, facebook?: string | null, logoName?: string | null, navHome?: string | null, navPortfolio?: string | null, navBlog?: string | null, navAbout?: string | null, navContact?: string | null, navSubFotografia?: string | null, navSubVideomaking?: string | null, navSubRegia?: string | null, navSubMosaico?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type HomepageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1356,6 +1362,8 @@ export const GlobalPartsFragmentDoc = gql`
   copyright
   instagram
   linkedin
+  youtube
+  facebook
   logoName
   navHome
   navPortfolio
