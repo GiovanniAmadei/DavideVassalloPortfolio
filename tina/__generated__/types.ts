@@ -695,6 +695,8 @@ export type PortfolioPage = Node & Document & {
   filterVideo2?: Maybe<Scalars['String']['output']>;
   imagesFoto1?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   imagesFoto2?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  descFoto1?: Maybe<Scalars['String']['output']>;
+  descFoto2?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -712,6 +714,8 @@ export type PortfolioPageFilter = {
   filterVideo2?: InputMaybe<StringFilter>;
   imagesFoto1?: InputMaybe<ImageFilter>;
   imagesFoto2?: InputMaybe<ImageFilter>;
+  descFoto1?: InputMaybe<StringFilter>;
+  descFoto2?: InputMaybe<StringFilter>;
 };
 
 export type PortfolioPageConnectionEdges = {
@@ -1077,6 +1081,8 @@ export type PortfolioPageMutation = {
   filterVideo2?: InputMaybe<Scalars['String']['input']>;
   imagesFoto1?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   imagesFoto2?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  descFoto1?: InputMaybe<Scalars['String']['input']>;
+  descFoto2?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type BlogPageMutation = {
@@ -1101,7 +1107,7 @@ export type GlobalPartsFragment = { __typename: 'Global', email: string, telefon
 
 export type HomepagePartsFragment = { __typename: 'Homepage', chiSonoLabel?: string | null, chiSonoPreviewTitle?: string | null, chiSonoPreviewText1?: string | null, chiSonoPreviewText2?: string | null, blogLabel?: string | null, mosaicoLabel?: string | null, ctaBlog?: string | null, ctaMosaico?: string | null, heroBands?: Array<{ __typename: 'HomepageHeroBands', title?: string | null, href?: string | null, images?: Array<string | null> | null } | null> | null };
 
-export type PortfolioPagePartsFragment = { __typename: 'PortfolioPage', tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, imagesFoto1?: Array<string | null> | null, imagesFoto2?: Array<string | null> | null };
+export type PortfolioPagePartsFragment = { __typename: 'PortfolioPage', tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, imagesFoto1?: Array<string | null> | null, imagesFoto2?: Array<string | null> | null, descFoto1?: string | null, descFoto2?: string | null };
 
 export type BlogPagePartsFragment = { __typename: 'BlogPage', attivata?: boolean | null, label?: string | null, title?: string | null, emptyMessage?: string | null, readMoreLabel?: string | null };
 
@@ -1243,7 +1249,7 @@ export type PortfolioPageQueryVariables = Exact<{
 }>;
 
 
-export type PortfolioPageQuery = { __typename?: 'Query', portfolioPage: { __typename: 'PortfolioPage', id: string, tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, imagesFoto1?: Array<string | null> | null, imagesFoto2?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PortfolioPageQuery = { __typename?: 'Query', portfolioPage: { __typename: 'PortfolioPage', id: string, tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, imagesFoto1?: Array<string | null> | null, imagesFoto2?: Array<string | null> | null, descFoto1?: string | null, descFoto2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type PortfolioPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1255,7 +1261,7 @@ export type PortfolioPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PortfolioPageConnectionQuery = { __typename?: 'Query', portfolioPageConnection: { __typename?: 'PortfolioPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PortfolioPageConnectionEdges', cursor: string, node?: { __typename: 'PortfolioPage', id: string, tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, imagesFoto1?: Array<string | null> | null, imagesFoto2?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PortfolioPageConnectionQuery = { __typename?: 'Query', portfolioPageConnection: { __typename?: 'PortfolioPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PortfolioPageConnectionEdges', cursor: string, node?: { __typename: 'PortfolioPage', id: string, tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, imagesFoto1?: Array<string | null> | null, imagesFoto2?: Array<string | null> | null, descFoto1?: string | null, descFoto2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type BlogPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1409,6 +1415,8 @@ export const PortfolioPagePartsFragmentDoc = gql`
   filterVideo2
   imagesFoto1
   imagesFoto2
+  descFoto1
+  descFoto2
 }
     `;
 export const BlogPagePartsFragmentDoc = gql`

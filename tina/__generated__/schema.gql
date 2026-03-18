@@ -473,6 +473,8 @@ type PortfolioPage implements Node & Document {
   filterVideo2: String
   imagesFoto1: [String]
   imagesFoto2: [String]
+  descFoto1: String
+  descFoto2: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -490,6 +492,8 @@ input PortfolioPageFilter {
   filterVideo2: StringFilter
   imagesFoto1: ImageFilter
   imagesFoto2: ImageFilter
+  descFoto1: StringFilter
+  descFoto2: StringFilter
 }
 
 type PortfolioPageConnectionEdges {
@@ -708,6 +712,8 @@ input PortfolioPageMutation {
   filterVideo2: String
   imagesFoto1: [String]
   imagesFoto2: [String]
+  descFoto1: String
+  descFoto2: String
 }
 
 input BlogPageMutation {

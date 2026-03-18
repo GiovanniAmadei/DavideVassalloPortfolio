@@ -67,6 +67,8 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
       label: pageData?.filterFoto1 || 'Ritratti',
       field: 'filterFoto1',
       imagesField: 'imagesFoto1',
+      descField: 'descFoto1',
+      desc: pageData?.descFoto1 || '',
       images: pageData?.imagesFoto1?.length ? pageData.imagesFoto1 : ['/assets/DSC_3667-Enhanced-NR.jpg', '/assets/DSC_3643-Enhanced-NR.jpg', '/assets/DSC_3596-Enhanced-NR-2.jpg'],
     },
     {
@@ -74,6 +76,8 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
       label: pageData?.filterFoto2 || 'Narrazione',
       field: 'filterFoto2',
       imagesField: 'imagesFoto2',
+      descField: 'descFoto2',
+      desc: pageData?.descFoto2 || '',
       images: pageData?.imagesFoto2?.length ? pageData.imagesFoto2 : ['/assets/DSC_2852.jpg', '/assets/DSC_2620-2.jpg', '/assets/DSC_9738-Enhanced-NR-2.jpg'],
     },
   ]
@@ -139,6 +143,17 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
           </div>
         ) : (
           <div className="fotografia-main" style={{ display: 'block', opacity: 1 }}>
+            {(() => {
+              const activePanel = fotoPanelsConfig.find(p => p.id === fotoFilter)
+              return activePanel?.desc ? (
+                <p
+                  className="foto-section-intro"
+                  data-tina-field={tinaField ? tinaField(pageData, activePanel.descField as any) : undefined}
+                >
+                  {activePanel.desc}
+                </p>
+              ) : null
+            })()}
             <MasonryGrid items={fotografiaData} filter={fotoFilter} />
           </div>
         )}

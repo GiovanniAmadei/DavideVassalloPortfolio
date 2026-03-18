@@ -81,6 +81,8 @@ img {
   display: block;
   max-width: 100%;
   opacity: 1 !important;
+  /* Prevent paper-grain mix-blend-mode from making images transparent on mobile */
+  isolation: isolate;
 }
 
 /* Except animations that need opacity 0 */
@@ -762,8 +764,8 @@ button {
 /* Filter buttons common style managed in tertiary-link block */
 
 .masonry-grid {
-  columns: 3 280px;
-  column-gap: 1.2rem;
+  columns: 3;
+  column-gap: 2rem;
 }
 
 /* ============================================
@@ -1017,6 +1019,15 @@ button {
 /* ============================================
    FOTOGRAFIA PANELS
    ============================================ */
+.foto-section-intro {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
 .foto-panels-container {
   display: flex;
   gap: 0;
@@ -1639,8 +1650,7 @@ button {
 
 .blog-preview-grid {
   display: grid;
-  grid-template-columns: minmax(auto, 900px);
-  justify-content: start;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-top: 0;
 }
@@ -1713,7 +1723,9 @@ button {
 }
 
 @media (max-width: 1100px) {
-  /* blog-preview-grid removed since it's 1 col now */
+  .blog-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 900px) {
@@ -1721,10 +1733,19 @@ button {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
+  /* Blog home preview: 1 article on mobile, hide the rest */
+  .blog-preview-grid {
+    grid-template-columns: 1fr;
+  }
+  .blog-preview-grid .blog-card:not(:first-child) {
+    display: none;
+  }
 }
 
 @media (max-width: 700px) {
-  /* blog-preview-grid removed since it's 1 col now */
+  .blog-preview-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ============================================
@@ -1921,7 +1942,7 @@ button {
   }
 
   .masonry-grid {
-    columns: 2 240px;
+    columns: 2;
   }
 }
 
@@ -1965,6 +1986,15 @@ button {
 
   .hero {
     padding: 2rem 1.2rem;
+  }
+}
+
+/* ============================================
+   PAPER GRAIN MOBILE FIX (Transparency Issue)
+   ============================================ */
+@media (max-width: 900px) {
+  #paper-grain-overlay {
+    display: none !important;
   }
 }
 

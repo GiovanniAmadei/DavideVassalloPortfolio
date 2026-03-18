@@ -479,6 +479,8 @@ export default defineConfig({
           { type: "string", name: "filterVideo2", label: "Filtro Video 2 (Es. Ricerca)" },
           { type: "image", name: "imagesFoto1", label: "Immagini Slider Foto 1 (Es. Ritratti)", list: true },
           { type: "image", name: "imagesFoto2", label: "Immagini Slider Foto 2 (Es. Narrazione)", list: true },
+          { type: "string", name: "descFoto1", label: "Testo Introduttivo Ritratti", ui: { component: "textarea" } },
+          { type: "string", name: "descFoto2", label: "Testo Introduttivo Narrazione", ui: { component: "textarea" } },
         ],
       },
 

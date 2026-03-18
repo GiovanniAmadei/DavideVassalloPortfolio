@@ -97,7 +97,7 @@ export default function HomeContent(props: HomeContentProps) {
           <div className="section-rule" />
         </Reveal>
         <div className="blog-preview-grid">
-          {posts.slice(0, 1).map((post) => {
+          {posts.slice(0, 3).map((post) => {
             const date = new Date(post.publishedAt || new Date()).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' })
             return (
               <Link key={post.slug} className="blog-card reveal active" href={`/blog/${post.slug}`} data-tina-field={tinaField(post)}>

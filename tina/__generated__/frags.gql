@@ -123,6 +123,8 @@ fragment PortfolioPageParts on PortfolioPage {
   filterVideo2
   imagesFoto1
   imagesFoto2
+  descFoto1
+  descFoto2
 }
 
 fragment BlogPageParts on BlogPage {
