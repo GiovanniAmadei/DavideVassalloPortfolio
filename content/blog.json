@@ -1,7 +1,11 @@
 {
   "attivata": true,
   "label": "Editoriale",
+  "label_en": "Editorial",
   "title": "Blog",
+  "title_en": "Blog",
   "emptyMessage": "Nessun articolo trovato.",
-  "readMoreLabel": "Leggi l'articolo..."
+  "emptyMessage_en": "No articles found.",
+  "readMoreLabel": "Leggi l'articolo...",
+  "readMoreLabel_en": "Read the article..."
 }

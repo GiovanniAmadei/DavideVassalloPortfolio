@@ -1,13 +1,24 @@
 {
   "titolo": "Davide Vassallo",
+  "titolo_en": "Davide Vassallo",
   "sottotitolo": "Fotografo e Videomaker",
+  "sottotitolo_en": "Photographer & Filmmaker",
   "descrizione": "",
+  "descrizione_en": "",
   "fotoProfilo": "",
   "esperienze": [
     {
       "anno": "2024",
       "titolo": "Esempio Mostra",
+      "titolo_en": "Exhibition Example",
       "luogo": "Milano"
     }
-  ]
+  ],
+  "filosofiaTitolo": "Filosofia di Scatto",
+  "filosofiaTitolo_en": "Shooting Philosophy",
+  "filosofiaCitazione": "\"Fotografare non significa catturare ciò che c'è, ma decidere rigorosamente cosa lasciare fuori dall'inquadratura. L'essenza si trova nell'ombra.\"",
+  "filosofiaCitazione_en": "\"Photography is not about capturing what is there, but about rigorously deciding what to leave out of the frame. The essence lies in the shadow.\"",
+  "filosofiaAutore": "Davide Vassallo",
+  "filosofiaDescrizione": "La mia ricerca si muove tra il documento e la costruzione, tra il paesaggio urbano e il corpo. Cerco la tensione nello spazio bianco, il significato nella pausa.",
+  "filosofiaDescrizione_en": "My research moves between documentation and construction, between the urban landscape and the body. I seek tension in the white space, meaning in the pause."
 }

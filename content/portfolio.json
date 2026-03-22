@@ -1,13 +1,21 @@
 {
   "tabFotografia": "Fotografia",
+  "tabFotografia_en": "Photography",
   "tabVideomaking": "Videomaking",
   "tabRegia": "Regia",
+  "tabRegia_en": "Direction",
   "tabMosaico": "Mosaico",
+  "tabMosaico_en": "Mosaic",
   "filterFoto1": "Ritratti",
+  "filterFoto1_en": "Portraits",
   "filterFoto2": "Narrazione",
+  "filterFoto2_en": "Narrative",
   "filterVideoAll": "Tutto",
+  "filterVideoAll_en": "All",
   "filterVideo1": "Reportage",
+  "filterVideo1_en": "Reportage",
   "filterVideo2": "Ricerca",
+  "filterVideo2_en": "Research",
   "imagesFoto1": [
     "/assets/DSC_3667-Enhanced-NR.jpg",
     "/assets/DSC_3643-Enhanced-NR.jpg",
@@ -19,6 +27,7 @@
     "/assets/DSC_9738-Enhanced-NR-2.jpg"
   ],
   "descFoto1": "Una ricerca costante sull'identità e la presenza. Il ritratto come spazio di ascolto, dove il soggetto si rivela attraverso la luce e il silenzio.",
-  "descFoto2": "Storie che prendono forma nel tempo. Immagini che documentano e interpretano, costruendo narrazioni visive tra reportage e ricerca personale."
+  "descFoto1_en": "A constant research on identity and presence. The portrait as a space of listening, where the subject reveals themselves through light and silence.",
+  "descFoto2": "Storie che prendono forma nel tempo. Immagini che documentano e interpretano, costruendo narrazioni visive tra reportage e ricerca personale.",
+  "descFoto2_en": "Stories that take shape over time. Images that document and interpret, building visual narratives between reportage and personal research."
 }
-

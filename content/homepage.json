@@ -2,6 +2,7 @@
   "heroBands": [
     {
       "title": "Fotografia",
+      "title_en": "Photography",
       "href": "/portfolio#fotografia",
       "images": [
         "/assets/DSC_3667-Enhanced-NR.jpg",
@@ -11,6 +12,7 @@
     },
     {
       "title": "Videomaking",
+      "title_en": "Videomaking",
       "href": "/portfolio#videomaking",
       "images": [
         "/assets/DSC_2620-2.jpg",
@@ -20,6 +22,7 @@
     },
     {
       "title": "Regia",
+      "title_en": "Direction",
       "href": "/portfolio#regia",
       "images": [
         "/assets/DSC_9738-Enhanced-NR-2.jpg",
@@ -29,11 +32,19 @@
     }
   ],
   "chiSonoLabel": "Chi sono",
+  "chiSonoLabel_en": "About me",
   "chiSonoPreviewTitle": "Davide\nVassallo",
+  "chiSonoPreviewTitle_en": "Davide\nVassallo",
   "chiSonoPreviewText1": "Sono Davide Vassallo, fotografo con base a Milano. Il mio linguaggio nasce dalla sottrazione: rigore geometrico e ricerca costante sull'identità e lo spazio.",
+  "chiSonoPreviewText1_en": "I am Davide Vassallo, a Milan-based photographer. My language is born from subtraction: geometric rigor and constant research on identity and space.",
   "chiSonoPreviewText2": "Dieci anni tra editoria e set commerciali, intrecciando reportage e ritratto in studio.",
+  "chiSonoPreviewText2_en": "Ten years between editorial and commercial sets, intertwining reportage and studio portraiture.",
   "blogLabel": "Blog",
+  "blogLabel_en": "Blog",
   "mosaicoLabel": "Mosaico",
+  "mosaicoLabel_en": "Mosaic",
   "ctaBlog": "Tutte le riflessioni",
-  "ctaMosaico": "vai al portfolio"
+  "ctaBlog_en": "All reflections",
+  "ctaMosaico": "vai al portfolio",
+  "ctaMosaico_en": "go to portfolio"
 }

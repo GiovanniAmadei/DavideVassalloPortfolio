@@ -16,5 +16,16 @@
   "navSubFotografia": "Fotografia",
   "navSubVideomaking": "Videomaking",
   "navSubRegia": "Regia",
-  "navSubMosaico": "Mosaico"
+  "navSubMosaico": "Mosaico",
+  "filterFoto1": "Ritratti",
+  "filterFoto2": "Narrazione",
+  "filterVideoAll": "Tutto",
+  "navAbout_en": "About",
+  "navContact_en": "Contact",
+  "navSubFotografia_en": "Photography",
+  "navSubRegia_en": "Direction",
+  "navSubMosaico_en": "Mosaic",
+  "filterFoto1_en": "Portraits",
+  "filterFoto2_en": "Narrative",
+  "filterVideoAll_en": "All"
 }
