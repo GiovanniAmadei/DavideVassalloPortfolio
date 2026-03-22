@@ -71,55 +71,39 @@ export default async function ProgettoVideoPage({ params }: PageProps) {
         </h1>
       </header>
 
-      {embedSrc ? (
-        <div className="project-top-row">
+      {/* Video + Specifiche side by side */}
+      <div className="project-top-row">
+        {embedSrc ? (
           <div className="project-video-wrapper reveal active">
             <iframe src={embedSrc} allowFullScreen />
           </div>
-          <div className="project-specifiche reveal active" style={{ transitionDelay: '0.1s' }}>
-            <h2>{t('specs')}</h2>
-            <ul className="project-specs-list">
-              {videoData.metadata && (
-                <li><span className="spec-label">{t('yearDurationType')}</span>{videoData.metadata}</li>
-              )}
-              <li><span className="spec-label">{t('directionPhoto')}</span>Davide Vassallo</li>
-              <li>
-                <span className="spec-label">{t('category')}</span>
-                {isVideomaking ? 'Videomaking' : (locale === 'en' ? 'Direction' : 'Regia')}
-                {sottocategoria && ` — ${sottocategoria}`}
-              </li>
-            </ul>
-          </div>
-        </div>
-      ) : (
-        <>
-          {videoData.src && (
-            // eslint-disable-next-line @next/next/no-img-element
+        ) : videoData.src ? (
+          <div className="reveal active">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={videoData.src}
               alt={videoData.title}
-              style={{ width: '100%', maxHeight: '70vh', objectFit: 'cover', marginBottom: '3rem' }}
+              style={{ width: '100%', maxHeight: '70vh', objectFit: 'cover' }}
             />
-          )}
-          <div className="project-content" style={{ marginBottom: '3rem' }}>
-            <div />
-            <div className="project-specifiche reveal active">
-              <h2>{t('specs')}</h2>
-              <ul className="project-specs-list">
-                {videoData.metadata && (
-                  <li><span className="spec-label">{t('yearDurationType')}</span>{videoData.metadata}</li>
-                )}
-                <li><span className="spec-label">{t('directionPhoto')}</span>Davide Vassallo</li>
-                <li>
-                  <span className="spec-label">{t('category')}</span>
-                  {isVideomaking ? 'Videomaking' : (locale === 'en' ? 'Direction' : 'Regia')}
-                  {sottocategoria && ` — ${sottocategoria}`}
-                </li>
-              </ul>
-            </div>
           </div>
-        </>
-      )}
+        ) : (
+          <div className="reveal active" />
+        )}
+        <div className="project-specifiche reveal active" style={{ transitionDelay: '0.1s' }}>
+          <h2>{t('specs')}</h2>
+          <ul className="project-specs-list">
+            {videoData.metadata && (
+              <li><span className="spec-label">{t('yearDurationType')}</span>{videoData.metadata}</li>
+            )}
+            <li><span className="spec-label">{t('directionPhoto')}</span>Davide Vassallo</li>
+            <li>
+              <span className="spec-label">{t('category')}</span>
+              {isVideomaking ? 'Videomaking' : (locale === 'en' ? 'Direction' : 'Regia')}
+              {sottocategoria && ` — ${sottocategoria}`}
+            </li>
+          </ul>
+        </div>
+      </div>
 
       {(videoData.logline || videoData.description) && (
         <div className="project-sinossi reveal active" style={{ transitionDelay: '0.2s', marginTop: '2.5rem' }}>

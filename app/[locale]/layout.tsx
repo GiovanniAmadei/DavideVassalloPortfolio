@@ -42,8 +42,24 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages()
-  const globalRes = await client.queries.global({ relativePath: "global.json" })
-  const blogRes = await client.queries.blogPage({ relativePath: "blog.json" })
+  let globalRes: any
+  let blogRes: any
+  try {
+    globalRes = await client.queries.global({ relativePath: "global.json" })
+    blogRes = await client.queries.blogPage({ relativePath: "blog.json" })
+  } catch (err: any) {
+    return (
+      <html lang={locale}>
+        <body>
+          <div style={{ padding: '2rem', fontFamily: 'monospace', color: 'red' }}>
+            <h1>Server-side Rendering Error: client.queries failed</h1>
+            <p>{err.message}</p>
+            <pre>{err.stack}</pre>
+          </div>
+        </body>
+      </html>
+    )
+  }
 
   return (
     <html lang={locale}>
