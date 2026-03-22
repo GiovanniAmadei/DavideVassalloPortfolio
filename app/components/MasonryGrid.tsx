@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useMemo } from 'react'
+import { useTranslations } from 'next-intl'
 import Lightbox from './Lightbox'
 
 interface MasonryItem {
@@ -36,18 +37,19 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export default function MasonryGrid({ items, shuffle = false, limit, filter, id, orderedGrid = false }: MasonryGridProps) {
+  const t = useTranslations('nav')
   const [lightbox, setLightbox] = useState<{ index: number } | null>(null)
+  const [refreshKey, setRefreshKey] = useState(0)
 
-  const processed = useCallback(() => {
-    let data = shuffle ? shuffleArray(items) : [...items]
-    if (filter && filter !== 'all') data = data.filter(i => i.category === filter)
-    if (limit) data = data.slice(0, limit)
-    return data
-  }, [items, shuffle, filter, limit])
-
-  const data = processed()
+  const data = useMemo(() => {
+    let result = shuffle ? shuffleArray(items) : [...items]
+    if (filter && filter !== 'all') result = result.filter(i => i.category === filter)
+    if (limit) result = result.slice(0, limit)
+    return result
+  }, [items, shuffle, filter, limit, refreshKey])
 
   const openLightbox = (index: number) => setLightbox({ index })
+  const handleRefresh = () => setRefreshKey(k => k + 1)
 
   return (
     <>
@@ -93,6 +95,37 @@ export default function MasonryGrid({ items, shuffle = false, limit, filter, id,
           </div>
         ))}
       </div>
+      
+      {shuffle && (
+        <div style={{ textAlign: 'center', marginTop: '3rem', marginBottom: '2rem' }}>
+          <button
+            onClick={handleRefresh}
+            style={{
+              background: 'transparent',
+              border: '1px solid var(--border)',
+              padding: '0.6rem 1.5rem',
+              fontFamily: '"Courier New", Courier, monospace',
+              fontSize: '0.8rem',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              color: 'inherit',
+              transition: 'background 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--foreground)'
+              e.currentTarget.style.color = 'var(--background)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent'
+              e.currentTarget.style.color = 'inherit'
+            }}
+          >
+            {t('refreshMosaic')}
+          </button>
+        </div>
+      )}
+
       {lightbox !== null && (
         <Lightbox items={data} initialIndex={lightbox.index} onClose={() => setLightbox(null)} />
       )}

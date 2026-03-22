@@ -78,7 +78,9 @@ export default function Header({ globalSettings, blogSettings, tinaField, locale
       // English paths have /en prefix, remove it for Italian
       newPath = newLocale === 'it' ? currentPath.replace(/^\/en/, '') || '/' : currentPath
     }
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`
     router.push(newPath)
+    router.refresh()
   }
 
   const rawNavLinks = [
@@ -132,7 +134,7 @@ export default function Header({ globalSettings, blogSettings, tinaField, locale
   return (
     <header className={`site-header${isPortfolio || submenuOpen ? ' is-portfolio-open' : ''}${showTertiary ? ' has-tertiary' : ''}`}>
       <div className="header-main">
-        <Link className="header-logo" href={localizedHref('/')} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'logoName') : undefined}>
+        <Link className="header-logo" href={localizedHref('/')} style={{ letterSpacing: '0.12em' }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'logoName') : undefined}>
           {globalSettings?.logoName || 'Davide Vassallo'}
         </Link>
 

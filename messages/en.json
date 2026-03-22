@@ -15,7 +15,8 @@
     "mosaic": "Mosaic",
     "portraits": "Portraits",
     "narration": "Narrative",
-    "all": "All"
+    "all": "All",
+    "refreshMosaic": "Shuffle Mosaic"
   },
   "about": {
     "label": "The Photographer",
