@@ -1,10 +1,15 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import client from '@/tina/__generated__/client'
-import PortfolioContent from '../components/PortfolioContent'
+import PortfolioContent from '../../components/PortfolioContent'
 
-export const metadata: Metadata = {
-  title: 'Portfolio',
-  description: 'Portfolio fotografico di Davide Vassallo — Fotografia, Videomaking, Regia, Mosaico. Galleria completa con lavori professionali.',
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'metadata' })
+  return {
+    title: t('portfolioTitle'),
+    description: t('portfolioDesc'),
+  }
 }
 
 export default async function PortfolioPage() {
@@ -13,7 +18,7 @@ export default async function PortfolioPage() {
   const pageRes = await client.queries.portfolioPage({ relativePath: "portfolio.json" })
 
   return (
-    <PortfolioContent 
+    <PortfolioContent
       fotoData={fotoRes.data as any}
       fotoQuery={fotoRes.query}
       fotoVariables={fotoRes.variables}

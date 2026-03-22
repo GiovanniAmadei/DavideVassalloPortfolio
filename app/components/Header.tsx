@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 import { usePortfolio } from './PortfolioContext'
 
 const InstagramIcon = () => (
@@ -33,23 +34,26 @@ const FacebookIcon = () => (
   </svg>
 )
 
-export default function Header({ globalSettings, blogSettings, tinaField }: { globalSettings?: any, blogSettings?: any, tinaField?: any }) {
+export default function Header({ globalSettings, blogSettings, tinaField, locale }: { globalSettings?: any, blogSettings?: any, tinaField?: any, locale?: string }) {
   const pathname = usePathname()
+  const router = useRouter()
+  const t = useTranslations('nav')
   const [mobileOpen, setMobileOpen] = useState(false)
   const [submenuOpen, setSubmenuOpen] = useState(false)
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const submenuNavRef = useRef<HTMLElement>(null)
 
-  const { 
-    activeTab, setActiveTab, 
-    fotoFilter, setFotoFilter, 
-    videoFilter, setVideoFilter, 
+  const {
+    activeTab, setActiveTab,
+    fotoFilter, setFotoFilter,
+    videoFilter, setVideoFilter,
     videoCategories, regiaCategories,
-    showFotoGrid, setShowFotoGrid 
+    showFotoGrid, setShowFotoGrid
   } = usePortfolio()
 
-  const isPortfolio = (pathname ?? '').startsWith('/portfolio')
-  const isStudio = (pathname ?? '').startsWith('/studio')
+  const currentLocale = locale || 'it'
+  const isPortfolio = (pathname ?? '').replace(/^\/(en)/, '').startsWith('/portfolio') || (pathname ?? '').startsWith('/portfolio')
+  const isStudio = (pathname ?? '').startsWith('/studio') || (pathname ?? '').includes('/studio')
 
   // Auto-scroll submenu to active tab on mobile
   useEffect(() => {
@@ -60,15 +64,28 @@ export default function Header({ globalSettings, blogSettings, tinaField }: { gl
     }
   }, [activeTab])
 
-  // Don't render header on studio pages
   if (isStudio) return null
 
+  // Language switcher: swap locale in current path
+  const switchLocale = (newLocale: string) => {
+    const currentPath = pathname ?? '/'
+    let newPath: string
+    if (currentLocale === 'it') {
+      // Italian paths have no prefix, add /en
+      newPath = newLocale === 'en' ? `/en${currentPath}` : currentPath
+    } else {
+      // English paths have /en prefix, remove it for Italian
+      newPath = newLocale === 'it' ? currentPath.replace(/^\/en/, '') || '/' : currentPath
+    }
+    router.push(newPath)
+  }
+
   const rawNavLinks = [
-    { href: '/', label: globalSettings?.navHome || 'Home', field: 'navHome' },
-    { href: '/portfolio', label: globalSettings?.navPortfolio || 'Portfolio', id: 'portfolio-toggle', field: 'navPortfolio' },
-    { href: '/blog', label: globalSettings?.navBlog || 'Blog', field: 'navBlog' },
-    { href: '/about', label: globalSettings?.navAbout || 'Chi Sono', field: 'navAbout' },
-    { href: '/contatti', label: globalSettings?.navContact || 'Contatti', field: 'navContact' },
+    { href: '/', label: globalSettings?.navHome || t('home'), field: 'navHome' },
+    { href: '/portfolio', label: globalSettings?.navPortfolio || t('portfolio'), id: 'portfolio-toggle', field: 'navPortfolio' },
+    { href: '/blog', label: globalSettings?.navBlog || t('blog'), field: 'navBlog' },
+    { href: '/about', label: globalSettings?.navAbout || t('about'), field: 'navAbout' },
+    { href: '/contatti', label: globalSettings?.navContact || t('contact'), field: 'navContact' },
   ]
 
   // Hide blog link if attivata is explicitly false
@@ -78,6 +95,9 @@ export default function Header({ globalSettings, blogSettings, tinaField }: { gl
     }
     return true
   })
+
+  // Prefix href with locale for English
+  const localizedHref = (href: string) => currentLocale === 'en' ? `/en${href}` : href
 
   const openSubmenu = () => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current)
@@ -89,24 +109,29 @@ export default function Header({ globalSettings, blogSettings, tinaField }: { gl
 
   // Tertiary bar config
   const fotoPanelsConfig = [
-    { id: 'ritratti', label: globalSettings?.filterFoto1 || 'Ritratti' },
-    { id: 'narrazione', label: globalSettings?.filterFoto2 || 'Narrazione' },
+    { id: 'ritratti', label: globalSettings?.filterFoto1 || t('portraits') },
+    { id: 'narrazione', label: globalSettings?.filterFoto2 || t('narration') },
   ]
   const currentVideoCategories = activeTab === 'videomaking' ? videoCategories : regiaCategories
   const videoFiltersConfig = [
-    { id: 'all', label: globalSettings?.filterVideoAll || 'Tutto' },
+    { id: 'all', label: globalSettings?.filterVideoAll || t('all') },
     ...currentVideoCategories
   ]
 
-  // Show tertiary bar when on portfolio page and in fotografia (with grid shown) or videomaking/regia (if filters exist)
-  const isVideoOrRegia = activeTab === 'videomaking' || activeTab === 'regia'
-  const hasVideoFilters = currentVideoCategories.length > 0
-  const showTertiary = isPortfolio && ((activeTab === 'fotografia' && showFotoGrid) || (isVideoOrRegia && hasVideoFilters))
+  const showTertiary = isPortfolio && ((activeTab === 'fotografia' && showFotoGrid) || ((activeTab === 'videomaking' || activeTab === 'regia') && currentVideoCategories.length > 0))
+
+  // Check active state considering locale prefix
+  const isActive = (href: string) => {
+    const path = pathname ?? ''
+    const normalizedPath = path.replace(/^\/en/, '') || '/'
+    if (href === '/') return normalizedPath === '/'
+    return normalizedPath.startsWith(href)
+  }
 
   return (
     <header className={`site-header${isPortfolio || submenuOpen ? ' is-portfolio-open' : ''}${showTertiary ? ' has-tertiary' : ''}`}>
       <div className="header-main">
-        <Link className="header-logo" href="/" data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'logoName') : undefined}>
+        <Link className="header-logo" href={localizedHref('/')} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'logoName') : undefined}>
           {globalSettings?.logoName || 'Davide Vassallo'}
         </Link>
 
@@ -121,18 +146,16 @@ export default function Header({ globalSettings, blogSettings, tinaField }: { gl
 
         <nav className={`header-nav${mobileOpen ? ' mobile-active' : ''}`} id="header-nav">
           {navLinks.map((link, i) => {
-            const isActive = link.href === '/'
-              ? pathname === '/'
-              : (pathname ?? '').startsWith(link.href)
+            const active = isActive(link.href)
 
             if (link.id === 'portfolio-toggle') {
               return (
                 <span key={link.href} style={{ display: 'contents' }}>
                   {i > 0 && <span className="nav-separator">&bull;</span>}
                   <Link
-                    href="/portfolio#mosaico"
+                    href={localizedHref('/portfolio#mosaico')}
                     id="portfolio-toggle"
-                    className={isActive ? 'active' : ''}
+                    className={active ? 'active' : ''}
                     onMouseEnter={mobileOpen ? undefined : openSubmenu}
                     onMouseLeave={mobileOpen ? undefined : closeSubmenu}
                     onClick={() => {
@@ -150,9 +173,9 @@ export default function Header({ globalSettings, blogSettings, tinaField }: { gl
             return (
               <span key={link.href} style={{ display: 'contents' }}>
                 {i > 0 && <span className="nav-separator">&bull;</span>}
-                <Link 
-                  href={link.href} 
-                  className={isActive ? 'active' : ''} 
+                <Link
+                  href={localizedHref(link.href)}
+                  className={active ? 'active' : ''}
                   onClick={() => setMobileOpen(false)}
                   data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, link.field) : undefined}
                 >
@@ -161,6 +184,22 @@ export default function Header({ globalSettings, blogSettings, tinaField }: { gl
               </span>
             )
           })}
+
+          {/* Language switcher */}
+          <span className="nav-separator">&bull;</span>
+          <span className="lang-switcher">
+            <button
+              className={`lang-btn${currentLocale === 'it' ? ' active' : ''}`}
+              onClick={() => switchLocale('it')}
+              aria-label="Italiano"
+            >IT</button>
+            <span className="lang-divider">/</span>
+            <button
+              className={`lang-btn${currentLocale === 'en' ? ' active' : ''}`}
+              onClick={() => switchLocale('en')}
+              aria-label="English"
+            >EN</button>
+          </span>
         </nav>
 
         <div className="header-social">
@@ -187,13 +226,13 @@ export default function Header({ globalSettings, blogSettings, tinaField }: { gl
         onMouseLeave={closeSubmenu}
       >
         <nav className="submenu-nav" ref={submenuNavRef}>
-          <Link href="/portfolio#fotografia" className={`portfolio-tab-link${activeTab === 'fotografia' ? ' active' : ''}`} data-tab="fotografia" onClick={() => { setActiveTab('fotografia'); setShowFotoGrid(false); setFotoFilter('ritratti'); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubFotografia') : undefined}>{globalSettings?.navSubFotografia || 'Fotografia'}</Link>
+          <Link href={localizedHref('/portfolio#fotografia')} className={`portfolio-tab-link${activeTab === 'fotografia' ? ' active' : ''}`} data-tab="fotografia" onClick={() => { setActiveTab('fotografia'); setShowFotoGrid(false); setFotoFilter('ritratti'); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubFotografia') : undefined}>{globalSettings?.navSubFotografia || t('photography')}</Link>
           <span className="nav-separator">&bull;</span>
-          <Link href="/portfolio#videomaking" className={`portfolio-tab-link${activeTab === 'videomaking' ? ' active' : ''}`} data-tab="videomaking" onClick={() => { setActiveTab('videomaking'); setVideoFilter('all'); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubVideomaking') : undefined}>{globalSettings?.navSubVideomaking || 'Videomaking'}</Link>
+          <Link href={localizedHref('/portfolio#videomaking')} className={`portfolio-tab-link${activeTab === 'videomaking' ? ' active' : ''}`} data-tab="videomaking" onClick={() => { setActiveTab('videomaking'); setVideoFilter('all'); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubVideomaking') : undefined}>{globalSettings?.navSubVideomaking || t('videomaking')}</Link>
           <span className="nav-separator">&bull;</span>
-          <Link href="/portfolio#regia" className={`portfolio-tab-link${activeTab === 'regia' ? ' active' : ''}`} data-tab="regia" onClick={() => { setActiveTab('regia'); setVideoFilter('all'); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubRegia') : undefined}>{globalSettings?.navSubRegia || 'Regia'}</Link>
+          <Link href={localizedHref('/portfolio#regia')} className={`portfolio-tab-link${activeTab === 'regia' ? ' active' : ''}`} data-tab="regia" onClick={() => { setActiveTab('regia'); setVideoFilter('all'); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubRegia') : undefined}>{globalSettings?.navSubRegia || t('direction')}</Link>
           <span className="nav-separator">&bull;</span>
-          <Link href="/portfolio#mosaico" className={`portfolio-tab-link${activeTab === 'mosaico' ? ' active' : ''}`} data-tab="mosaico" onClick={() => { setActiveTab('mosaico'); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubMosaico') : undefined}>{globalSettings?.navSubMosaico || 'Mosaico'}</Link>
+          <Link href={localizedHref('/portfolio#mosaico')} className={`portfolio-tab-link${activeTab === 'mosaico' ? ' active' : ''}`} data-tab="mosaico" onClick={() => { setActiveTab('mosaico'); setMobileOpen(false) }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'navSubMosaico') : undefined}>{globalSettings?.navSubMosaico || t('mosaic')}</Link>
         </nav>
       </div>
 

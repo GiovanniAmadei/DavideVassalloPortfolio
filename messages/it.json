@@ -1,0 +1,92 @@
+{
+  "common": {
+    "readMore": "Leggi di più →",
+    "readArticle": "Leggi l'articolo..."
+  },
+  "nav": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "about": "Chi Sono",
+    "contact": "Contatti",
+    "photography": "Fotografia",
+    "videomaking": "Videomaking",
+    "direction": "Regia",
+    "mosaic": "Mosaico",
+    "portraits": "Ritratti",
+    "narration": "Narrazione",
+    "all": "Tutto"
+  },
+  "about": {
+    "label": "Il Fotografo",
+    "title": "Chi Sono",
+    "philosophyTitle": "Filosofia di Scatto",
+    "philosophyQuote": "\"Fotografare non significa catturare ciò che c'è, ma decidere rigorosamente cosa lasciare fuori dall'inquadratura. L'essenza si trova nell'ombra.\"",
+    "philosophyAuthor": "Davide Vassallo",
+    "philosophyDesc": "La mia ricerca si muove tra il documento e la costruzione, tra il paesaggio urbano e il corpo. Cerco la tensione nello spazio bianco, il significato nella pausa.",
+    "bio1": "Sono Davide Vassallo, fotografo con base a Milano. Definisco il mio linguaggio attraverso sottrazione, rigore geometrico e una costante ricerca sull'identità e lo spazio.",
+    "bio2": "Con oltre dieci anni di esperienza tra editoria e set commerciali, intreccio il candore della fotografia documentaristica al rigore del ritratto in studio. Il mio sguardo è plasmato dalla tradizione del fotogiornalismo europeo e dall'estetica minimalista giapponese.",
+    "bio3": "Collaboro con agenzie di comunicazione, brand di lusso, istituzioni culturali e testate editoriali. Ogni progetto è un dialogo aperto tra chi sono e chi mi guarda.",
+    "detailBase": "Base",
+    "detailBaseValue": "Milano, Italia",
+    "detailSpec": "Specializzazione",
+    "detailSpecValue": "Ritratto, Reportage, Ricerca",
+    "detailGear": "Attrezzatura",
+    "detailGearValue": "Nikon Z Series, Leica M",
+    "detailAvail": "Disponibilità",
+    "detailAvailValue": "Italia & Europa"
+  },
+  "contact": {
+    "pageLabel": "Parliamoci",
+    "pageTitle": "Contatti",
+    "sectionTitle": "Creiamo\ninsieme",
+    "studioLabel": "Studio Fotografico",
+    "phoneLabel": "Telefono",
+    "portraitLabel": "Ritratto",
+    "reportageLabel": "Reportage",
+    "researchLabel": "Ricerca",
+    "formName": "Nome",
+    "formEmail": "Email",
+    "formSubject": "Tipo di Progetto",
+    "formMessage": "Messaggio",
+    "formSubmit": "Invia Messaggio",
+    "placeholderName": "Mario Rossi",
+    "placeholderEmail": "mario@rossi.it",
+    "placeholderSubject": "Ritratto / Reportage / Editoriale",
+    "placeholderMessage": "Raccontami il tuo progetto..."
+  },
+  "blog": {
+    "label": "Editoriale",
+    "title": "Blog",
+    "empty": "Nessun articolo trovato.",
+    "readMore": "Leggi l'articolo..."
+  },
+  "cookie": {
+    "message": "Questo sito utilizza cookie tecnici necessari al suo funzionamento. Per maggiori informazioni consulta la nostra",
+    "privacy": "Privacy Policy",
+    "accept": "Accetta",
+    "decline": "Rifiuta"
+  },
+  "video": {
+    "backVideomaking": "← Videomaking",
+    "backRegia": "← Regia",
+    "specs": "Specifiche",
+    "yearDurationType": "Anno / Durata / Tipo",
+    "directionPhoto": "Regia & Direzione della Fotografia",
+    "category": "Categoria",
+    "synopsis": "Sinossi",
+    "fallbackTitle": "Progetto — Davide Vassallo"
+  },
+  "metadata": {
+    "homeTitle": "Davide Vassallo | Photographer",
+    "homeDesc": "Davide Vassallo — Fotografo professionale a Milano. Portfolio editoriale di ritratto, reportage eventi e ricerca fotografica.",
+    "blogTitle": "Blog",
+    "blogDesc": "Blog di Davide Vassallo — Riflessioni sulla fotografia, tecnica, visione e racconti dai set.",
+    "aboutTitle": "Chi Sono",
+    "aboutDesc": "Chi è Davide Vassallo — Fotografo editoriale milanese. Biografia, filosofia di scatto e percorso professionale.",
+    "contactTitle": "Contatti",
+    "contactDesc": "Contatta Davide Vassallo — Fotografo disponibile per ritratti, reportage ed eventi a Milano e in Italia.",
+    "portfolioTitle": "Portfolio",
+    "portfolioDesc": "Portfolio fotografico di Davide Vassallo — Fotografia, Videomaking, Regia, Mosaico. Galleria completa con lavori professionali."
+  }
+}

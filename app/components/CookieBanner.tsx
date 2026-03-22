@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 
 export default function CookieBanner() {
+  const t = useTranslations('cookie')
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -48,8 +50,7 @@ export default function CookieBanner() {
       }}
     >
       <p style={{ margin: 0, lineHeight: '1.6' }}>
-        Questo sito utilizza cookie tecnici necessari al suo funzionamento.
-        Per maggiori informazioni consulta la nostra{' '}
+        {t('message')}{' '}
         <a
           href="/privacy"
           style={{
@@ -58,7 +59,7 @@ export default function CookieBanner() {
             textUnderlineOffset: '3px',
           }}
         >
-          Privacy Policy
+          {t('privacy')}
         </a>
         .
       </p>
@@ -78,7 +79,7 @@ export default function CookieBanner() {
             color: 'var(--muted, #888888)',
           }}
         >
-          Rifiuta
+          {t('decline')}
         </button>
         <button
           onClick={accept}
@@ -94,7 +95,7 @@ export default function CookieBanner() {
             color: 'var(--background, #f9f8f6)',
           }}
         >
-          Accetta
+          {t('accept')}
         </button>
       </div>
     </div>

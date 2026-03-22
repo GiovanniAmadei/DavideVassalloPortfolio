@@ -1,0 +1,92 @@
+{
+  "common": {
+    "readMore": "Read more →",
+    "readArticle": "Read the article..."
+  },
+  "nav": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact",
+    "photography": "Photography",
+    "videomaking": "Videomaking",
+    "direction": "Direction",
+    "mosaic": "Mosaic",
+    "portraits": "Portraits",
+    "narration": "Narrative",
+    "all": "All"
+  },
+  "about": {
+    "label": "The Photographer",
+    "title": "About Me",
+    "philosophyTitle": "Shooting Philosophy",
+    "philosophyQuote": "\"Photography is not about capturing what is there, but about rigorously deciding what to leave out of the frame. The essence lies in the shadow.\"",
+    "philosophyAuthor": "Davide Vassallo",
+    "philosophyDesc": "My research moves between documentation and construction, between the urban landscape and the body. I seek tension in the white space, meaning in the pause.",
+    "bio1": "I am Davide Vassallo, a Milan-based photographer. I define my language through subtraction, geometric rigor and a constant research on identity and space.",
+    "bio2": "With over ten years of experience in editorial and commercial sets, I intertwine documentary photography with the rigor of studio portraiture. My gaze is shaped by the European photojournalism tradition and the Japanese minimalist aesthetic.",
+    "bio3": "I collaborate with communication agencies, luxury brands, cultural institutions and editorial publications. Every project is an open dialogue between who I am and who is looking.",
+    "detailBase": "Base",
+    "detailBaseValue": "Milan, Italy",
+    "detailSpec": "Specialization",
+    "detailSpecValue": "Portrait, Reportage, Research",
+    "detailGear": "Equipment",
+    "detailGearValue": "Nikon Z Series, Leica M",
+    "detailAvail": "Availability",
+    "detailAvailValue": "Italy & Europe"
+  },
+  "contact": {
+    "pageLabel": "Let's talk",
+    "pageTitle": "Contact",
+    "sectionTitle": "Let's create\ntogether",
+    "studioLabel": "Photography Studio",
+    "phoneLabel": "Phone",
+    "portraitLabel": "Portrait",
+    "reportageLabel": "Reportage",
+    "researchLabel": "Research",
+    "formName": "Name",
+    "formEmail": "Email",
+    "formSubject": "Project Type",
+    "formMessage": "Message",
+    "formSubmit": "Send Message",
+    "placeholderName": "John Doe",
+    "placeholderEmail": "john@doe.com",
+    "placeholderSubject": "Portrait / Reportage / Editorial",
+    "placeholderMessage": "Tell me about your project..."
+  },
+  "blog": {
+    "label": "Editorial",
+    "title": "Blog",
+    "empty": "No articles found.",
+    "readMore": "Read the article..."
+  },
+  "cookie": {
+    "message": "This site uses technical cookies necessary for its operation. For more information please read our",
+    "privacy": "Privacy Policy",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "video": {
+    "backVideomaking": "← Videomaking",
+    "backRegia": "← Direction",
+    "specs": "Specifications",
+    "yearDurationType": "Year / Duration / Type",
+    "directionPhoto": "Direction & Cinematography",
+    "category": "Category",
+    "synopsis": "Synopsis",
+    "fallbackTitle": "Project — Davide Vassallo"
+  },
+  "metadata": {
+    "homeTitle": "Davide Vassallo | Photographer",
+    "homeDesc": "Davide Vassallo — Professional photographer based in Milan. Editorial portfolio of portraiture, event reportage and photographic research.",
+    "blogTitle": "Blog",
+    "blogDesc": "Davide Vassallo's Blog — Reflections on photography, technique, vision and stories from the set.",
+    "aboutTitle": "About",
+    "aboutDesc": "About Davide Vassallo — Milan-based editorial photographer. Biography, shooting philosophy and professional journey.",
+    "contactTitle": "Contact",
+    "contactDesc": "Contact Davide Vassallo — Photographer available for portraits, reportage and events in Milan and across Italy.",
+    "portfolioTitle": "Portfolio",
+    "portfolioDesc": "Davide Vassallo's photography portfolio — Photography, Videomaking, Direction, Mosaic. Complete gallery of professional work."
+  }
+}

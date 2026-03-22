@@ -210,6 +210,42 @@ button {
   width: 100%;
 }
 
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  pointer-events: auto;
+  z-index: 201;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.lang-btn:hover,
+.lang-btn.active {
+  color: var(--text);
+}
+
+.lang-divider {
+  color: var(--muted);
+  font-size: 0.75rem;
+  user-select: none;
+}
+
 .header-social {
   display: flex;
   gap: 1.5rem;

@@ -12,10 +12,11 @@ interface GlobalDataWrapperProps {
   blogData: any
   blogQuery: string
   blogVariables: object
+  locale: string
   children: React.ReactNode
 }
 
-export default function GlobalDataWrapper({ data, query, variables, blogData, blogQuery, blogVariables, children }: GlobalDataWrapperProps) {
+export default function GlobalDataWrapper({ data, query, variables, blogData, blogQuery, blogVariables, locale, children }: GlobalDataWrapperProps) {
   const { data: globalData } = useTina({
     query,
     variables,
@@ -33,7 +34,7 @@ export default function GlobalDataWrapper({ data, query, variables, blogData, bl
 
   return (
     <>
-      <Header globalSettings={globalSettings} blogSettings={blogSettings} tinaField={tinaField} />
+      <Header globalSettings={globalSettings} blogSettings={blogSettings} tinaField={tinaField} locale={locale} />
       {children}
       <Footer globalSettings={globalSettings} tinaField={tinaField} />
     </>

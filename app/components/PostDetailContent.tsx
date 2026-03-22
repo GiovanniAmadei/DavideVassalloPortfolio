@@ -2,6 +2,7 @@
 
 import { useTina, tinaField } from "tinacms/dist/react"
 import { TinaMarkdown } from "tinacms/dist/rich-text"
+import { useLocale } from 'next-intl'
 import type { PostQuery } from "../../../tina/__generated__/types"
 
 interface PostDetailContentProps {
@@ -11,6 +12,9 @@ interface PostDetailContentProps {
 }
 
 export default function PostDetailContent(props: PostDetailContentProps) {
+  const locale = useLocale()
+  const dateLocale = locale === 'en' ? 'en-GB' : 'it-IT'
+
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
@@ -18,7 +22,7 @@ export default function PostDetailContent(props: PostDetailContentProps) {
   })
 
   const post = data.post
-  const date = new Date(post.publishedAt || new Date()).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' })
+  const date = new Date(post.publishedAt || new Date()).toLocaleDateString(dateLocale, { day: '2-digit', month: 'long', year: 'numeric' })
 
   return (
     <article style={{ maxWidth: '760px', margin: '0 auto', padding: '8rem 2rem 6rem' }}>
