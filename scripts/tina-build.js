@@ -21,12 +21,12 @@ if (isMainBranch) {
   execSync('tinacms build', { stdio: 'inherit' });
 } else {
   console.log(`[tina-build] Branch "${currentBranch}" is not "${tinaBranch}" — building in local mode (no TinaCloud)`);
-  execSync('tinacms build --local', {
+  execSync('tinacms build --local --skip-cloud-checks', {
     stdio: 'inherit',
     env: {
       ...process.env,
-      NEXT_PUBLIC_TINA_CLIENT_ID: '',
-      TINA_TOKEN: '',
+      NEXT_PUBLIC_TINA_CLIENT_ID: 'dummy-client-id',
+      TINA_TOKEN: 'dummy-token',
     },
   });
 }
