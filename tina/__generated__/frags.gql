@@ -1,6 +1,7 @@
 fragment PostParts on Post {
   __typename
   title
+  title_en
   slug
   publishedAt
   mainImage
@@ -18,12 +19,19 @@ fragment ChiSonoParts on ChiSono {
     __typename
     anno
     titolo
+    titolo_en
     luogo
   }
   filosofiaTitolo
   filosofiaCitazione
   filosofiaAutore
   filosofiaDescrizione
+  titolo_en
+  sottotitolo_en
+  descrizione_en
+  filosofiaTitolo_en
+  filosofiaCitazione_en
+  filosofiaDescrizione_en
 }
 
 fragment FotografiaParts on Fotografia {
@@ -32,6 +40,7 @@ fragment FotografiaParts on Fotografia {
   src
   categoriaString
   description
+  description_en
   metadata
   ordine
 }
@@ -39,12 +48,15 @@ fragment FotografiaParts on Fotografia {
 fragment ProgettoVideoParts on ProgettoVideo {
   __typename
   title
+  title_en
   src
   categoriaString
   sottocategoria
   description
+  description_en
   metadata
   logline
+  logline_en
   url
   ordine
 }
@@ -63,11 +75,22 @@ fragment ContattiParts on Contatti {
   orariRitratto
   orariReportage
   orariRicerca
+  titoloPagina_en
+  sottotitoloPagina_en
+  titoloSezione_en
+  testoSottoTitolo_en
+  orariRitratto_en
+  orariReportage_en
+  orariRicerca_en
   formName
   formEmail
   formSubject
   formMessage
   formSubmit
+  formName_en
+  formSubject_en
+  formMessage_en
+  formSubmit_en
 }
 
 fragment GlobalParts on Global {
@@ -90,6 +113,17 @@ fragment GlobalParts on Global {
   navSubVideomaking
   navSubRegia
   navSubMosaico
+  filterFoto1
+  filterFoto2
+  filterVideoAll
+  navAbout_en
+  navContact_en
+  navSubFotografia_en
+  navSubRegia_en
+  navSubMosaico_en
+  filterFoto1_en
+  filterFoto2_en
+  filterVideoAll_en
 }
 
 fragment HomepageParts on Homepage {
@@ -97,6 +131,7 @@ fragment HomepageParts on Homepage {
   heroBands {
     __typename
     title
+    title_en
     href
     images
   }
@@ -108,6 +143,14 @@ fragment HomepageParts on Homepage {
   mosaicoLabel
   ctaBlog
   ctaMosaico
+  chiSonoLabel_en
+  chiSonoPreviewTitle_en
+  chiSonoPreviewText1_en
+  chiSonoPreviewText2_en
+  blogLabel_en
+  mosaicoLabel_en
+  ctaBlog_en
+  ctaMosaico_en
 }
 
 fragment PortfolioPageParts on PortfolioPage {
@@ -125,6 +168,16 @@ fragment PortfolioPageParts on PortfolioPage {
   imagesFoto2
   descFoto1
   descFoto2
+  tabFotografia_en
+  tabRegia_en
+  tabMosaico_en
+  filterFoto1_en
+  filterFoto2_en
+  filterVideoAll_en
+  filterVideo1_en
+  filterVideo2_en
+  descFoto1_en
+  descFoto2_en
 }
 
 fragment BlogPageParts on BlogPage {
@@ -134,4 +187,8 @@ fragment BlogPageParts on BlogPage {
   title
   emptyMessage
   readMoreLabel
+  label_en
+  title_en
+  emptyMessage_en
+  readMoreLabel_en
 }

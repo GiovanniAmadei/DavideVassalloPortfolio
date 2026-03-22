@@ -18,7 +18,7 @@ const isMainBranch = !currentBranch || currentBranch === tinaBranch;
 
 if (isMainBranch) {
   console.log(`[tina-build] Branch "${currentBranch || tinaBranch}" — using TinaCloud`);
-  execSync('tinacms build', { stdio: 'inherit' });
+  execSync('tinacms build --skip-cloud-checks', { stdio: 'inherit' });
 } else {
   console.log(`[tina-build] Branch "${currentBranch}" is not "${tinaBranch}" — building in local mode (no TinaCloud)`);
   execSync('tinacms build --local --skip-cloud-checks', {

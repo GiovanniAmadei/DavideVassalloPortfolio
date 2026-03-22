@@ -113,6 +113,7 @@ union DocumentNode = Post | ChiSono | Fotografia | ProgettoVideo | Contatti | Gl
 
 type Post implements Node & Document {
   title: String!
+  title_en: String
   slug: String!
   publishedAt: String
   mainImage: String
@@ -153,6 +154,7 @@ input RichTextFilter {
 
 input PostFilter {
   title: StringFilter
+  title_en: StringFilter
   slug: StringFilter
   publishedAt: DatetimeFilter
   mainImage: ImageFilter
@@ -174,6 +176,7 @@ type PostConnection implements Connection {
 type ChiSonoEsperienze {
   anno: String
   titolo: String
+  titolo_en: String
   luogo: String
 }
 
@@ -187,6 +190,12 @@ type ChiSono implements Node & Document {
   filosofiaCitazione: String
   filosofiaAutore: String
   filosofiaDescrizione: String
+  titolo_en: String
+  sottotitolo_en: String
+  descrizione_en: JSON
+  filosofiaTitolo_en: String
+  filosofiaCitazione_en: String
+  filosofiaDescrizione_en: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -195,6 +204,7 @@ type ChiSono implements Node & Document {
 input ChiSonoEsperienzeFilter {
   anno: StringFilter
   titolo: StringFilter
+  titolo_en: StringFilter
   luogo: StringFilter
 }
 
@@ -208,6 +218,12 @@ input ChiSonoFilter {
   filosofiaCitazione: StringFilter
   filosofiaAutore: StringFilter
   filosofiaDescrizione: StringFilter
+  titolo_en: StringFilter
+  sottotitolo_en: StringFilter
+  descrizione_en: RichTextFilter
+  filosofiaTitolo_en: StringFilter
+  filosofiaCitazione_en: StringFilter
+  filosofiaDescrizione_en: StringFilter
 }
 
 type ChiSonoConnectionEdges {
@@ -226,6 +242,7 @@ type Fotografia implements Node & Document {
   src: String!
   categoriaString: String!
   description: String
+  description_en: String
   metadata: String
   ordine: Float
   id: ID!
@@ -248,6 +265,7 @@ input FotografiaFilter {
   src: ImageFilter
   categoriaString: StringFilter
   description: StringFilter
+  description_en: StringFilter
   metadata: StringFilter
   ordine: NumberFilter
 }
@@ -265,12 +283,15 @@ type FotografiaConnection implements Connection {
 
 type ProgettoVideo implements Node & Document {
   title: String!
+  title_en: String
   src: String!
   categoriaString: String!
   sottocategoria: String
   description: String
+  description_en: String
   metadata: String
   logline: String
+  logline_en: String
   url: String
   ordine: Float
   id: ID!
@@ -280,12 +301,15 @@ type ProgettoVideo implements Node & Document {
 
 input ProgettoVideoFilter {
   title: StringFilter
+  title_en: StringFilter
   src: ImageFilter
   categoriaString: StringFilter
   sottocategoria: StringFilter
   description: StringFilter
+  description_en: StringFilter
   metadata: StringFilter
   logline: StringFilter
+  logline_en: StringFilter
   url: StringFilter
   ordine: NumberFilter
 }
@@ -314,11 +338,22 @@ type Contatti implements Node & Document {
   orariRitratto: String
   orariReportage: String
   orariRicerca: String
+  titoloPagina_en: String
+  sottotitoloPagina_en: String
+  titoloSezione_en: String
+  testoSottoTitolo_en: String
+  orariRitratto_en: String
+  orariReportage_en: String
+  orariRicerca_en: String
   formName: String
   formEmail: String
   formSubject: String
   formMessage: String
   formSubmit: String
+  formName_en: String
+  formSubject_en: String
+  formMessage_en: String
+  formSubmit_en: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -337,11 +372,22 @@ input ContattiFilter {
   orariRitratto: StringFilter
   orariReportage: StringFilter
   orariRicerca: StringFilter
+  titoloPagina_en: StringFilter
+  sottotitoloPagina_en: StringFilter
+  titoloSezione_en: StringFilter
+  testoSottoTitolo_en: StringFilter
+  orariRitratto_en: StringFilter
+  orariReportage_en: StringFilter
+  orariRicerca_en: StringFilter
   formName: StringFilter
   formEmail: StringFilter
   formSubject: StringFilter
   formMessage: StringFilter
   formSubmit: StringFilter
+  formName_en: StringFilter
+  formSubject_en: StringFilter
+  formMessage_en: StringFilter
+  formSubmit_en: StringFilter
 }
 
 type ContattiConnectionEdges {
@@ -374,6 +420,17 @@ type Global implements Node & Document {
   navSubVideomaking: String
   navSubRegia: String
   navSubMosaico: String
+  filterFoto1: String
+  filterFoto2: String
+  filterVideoAll: String
+  navAbout_en: String
+  navContact_en: String
+  navSubFotografia_en: String
+  navSubRegia_en: String
+  navSubMosaico_en: String
+  filterFoto1_en: String
+  filterFoto2_en: String
+  filterVideoAll_en: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -398,6 +455,17 @@ input GlobalFilter {
   navSubVideomaking: StringFilter
   navSubRegia: StringFilter
   navSubMosaico: StringFilter
+  filterFoto1: StringFilter
+  filterFoto2: StringFilter
+  filterVideoAll: StringFilter
+  navAbout_en: StringFilter
+  navContact_en: StringFilter
+  navSubFotografia_en: StringFilter
+  navSubRegia_en: StringFilter
+  navSubMosaico_en: StringFilter
+  filterFoto1_en: StringFilter
+  filterFoto2_en: StringFilter
+  filterVideoAll_en: StringFilter
 }
 
 type GlobalConnectionEdges {
@@ -413,6 +481,7 @@ type GlobalConnection implements Connection {
 
 type HomepageHeroBands {
   title: String
+  title_en: String
   href: String
   images: [String]
 }
@@ -427,6 +496,14 @@ type Homepage implements Node & Document {
   mosaicoLabel: String
   ctaBlog: String
   ctaMosaico: String
+  chiSonoLabel_en: String
+  chiSonoPreviewTitle_en: String
+  chiSonoPreviewText1_en: String
+  chiSonoPreviewText2_en: String
+  blogLabel_en: String
+  mosaicoLabel_en: String
+  ctaBlog_en: String
+  ctaMosaico_en: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -434,6 +511,7 @@ type Homepage implements Node & Document {
 
 input HomepageHeroBandsFilter {
   title: StringFilter
+  title_en: StringFilter
   href: StringFilter
   images: ImageFilter
 }
@@ -448,6 +526,14 @@ input HomepageFilter {
   mosaicoLabel: StringFilter
   ctaBlog: StringFilter
   ctaMosaico: StringFilter
+  chiSonoLabel_en: StringFilter
+  chiSonoPreviewTitle_en: StringFilter
+  chiSonoPreviewText1_en: StringFilter
+  chiSonoPreviewText2_en: StringFilter
+  blogLabel_en: StringFilter
+  mosaicoLabel_en: StringFilter
+  ctaBlog_en: StringFilter
+  ctaMosaico_en: StringFilter
 }
 
 type HomepageConnectionEdges {
@@ -475,6 +561,16 @@ type PortfolioPage implements Node & Document {
   imagesFoto2: [String]
   descFoto1: String
   descFoto2: String
+  tabFotografia_en: String
+  tabRegia_en: String
+  tabMosaico_en: String
+  filterFoto1_en: String
+  filterFoto2_en: String
+  filterVideoAll_en: String
+  filterVideo1_en: String
+  filterVideo2_en: String
+  descFoto1_en: String
+  descFoto2_en: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -494,6 +590,16 @@ input PortfolioPageFilter {
   imagesFoto2: ImageFilter
   descFoto1: StringFilter
   descFoto2: StringFilter
+  tabFotografia_en: StringFilter
+  tabRegia_en: StringFilter
+  tabMosaico_en: StringFilter
+  filterFoto1_en: StringFilter
+  filterFoto2_en: StringFilter
+  filterVideoAll_en: StringFilter
+  filterVideo1_en: StringFilter
+  filterVideo2_en: StringFilter
+  descFoto1_en: StringFilter
+  descFoto2_en: StringFilter
 }
 
 type PortfolioPageConnectionEdges {
@@ -513,6 +619,10 @@ type BlogPage implements Node & Document {
   title: String
   emptyMessage: String
   readMoreLabel: String
+  label_en: String
+  title_en: String
+  emptyMessage_en: String
+  readMoreLabel_en: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -529,6 +639,10 @@ input BlogPageFilter {
   title: StringFilter
   emptyMessage: StringFilter
   readMoreLabel: StringFilter
+  label_en: StringFilter
+  title_en: StringFilter
+  emptyMessage_en: StringFilter
+  readMoreLabel_en: StringFilter
 }
 
 type BlogPageConnectionEdges {
@@ -595,6 +709,7 @@ input DocumentMutation {
 
 input PostMutation {
   title: String
+  title_en: String
   slug: String
   publishedAt: String
   mainImage: String
@@ -605,6 +720,7 @@ input PostMutation {
 input ChiSonoEsperienzeMutation {
   anno: String
   titolo: String
+  titolo_en: String
   luogo: String
 }
 
@@ -618,6 +734,12 @@ input ChiSonoMutation {
   filosofiaCitazione: String
   filosofiaAutore: String
   filosofiaDescrizione: String
+  titolo_en: String
+  sottotitolo_en: String
+  descrizione_en: JSON
+  filosofiaTitolo_en: String
+  filosofiaCitazione_en: String
+  filosofiaDescrizione_en: String
 }
 
 input FotografiaMutation {
@@ -625,18 +747,22 @@ input FotografiaMutation {
   src: String
   categoriaString: String
   description: String
+  description_en: String
   metadata: String
   ordine: Float
 }
 
 input ProgettoVideoMutation {
   title: String
+  title_en: String
   src: String
   categoriaString: String
   sottocategoria: String
   description: String
+  description_en: String
   metadata: String
   logline: String
+  logline_en: String
   url: String
   ordine: Float
 }
@@ -654,11 +780,22 @@ input ContattiMutation {
   orariRitratto: String
   orariReportage: String
   orariRicerca: String
+  titoloPagina_en: String
+  sottotitoloPagina_en: String
+  titoloSezione_en: String
+  testoSottoTitolo_en: String
+  orariRitratto_en: String
+  orariReportage_en: String
+  orariRicerca_en: String
   formName: String
   formEmail: String
   formSubject: String
   formMessage: String
   formSubmit: String
+  formName_en: String
+  formSubject_en: String
+  formMessage_en: String
+  formSubmit_en: String
 }
 
 input GlobalMutation {
@@ -680,10 +817,22 @@ input GlobalMutation {
   navSubVideomaking: String
   navSubRegia: String
   navSubMosaico: String
+  filterFoto1: String
+  filterFoto2: String
+  filterVideoAll: String
+  navAbout_en: String
+  navContact_en: String
+  navSubFotografia_en: String
+  navSubRegia_en: String
+  navSubMosaico_en: String
+  filterFoto1_en: String
+  filterFoto2_en: String
+  filterVideoAll_en: String
 }
 
 input HomepageHeroBandsMutation {
   title: String
+  title_en: String
   href: String
   images: [String]
 }
@@ -698,6 +847,14 @@ input HomepageMutation {
   mosaicoLabel: String
   ctaBlog: String
   ctaMosaico: String
+  chiSonoLabel_en: String
+  chiSonoPreviewTitle_en: String
+  chiSonoPreviewText1_en: String
+  chiSonoPreviewText2_en: String
+  blogLabel_en: String
+  mosaicoLabel_en: String
+  ctaBlog_en: String
+  ctaMosaico_en: String
 }
 
 input PortfolioPageMutation {
@@ -714,6 +871,16 @@ input PortfolioPageMutation {
   imagesFoto2: [String]
   descFoto1: String
   descFoto2: String
+  tabFotografia_en: String
+  tabRegia_en: String
+  tabMosaico_en: String
+  filterFoto1_en: String
+  filterFoto2_en: String
+  filterVideoAll_en: String
+  filterVideo1_en: String
+  filterVideo2_en: String
+  descFoto1_en: String
+  descFoto2_en: String
 }
 
 input BlogPageMutation {
@@ -722,6 +889,10 @@ input BlogPageMutation {
   title: String
   emptyMessage: String
   readMoreLabel: String
+  label_en: String
+  title_en: String
+  emptyMessage_en: String
+  readMoreLabel_en: String
 }
 
 schema {
