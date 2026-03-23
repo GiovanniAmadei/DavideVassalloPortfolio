@@ -2,14 +2,12 @@
 
 import { useEffect, useRef, ReactNode } from 'react'
 
-interface RevealProps {
+interface RevealProps extends React.HTMLAttributes<HTMLElement> {
   children: ReactNode
-  className?: string
-  style?: React.CSSProperties
   tag?: keyof JSX.IntrinsicElements
 }
 
-export default function Reveal({ children, className = '', style, tag: Tag = 'div' }: RevealProps) {
+export default function Reveal({ children, className = '', style, tag: Tag = 'div', ...rest }: RevealProps) {
   const ref = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -25,7 +23,7 @@ export default function Reveal({ children, className = '', style, tag: Tag = 'di
 
   return (
     // @ts-expect-error dynamic tag
-    <Tag ref={ref} className={`reveal ${className}`} style={style}>
+    <Tag ref={ref} className={`reveal ${className}`} style={style} {...rest}>
       {children}
     </Tag>
   )
