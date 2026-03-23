@@ -43,6 +43,7 @@ fragment FotografiaParts on Fotografia {
   description_en
   metadata
   ordine
+  inMosaico
 }
 
 fragment ProgettoVideoParts on ProgettoVideo {
@@ -134,6 +135,7 @@ fragment HomepageParts on Homepage {
     title_en
     href
     images
+    objectPosition
   }
   chiSonoLabel
   chiSonoPreviewTitle

@@ -245,6 +245,7 @@ type Fotografia implements Node & Document {
   description_en: String
   metadata: String
   ordine: Float
+  inMosaico: Boolean
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -260,6 +261,11 @@ input NumberFilter {
   in: [Float]
 }
 
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
 input FotografiaFilter {
   title: StringFilter
   src: ImageFilter
@@ -268,6 +274,7 @@ input FotografiaFilter {
   description_en: StringFilter
   metadata: StringFilter
   ordine: NumberFilter
+  inMosaico: BooleanFilter
 }
 
 type FotografiaConnectionEdges {
@@ -484,6 +491,7 @@ type HomepageHeroBands {
   title_en: String
   href: String
   images: [String]
+  objectPosition: String
 }
 
 type Homepage implements Node & Document {
@@ -514,6 +522,7 @@ input HomepageHeroBandsFilter {
   title_en: StringFilter
   href: StringFilter
   images: ImageFilter
+  objectPosition: StringFilter
 }
 
 input HomepageFilter {
@@ -626,11 +635,6 @@ type BlogPage implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input BooleanFilter {
-  eq: Boolean
-  exists: Boolean
 }
 
 input BlogPageFilter {
@@ -750,6 +754,7 @@ input FotografiaMutation {
   description_en: String
   metadata: String
   ordine: Float
+  inMosaico: Boolean
 }
 
 input ProgettoVideoMutation {
@@ -835,6 +840,7 @@ input HomepageHeroBandsMutation {
   title_en: String
   href: String
   images: [String]
+  objectPosition: String
 }
 
 input HomepageMutation {
