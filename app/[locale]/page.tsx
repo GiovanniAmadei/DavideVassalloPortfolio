@@ -40,8 +40,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       client.queries.homepage({ relativePath: "homepage.json" }),
     ])
   } catch (err) {
-    console.error('[HomePage] TinaCMS fetch failed:', err)
-    throw err
+    // TinaCloud can be temporarily unavailable during schema reindexing.
+    // Log the error but return a minimal page instead of a 500.
+    console.error('[HomePage] TinaCMS fetch failed (may be reindexing):', err)
+    return <div style={{ minHeight: '100vh' }} />
   }
 
   return (
