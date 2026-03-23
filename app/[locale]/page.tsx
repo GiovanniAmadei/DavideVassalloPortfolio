@@ -31,9 +31,18 @@ const jsonLd = {
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
-  const fotoRes = await client.queries.fotografiaConnection()
-  const postRes = await client.queries.postConnection()
-  const homeRes = await client.queries.homepage({ relativePath: "homepage.json" })
+
+  let fotoRes, postRes, homeRes
+  try {
+    ;[fotoRes, postRes, homeRes] = await Promise.all([
+      client.queries.fotografiaConnection(),
+      client.queries.postConnection(),
+      client.queries.homepage({ relativePath: "homepage.json" }),
+    ])
+  } catch (err) {
+    console.error('[HomePage] TinaCMS fetch failed:', err)
+    throw err
+  }
 
   return (
     <>
@@ -42,17 +51,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <HomeContent
-        postData={postRes.data as any}
-        postQuery={postRes.query}
-        postVariables={postRes.variables}
+        postData={postRes!.data as any}
+        postQuery={postRes!.query}
+        postVariables={postRes!.variables}
 
-        fotoData={fotoRes.data as any}
-        fotoQuery={fotoRes.query}
-        fotoVariables={fotoRes.variables}
+        fotoData={fotoRes!.data as any}
+        fotoQuery={fotoRes!.query}
+        fotoVariables={fotoRes!.variables}
 
-        homeData={homeRes.data as any}
-        homeQuery={homeRes.query}
-        homeVariables={homeRes.variables}
+        homeData={homeRes!.data as any}
+        homeQuery={homeRes!.query}
+        homeVariables={homeRes!.variables}
 
         locale={locale}
       />
