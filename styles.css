@@ -143,6 +143,7 @@ button {
   color: var(--text);
   line-height: 1;
   flex: 1;
+  white-space: nowrap;
 }
 
 .header-nav {
@@ -237,7 +238,7 @@ button {
 
 .lang-btn:hover,
 .lang-btn.active {
-  color: var(--text);
+  color: var(--accent-red);
 }
 
 .lang-divider {

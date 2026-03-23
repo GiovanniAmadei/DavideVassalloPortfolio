@@ -134,7 +134,7 @@ export default function Header({ globalSettings, blogSettings, tinaField, locale
   return (
     <header className={`site-header${isPortfolio || submenuOpen ? ' is-portfolio-open' : ''}${showTertiary ? ' has-tertiary' : ''}`}>
       <div className="header-main">
-        <Link className="header-logo" href={localizedHref('/')} style={{ letterSpacing: '0.12em' }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'logoName') : undefined}>
+        <Link className="header-logo" href={localizedHref('/')} style={{ letterSpacing: '0.05em' }} data-tina-field={tinaField && globalSettings ? tinaField(globalSettings, 'logoName') : undefined}>
           {globalSettings?.logoName || 'Davide Vassallo'}
         </Link>
 
@@ -188,21 +188,6 @@ export default function Header({ globalSettings, blogSettings, tinaField, locale
             )
           })}
 
-          {/* Language switcher */}
-          <span className="nav-separator">&bull;</span>
-          <span className="lang-switcher">
-            <button
-              className={`lang-btn${currentLocale === 'it' ? ' active' : ''}`}
-              onClick={() => switchLocale('it')}
-              aria-label="Italiano"
-            >IT</button>
-            <span className="lang-divider">/</span>
-            <button
-              className={`lang-btn${currentLocale === 'en' ? ' active' : ''}`}
-              onClick={() => switchLocale('en')}
-              aria-label="English"
-            >EN</button>
-          </span>
         </nav>
 
         <div className="header-social">
@@ -218,6 +203,19 @@ export default function Header({ globalSettings, blogSettings, tinaField, locale
           <a href={globalSettings?.facebook || "https://facebook.com"} target="_blank" rel="noopener" aria-label="Facebook" data-tina-field={tinaField ? tinaField(globalSettings, 'facebook') : undefined}>
             <FacebookIcon />
           </a>
+          <span className="lang-switcher">
+            <button
+              className={`lang-btn${currentLocale === 'it' ? ' active' : ''}`}
+              onClick={() => switchLocale('it')}
+              aria-label="Italiano"
+            >IT</button>
+            <span className="lang-divider">/</span>
+            <button
+              className={`lang-btn${currentLocale === 'en' ? ' active' : ''}`}
+              onClick={() => switchLocale('en')}
+              aria-label="English"
+            >EN</button>
+          </span>
         </div>
       </div>
 
