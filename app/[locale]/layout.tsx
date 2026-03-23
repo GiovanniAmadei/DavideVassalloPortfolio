@@ -19,12 +19,37 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'metadata' })
+  const title = t('homeTitle')
+  const description = t('homeDesc')
   return {
     title: {
-      default: t('homeTitle'),
+      default: title,
       template: `%s | Davide Vassallo`
     },
-    description: t('homeDesc'),
+    description,
+    openGraph: {
+      title,
+      description,
+      url: 'https://davidevassallo.net',
+      siteName: 'Davide Vassallo',
+      images: [
+        {
+          url: 'https://davidevassallo.net/assets/DSC_2852.jpg',
+          width: 1200,
+          height: 800,
+          alt: 'Davide Vassallo — Fotografo Professionale',
+        },
+      ],
+      locale: locale === 'en' ? 'en_GB' : 'it_IT',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['https://davidevassallo.net/assets/DSC_2852.jpg'],
+    },
+    metadataBase: new URL('https://davidevassallo.net'),
   }
 }
 
