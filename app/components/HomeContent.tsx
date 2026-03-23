@@ -54,12 +54,13 @@ export default function HomeContent(props: HomeContentProps) {
 
   const fotografiaData = (fotoDataLocal.fotografiaConnection.edges || []).map((e: any) => e?.node).filter(Boolean).sort((a: any, b: any) => (a.ordine || 0) - (b.ordine || 0)) as any[]
 
+  const mosaicoFiltered = fotografiaData.filter((item: any) => item.inMosaico !== false)
   const mosaicoData = [
-    ...fotografiaData,
-    ...fotografiaData,
-    ...fotografiaData,
-    ...fotografiaData,
-    ...fotografiaData,
+    ...mosaicoFiltered,
+    ...mosaicoFiltered,
+    ...mosaicoFiltered,
+    ...mosaicoFiltered,
+    ...mosaicoFiltered,
   ].map((item) => ({ ...item, _tinaField: tinaField(item) }))
 
   // Localized hero bands: swap title with _en variant when in English

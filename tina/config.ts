@@ -236,6 +236,12 @@ export default defineConfig({
             name: "ordine",
             label: "Ordine in Galleria",
           },
+          {
+            type: "boolean",
+            name: "inMosaico",
+            label: "Includi nel Mosaico",
+            description: "Se attivo, questa foto appare nel mosaico in homepage e portfolio.",
+          },
         ],
       },
 
@@ -556,7 +562,24 @@ export default defineConfig({
               { type: "string", name: "title", label: "Titolo Pannello (IT)" },
               { type: "string", name: "title_en", label: "Panel Title (EN)" },
               { type: "string", name: "href", label: "Link Pannello (Es. /portfolio#fotografia)" },
-              { type: "image", name: "images", label: "Immagini Slider", list: true }
+              { type: "image", name: "images", label: "Immagini Slider", list: true },
+              {
+                type: "string",
+                name: "objectPosition",
+                label: "Posizione Immagine",
+                description: "Controlla il punto focale. Es: 'center center', 'top center', 'center 30%'",
+                options: [
+                  { value: "center center", label: "Centro (default)" },
+                  { value: "top center", label: "Alto" },
+                  { value: "bottom center", label: "Basso" },
+                  { value: "center left", label: "Sinistra" },
+                  { value: "center right", label: "Destra" },
+                  { value: "20% center", label: "Sinistra-centro" },
+                  { value: "80% center", label: "Destra-centro" },
+                  { value: "center 30%", label: "Alto-centro" },
+                  { value: "center 70%", label: "Basso-centro" },
+                ],
+              },
             ],
           },
           // ── Italiano ──

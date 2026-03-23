@@ -74,12 +74,14 @@ export default function PortfolioContent(props: PortfolioContentProps) {
     setRegiaCategories(rCats)
   }, [vCatsStr, rCatsStr, setVideoCategories, setRegiaCategories])
 
+  const mosaicoData = fotografiaData.filter((item: any) => item.inMosaico !== false)
+
   return (
-    <PortfolioTabs 
+    <PortfolioTabs
       fotografiaData={fotografiaData}
       videomakingData={videomakingData}
       regiaData={regiaData}
-      mosaicoData={fotografiaData}
+      mosaicoData={mosaicoData}
       pageData={pageData}
       tinaField={tinaField}
     />
