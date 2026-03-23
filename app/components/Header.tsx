@@ -188,6 +188,20 @@ export default function Header({ globalSettings, blogSettings, tinaField, locale
             )
           })}
 
+          {/* Language switcher — mobile only (desktop version is in header-social) */}
+          <span className="lang-switcher lang-switcher-mobile">
+            <button
+              className={`lang-btn${currentLocale === 'it' ? ' active' : ''}`}
+              onClick={() => switchLocale('it')}
+              aria-label="Italiano"
+            >IT</button>
+            <span className="lang-divider">/</span>
+            <button
+              className={`lang-btn${currentLocale === 'en' ? ' active' : ''}`}
+              onClick={() => switchLocale('en')}
+              aria-label="English"
+            >EN</button>
+          </span>
         </nav>
 
         <div className="header-social">

@@ -211,6 +211,10 @@ button {
   width: 100%;
 }
 
+.lang-switcher-mobile {
+  display: none;
+}
+
 .lang-switcher {
   display: flex;
   align-items: center;
@@ -1859,6 +1863,21 @@ button {
     opacity: 1;
     visibility: visible;
     z-index: 1001;
+  }
+
+  .lang-switcher-mobile {
+    display: flex;
+    justify-content: center;
+    padding: 0.8rem 0 0.4rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0.4rem;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+  }
+
+  .lang-switcher-mobile .lang-btn {
+    font-size: 1rem;
+    letter-spacing: 0.15em;
   }
 
   .site-header.is-portfolio-open .submenu-nav,
