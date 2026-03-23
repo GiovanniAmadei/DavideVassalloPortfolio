@@ -7,7 +7,7 @@ export const config = {
   },
 }
 
-const handler = createMediaHandler({
+export default createMediaHandler({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || '',
   api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || '',
   api_secret: process.env.CLOUDINARY_API_SECRET || '',
@@ -25,61 +25,3 @@ const handler = createMediaHandler({
     }
   },
 })
-
-export default async function customMediaHandler(req: any, res: any) {
-  try {
-    // Intercettiamo res.json e res.status per vedere se c'è un errore interno
-    const originalJson = res.json.bind(res);
-    const originalStatus = res.status.bind(res);
-    
-    let statusCode = 200;
-    res.status = (code: number) => {
-      statusCode = code;
-      return originalStatus(code);
-    };
-    
-    res.json = (body: any) => {
-      // Intercettiamo TUTTI gli errori (status >= 400 o body.e)
-      if (statusCode >= 400 || body?.e) {
-        const errorMsg = body?.e || body?.message || `HTTP ${statusCode} Error`;
-        // Ritorniamo 200 e forziamo un finto file d'errore così TinaCMS lo mostra nella UI
-        res.status(200);
-        return originalJson({
-          items: [{
-            id: 'debug-error',
-            type: 'file',
-            filename: `ERROR_LOG (${statusCode}): ${typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg)}`,
-            directory: '/',
-            src: 'https://via.placeholder.com/150?text=ERROR',
-            thumbnails: {
-              '75x75': 'https://via.placeholder.com/75?text=ERROR',
-              '400x400': 'https://via.placeholder.com/400?text=ERROR',
-              '1000x1000': 'https://via.placeholder.com/1000?text=ERROR'
-            }
-          }],
-          offset: 0
-        });
-      }
-      return originalJson(body);
-    };
-
-    await handler(req, res)
-  } catch (err: any) {
-    console.error('Unhandled Media Handler Error:', err)
-    res.status(200).json({
-      items: [{
-        id: 'debug-error-catch',
-        type: 'file',
-        filename: `CATCH_ERROR: ${err?.message || err}`,
-        directory: '/',
-        src: 'https://via.placeholder.com/150?text=ERROR',
-        thumbnails: {
-           '75x75': 'https://via.placeholder.com/75?text=ERROR',
-           '400x400': 'https://via.placeholder.com/400?text=ERROR',
-           '1000x1000': 'https://via.placeholder.com/1000?text=ERROR'
-        }
-      }],
-      offset: 0
-    });
-  }
-}
