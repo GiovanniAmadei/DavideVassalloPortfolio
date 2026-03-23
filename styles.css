@@ -259,6 +259,8 @@ button {
 }
 
 .header-social a {
+  display: flex;
+  align-items: center;
   color: var(--muted);
   transition: color 0.3s ease, transform 0.25s ease, filter 0.3s ease;
 }
