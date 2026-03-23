@@ -233,6 +233,9 @@ button {
   text-transform: uppercase;
   color: var(--muted);
   padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
   transition: color 0.2s ease;
 }
 
