@@ -8,9 +8,9 @@ export const config = {
 }
 
 export default createMediaHandler({
-  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || '',
-  api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || '',
-  api_secret: process.env.CLOUDINARY_API_SECRET || '',
+  cloud_name: (process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || '').trim(),
+  api_key: (process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || '').trim(),
+  api_secret: (process.env.CLOUDINARY_API_SECRET || '').trim(),
   authorized: async (req, _res) => {
     try {
       if (process.env.NODE_ENV === 'development') {
