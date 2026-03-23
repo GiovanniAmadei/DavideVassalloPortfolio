@@ -141,7 +141,7 @@ button {
   text-transform: uppercase;
   color: var(--text);
   line-height: 1;
-  flex: 0 0 auto;
+  flex: 1;
   white-space: nowrap;
 }
 
@@ -149,7 +149,7 @@ button {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  flex: 2;
+  flex: 0 0 auto;
   align-items: center;
 }
 
