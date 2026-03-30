@@ -134,8 +134,11 @@ fragment HomepageParts on Homepage {
     title
     title_en
     href
-    images
-    objectPosition
+    images {
+      __typename
+      src
+      objectPosition
+    }
   }
   chiSonoLabel
   chiSonoPreviewTitle
@@ -166,8 +169,16 @@ fragment PortfolioPageParts on PortfolioPage {
   filterVideoAll
   filterVideo1
   filterVideo2
-  imagesFoto1
-  imagesFoto2
+  imagesFoto1 {
+    __typename
+    src
+    objectPosition
+  }
+  imagesFoto2 {
+    __typename
+    src
+    objectPosition
+  }
   descFoto1
   descFoto2
   tabFotografia_en

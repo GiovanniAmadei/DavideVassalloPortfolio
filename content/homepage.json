@@ -5,9 +5,18 @@
       "title_en": "Photography",
       "href": "/portfolio#fotografia",
       "images": [
-        "/assets/DSC_3667-Enhanced-NR.jpg",
-        "/assets/DSC_3643-Enhanced-NR.jpg",
-        "/assets/DSC_3596-Enhanced-NR-2.jpg"
+        {
+          "src": "/assets/DSC_3667-Enhanced-NR.jpg",
+          "objectPosition": "center center"
+        },
+        {
+          "src": "/assets/DSC_3643-Enhanced-NR.jpg",
+          "objectPosition": "center center"
+        },
+        {
+          "src": "/assets/DSC_3596-Enhanced-NR-2.jpg",
+          "objectPosition": "center center"
+        }
       ]
     },
     {
@@ -15,9 +24,18 @@
       "title_en": "Videomaking",
       "href": "/portfolio#videomaking",
       "images": [
-        "/assets/DSC_2620-2.jpg",
-        "/assets/DSC_2952-2.jpg",
-        "/assets/DSC_2706-2.jpg"
+        {
+          "src": "/assets/DSC_2620-2.jpg",
+          "objectPosition": "center center"
+        },
+        {
+          "src": "/assets/DSC_2952-2.jpg",
+          "objectPosition": "center center"
+        },
+        {
+          "src": "/assets/DSC_2706-2.jpg",
+          "objectPosition": "center center"
+        }
       ]
     },
     {
@@ -25,9 +43,18 @@
       "title_en": "Direction",
       "href": "/portfolio#regia",
       "images": [
-        "/assets/DSC_9738-Enhanced-NR-2.jpg",
-        "/assets/DSC_9859-Enhanced-NR.jpg",
-        "/assets/DSC_2965.jpg"
+        {
+          "src": "/assets/DSC_9738-Enhanced-NR-2.jpg",
+          "objectPosition": "center center"
+        },
+        {
+          "src": "/assets/DSC_9859-Enhanced-NR.jpg",
+          "objectPosition": "center center"
+        },
+        {
+          "src": "/assets/DSC_2965.jpg",
+          "objectPosition": "center center"
+        }
       ]
     }
   ],

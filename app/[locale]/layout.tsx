@@ -49,6 +49,22 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description,
       images: ['https://davidevassallo.net/assets/DSC_2852.jpg'],
     },
+    icons: {
+      icon: '/icon.png',
+      shortcut: '/icon.png',
+      apple: '/icon.png',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     metadataBase: new URL('https://davidevassallo.net'),
   }
 }

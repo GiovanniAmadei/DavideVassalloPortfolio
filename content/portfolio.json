@@ -17,14 +17,32 @@
   "filterVideo2": "Ricerca",
   "filterVideo2_en": "Research",
   "imagesFoto1": [
-    "/assets/DSC_3667-Enhanced-NR.jpg",
-    "/assets/DSC_3643-Enhanced-NR.jpg",
-    "/assets/DSC_3596-Enhanced-NR-2.jpg"
+    {
+      "src": "/assets/DSC_3667-Enhanced-NR.jpg",
+      "objectPosition": "center center"
+    },
+    {
+      "src": "/assets/DSC_3643-Enhanced-NR.jpg",
+      "objectPosition": "center center"
+    },
+    {
+      "src": "/assets/DSC_3596-Enhanced-NR-2.jpg",
+      "objectPosition": "center center"
+    }
   ],
   "imagesFoto2": [
-    "/assets/DSC_2852.jpg",
-    "/assets/DSC_2620-2.jpg",
-    "/assets/DSC_9738-Enhanced-NR-2.jpg"
+    {
+      "src": "/assets/DSC_2852.jpg",
+      "objectPosition": "center center"
+    },
+    {
+      "src": "/assets/DSC_2620-2.jpg",
+      "objectPosition": "center center"
+    },
+    {
+      "src": "/assets/DSC_9738-Enhanced-NR-2.jpg",
+      "objectPosition": "center center"
+    }
   ],
   "descFoto1": "Una ricerca costante sull'identità e la presenza. Il ritratto come spazio di ascolto, dove il soggetto si rivela attraverso la luce e il silenzio.",
   "descFoto1_en": "A constant research on identity and presence. The portrait as a space of listening, where the subject reveals themselves through light and silence.",

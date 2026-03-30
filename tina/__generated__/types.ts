@@ -703,13 +703,18 @@ export type GlobalConnection = Connection & {
   edges?: Maybe<Array<Maybe<GlobalConnectionEdges>>>;
 };
 
+export type HomepageHeroBandsImages = {
+  __typename?: 'HomepageHeroBandsImages';
+  src: Scalars['String']['output'];
+  objectPosition?: Maybe<Scalars['String']['output']>;
+};
+
 export type HomepageHeroBands = {
   __typename?: 'HomepageHeroBands';
   title?: Maybe<Scalars['String']['output']>;
   title_en?: Maybe<Scalars['String']['output']>;
   href?: Maybe<Scalars['String']['output']>;
-  images?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  objectPosition?: Maybe<Scalars['String']['output']>;
+  images?: Maybe<Array<Maybe<HomepageHeroBandsImages>>>;
 };
 
 export type Homepage = Node & Document & {
@@ -736,12 +741,16 @@ export type Homepage = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
+export type HomepageHeroBandsImagesFilter = {
+  src?: InputMaybe<ImageFilter>;
+  objectPosition?: InputMaybe<StringFilter>;
+};
+
 export type HomepageHeroBandsFilter = {
   title?: InputMaybe<StringFilter>;
   title_en?: InputMaybe<StringFilter>;
   href?: InputMaybe<StringFilter>;
-  images?: InputMaybe<ImageFilter>;
-  objectPosition?: InputMaybe<StringFilter>;
+  images?: InputMaybe<HomepageHeroBandsImagesFilter>;
 };
 
 export type HomepageFilter = {
@@ -777,6 +786,18 @@ export type HomepageConnection = Connection & {
   edges?: Maybe<Array<Maybe<HomepageConnectionEdges>>>;
 };
 
+export type PortfolioPageImagesFoto1 = {
+  __typename?: 'PortfolioPageImagesFoto1';
+  src: Scalars['String']['output'];
+  objectPosition?: Maybe<Scalars['String']['output']>;
+};
+
+export type PortfolioPageImagesFoto2 = {
+  __typename?: 'PortfolioPageImagesFoto2';
+  src: Scalars['String']['output'];
+  objectPosition?: Maybe<Scalars['String']['output']>;
+};
+
 export type PortfolioPage = Node & Document & {
   __typename?: 'PortfolioPage';
   tabFotografia?: Maybe<Scalars['String']['output']>;
@@ -788,8 +809,8 @@ export type PortfolioPage = Node & Document & {
   filterVideoAll?: Maybe<Scalars['String']['output']>;
   filterVideo1?: Maybe<Scalars['String']['output']>;
   filterVideo2?: Maybe<Scalars['String']['output']>;
-  imagesFoto1?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  imagesFoto2?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  imagesFoto1?: Maybe<Array<Maybe<PortfolioPageImagesFoto1>>>;
+  imagesFoto2?: Maybe<Array<Maybe<PortfolioPageImagesFoto2>>>;
   descFoto1?: Maybe<Scalars['String']['output']>;
   descFoto2?: Maybe<Scalars['String']['output']>;
   tabFotografia_en?: Maybe<Scalars['String']['output']>;
@@ -807,6 +828,16 @@ export type PortfolioPage = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
+export type PortfolioPageImagesFoto1Filter = {
+  src?: InputMaybe<ImageFilter>;
+  objectPosition?: InputMaybe<StringFilter>;
+};
+
+export type PortfolioPageImagesFoto2Filter = {
+  src?: InputMaybe<ImageFilter>;
+  objectPosition?: InputMaybe<StringFilter>;
+};
+
 export type PortfolioPageFilter = {
   tabFotografia?: InputMaybe<StringFilter>;
   tabVideomaking?: InputMaybe<StringFilter>;
@@ -817,8 +848,8 @@ export type PortfolioPageFilter = {
   filterVideoAll?: InputMaybe<StringFilter>;
   filterVideo1?: InputMaybe<StringFilter>;
   filterVideo2?: InputMaybe<StringFilter>;
-  imagesFoto1?: InputMaybe<ImageFilter>;
-  imagesFoto2?: InputMaybe<ImageFilter>;
+  imagesFoto1?: InputMaybe<PortfolioPageImagesFoto1Filter>;
+  imagesFoto2?: InputMaybe<PortfolioPageImagesFoto2Filter>;
   descFoto1?: InputMaybe<StringFilter>;
   descFoto2?: InputMaybe<StringFilter>;
   tabFotografia_en?: InputMaybe<StringFilter>;
@@ -1204,12 +1235,16 @@ export type GlobalMutation = {
   filterVideoAll_en?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type HomepageHeroBandsImagesMutation = {
+  src?: InputMaybe<Scalars['String']['input']>;
+  objectPosition?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HomepageHeroBandsMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   title_en?: InputMaybe<Scalars['String']['input']>;
   href?: InputMaybe<Scalars['String']['input']>;
-  images?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  objectPosition?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Array<InputMaybe<HomepageHeroBandsImagesMutation>>>;
 };
 
 export type HomepageMutation = {
@@ -1232,6 +1267,16 @@ export type HomepageMutation = {
   ctaMosaico_en?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type PortfolioPageImagesFoto1Mutation = {
+  src?: InputMaybe<Scalars['String']['input']>;
+  objectPosition?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PortfolioPageImagesFoto2Mutation = {
+  src?: InputMaybe<Scalars['String']['input']>;
+  objectPosition?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type PortfolioPageMutation = {
   tabFotografia?: InputMaybe<Scalars['String']['input']>;
   tabVideomaking?: InputMaybe<Scalars['String']['input']>;
@@ -1242,8 +1287,8 @@ export type PortfolioPageMutation = {
   filterVideoAll?: InputMaybe<Scalars['String']['input']>;
   filterVideo1?: InputMaybe<Scalars['String']['input']>;
   filterVideo2?: InputMaybe<Scalars['String']['input']>;
-  imagesFoto1?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  imagesFoto2?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  imagesFoto1?: InputMaybe<Array<InputMaybe<PortfolioPageImagesFoto1Mutation>>>;
+  imagesFoto2?: InputMaybe<Array<InputMaybe<PortfolioPageImagesFoto2Mutation>>>;
   descFoto1?: InputMaybe<Scalars['String']['input']>;
   descFoto2?: InputMaybe<Scalars['String']['input']>;
   tabFotografia_en?: InputMaybe<Scalars['String']['input']>;
@@ -1282,9 +1327,9 @@ export type ContattiPartsFragment = { __typename: 'Contatti', email: string, tel
 
 export type GlobalPartsFragment = { __typename: 'Global', email: string, telefono?: string | null, indirizzo?: string | null, copyright?: string | null, instagram?: string | null, linkedin?: string | null, youtube?: string | null, facebook?: string | null, logoName?: string | null, navHome?: string | null, navPortfolio?: string | null, navBlog?: string | null, navAbout?: string | null, navContact?: string | null, navSubFotografia?: string | null, navSubVideomaking?: string | null, navSubRegia?: string | null, navSubMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, navAbout_en?: string | null, navContact_en?: string | null, navSubFotografia_en?: string | null, navSubRegia_en?: string | null, navSubMosaico_en?: string | null, filterFoto1_en?: string | null, filterFoto2_en?: string | null, filterVideoAll_en?: string | null };
 
-export type HomepagePartsFragment = { __typename: 'Homepage', chiSonoLabel?: string | null, chiSonoPreviewTitle?: string | null, chiSonoPreviewText1?: string | null, chiSonoPreviewText2?: string | null, blogLabel?: string | null, mosaicoLabel?: string | null, ctaBlog?: string | null, ctaMosaico?: string | null, chiSonoLabel_en?: string | null, chiSonoPreviewTitle_en?: string | null, chiSonoPreviewText1_en?: string | null, chiSonoPreviewText2_en?: string | null, blogLabel_en?: string | null, mosaicoLabel_en?: string | null, ctaBlog_en?: string | null, ctaMosaico_en?: string | null, heroBands?: Array<{ __typename: 'HomepageHeroBands', title?: string | null, title_en?: string | null, href?: string | null, images?: Array<string | null> | null, objectPosition?: string | null } | null> | null };
+export type HomepagePartsFragment = { __typename: 'Homepage', chiSonoLabel?: string | null, chiSonoPreviewTitle?: string | null, chiSonoPreviewText1?: string | null, chiSonoPreviewText2?: string | null, blogLabel?: string | null, mosaicoLabel?: string | null, ctaBlog?: string | null, ctaMosaico?: string | null, chiSonoLabel_en?: string | null, chiSonoPreviewTitle_en?: string | null, chiSonoPreviewText1_en?: string | null, chiSonoPreviewText2_en?: string | null, blogLabel_en?: string | null, mosaicoLabel_en?: string | null, ctaBlog_en?: string | null, ctaMosaico_en?: string | null, heroBands?: Array<{ __typename: 'HomepageHeroBands', title?: string | null, title_en?: string | null, href?: string | null, images?: Array<{ __typename: 'HomepageHeroBandsImages', src: string, objectPosition?: string | null } | null> | null } | null> | null };
 
-export type PortfolioPagePartsFragment = { __typename: 'PortfolioPage', tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, imagesFoto1?: Array<string | null> | null, imagesFoto2?: Array<string | null> | null, descFoto1?: string | null, descFoto2?: string | null, tabFotografia_en?: string | null, tabRegia_en?: string | null, tabMosaico_en?: string | null, filterFoto1_en?: string | null, filterFoto2_en?: string | null, filterVideoAll_en?: string | null, filterVideo1_en?: string | null, filterVideo2_en?: string | null, descFoto1_en?: string | null, descFoto2_en?: string | null };
+export type PortfolioPagePartsFragment = { __typename: 'PortfolioPage', tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, descFoto1?: string | null, descFoto2?: string | null, tabFotografia_en?: string | null, tabRegia_en?: string | null, tabMosaico_en?: string | null, filterFoto1_en?: string | null, filterFoto2_en?: string | null, filterVideoAll_en?: string | null, filterVideo1_en?: string | null, filterVideo2_en?: string | null, descFoto1_en?: string | null, descFoto2_en?: string | null, imagesFoto1?: Array<{ __typename: 'PortfolioPageImagesFoto1', src: string, objectPosition?: string | null } | null> | null, imagesFoto2?: Array<{ __typename: 'PortfolioPageImagesFoto2', src: string, objectPosition?: string | null } | null> | null };
 
 export type BlogPagePartsFragment = { __typename: 'BlogPage', attivata?: boolean | null, label?: string | null, title?: string | null, emptyMessage?: string | null, readMoreLabel?: string | null, label_en?: string | null, title_en?: string | null, emptyMessage_en?: string | null, readMoreLabel_en?: string | null };
 
@@ -1407,7 +1452,7 @@ export type HomepageQueryVariables = Exact<{
 }>;
 
 
-export type HomepageQuery = { __typename?: 'Query', homepage: { __typename: 'Homepage', id: string, chiSonoLabel?: string | null, chiSonoPreviewTitle?: string | null, chiSonoPreviewText1?: string | null, chiSonoPreviewText2?: string | null, blogLabel?: string | null, mosaicoLabel?: string | null, ctaBlog?: string | null, ctaMosaico?: string | null, chiSonoLabel_en?: string | null, chiSonoPreviewTitle_en?: string | null, chiSonoPreviewText1_en?: string | null, chiSonoPreviewText2_en?: string | null, blogLabel_en?: string | null, mosaicoLabel_en?: string | null, ctaBlog_en?: string | null, ctaMosaico_en?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, heroBands?: Array<{ __typename: 'HomepageHeroBands', title?: string | null, title_en?: string | null, href?: string | null, images?: Array<string | null> | null, objectPosition?: string | null } | null> | null } };
+export type HomepageQuery = { __typename?: 'Query', homepage: { __typename: 'Homepage', id: string, chiSonoLabel?: string | null, chiSonoPreviewTitle?: string | null, chiSonoPreviewText1?: string | null, chiSonoPreviewText2?: string | null, blogLabel?: string | null, mosaicoLabel?: string | null, ctaBlog?: string | null, ctaMosaico?: string | null, chiSonoLabel_en?: string | null, chiSonoPreviewTitle_en?: string | null, chiSonoPreviewText1_en?: string | null, chiSonoPreviewText2_en?: string | null, blogLabel_en?: string | null, mosaicoLabel_en?: string | null, ctaBlog_en?: string | null, ctaMosaico_en?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, heroBands?: Array<{ __typename: 'HomepageHeroBands', title?: string | null, title_en?: string | null, href?: string | null, images?: Array<{ __typename: 'HomepageHeroBandsImages', src: string, objectPosition?: string | null } | null> | null } | null> | null } };
 
 export type HomepageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1419,14 +1464,14 @@ export type HomepageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomepageConnectionQuery = { __typename?: 'Query', homepageConnection: { __typename?: 'HomepageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomepageConnectionEdges', cursor: string, node?: { __typename: 'Homepage', id: string, chiSonoLabel?: string | null, chiSonoPreviewTitle?: string | null, chiSonoPreviewText1?: string | null, chiSonoPreviewText2?: string | null, blogLabel?: string | null, mosaicoLabel?: string | null, ctaBlog?: string | null, ctaMosaico?: string | null, chiSonoLabel_en?: string | null, chiSonoPreviewTitle_en?: string | null, chiSonoPreviewText1_en?: string | null, chiSonoPreviewText2_en?: string | null, blogLabel_en?: string | null, mosaicoLabel_en?: string | null, ctaBlog_en?: string | null, ctaMosaico_en?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, heroBands?: Array<{ __typename: 'HomepageHeroBands', title?: string | null, title_en?: string | null, href?: string | null, images?: Array<string | null> | null, objectPosition?: string | null } | null> | null } | null } | null> | null } };
+export type HomepageConnectionQuery = { __typename?: 'Query', homepageConnection: { __typename?: 'HomepageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomepageConnectionEdges', cursor: string, node?: { __typename: 'Homepage', id: string, chiSonoLabel?: string | null, chiSonoPreviewTitle?: string | null, chiSonoPreviewText1?: string | null, chiSonoPreviewText2?: string | null, blogLabel?: string | null, mosaicoLabel?: string | null, ctaBlog?: string | null, ctaMosaico?: string | null, chiSonoLabel_en?: string | null, chiSonoPreviewTitle_en?: string | null, chiSonoPreviewText1_en?: string | null, chiSonoPreviewText2_en?: string | null, blogLabel_en?: string | null, mosaicoLabel_en?: string | null, ctaBlog_en?: string | null, ctaMosaico_en?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, heroBands?: Array<{ __typename: 'HomepageHeroBands', title?: string | null, title_en?: string | null, href?: string | null, images?: Array<{ __typename: 'HomepageHeroBandsImages', src: string, objectPosition?: string | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export type PortfolioPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PortfolioPageQuery = { __typename?: 'Query', portfolioPage: { __typename: 'PortfolioPage', id: string, tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, imagesFoto1?: Array<string | null> | null, imagesFoto2?: Array<string | null> | null, descFoto1?: string | null, descFoto2?: string | null, tabFotografia_en?: string | null, tabRegia_en?: string | null, tabMosaico_en?: string | null, filterFoto1_en?: string | null, filterFoto2_en?: string | null, filterVideoAll_en?: string | null, filterVideo1_en?: string | null, filterVideo2_en?: string | null, descFoto1_en?: string | null, descFoto2_en?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PortfolioPageQuery = { __typename?: 'Query', portfolioPage: { __typename: 'PortfolioPage', id: string, tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, descFoto1?: string | null, descFoto2?: string | null, tabFotografia_en?: string | null, tabRegia_en?: string | null, tabMosaico_en?: string | null, filterFoto1_en?: string | null, filterFoto2_en?: string | null, filterVideoAll_en?: string | null, filterVideo1_en?: string | null, filterVideo2_en?: string | null, descFoto1_en?: string | null, descFoto2_en?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, imagesFoto1?: Array<{ __typename: 'PortfolioPageImagesFoto1', src: string, objectPosition?: string | null } | null> | null, imagesFoto2?: Array<{ __typename: 'PortfolioPageImagesFoto2', src: string, objectPosition?: string | null } | null> | null } };
 
 export type PortfolioPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1438,7 +1483,7 @@ export type PortfolioPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PortfolioPageConnectionQuery = { __typename?: 'Query', portfolioPageConnection: { __typename?: 'PortfolioPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PortfolioPageConnectionEdges', cursor: string, node?: { __typename: 'PortfolioPage', id: string, tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, imagesFoto1?: Array<string | null> | null, imagesFoto2?: Array<string | null> | null, descFoto1?: string | null, descFoto2?: string | null, tabFotografia_en?: string | null, tabRegia_en?: string | null, tabMosaico_en?: string | null, filterFoto1_en?: string | null, filterFoto2_en?: string | null, filterVideoAll_en?: string | null, filterVideo1_en?: string | null, filterVideo2_en?: string | null, descFoto1_en?: string | null, descFoto2_en?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PortfolioPageConnectionQuery = { __typename?: 'Query', portfolioPageConnection: { __typename?: 'PortfolioPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PortfolioPageConnectionEdges', cursor: string, node?: { __typename: 'PortfolioPage', id: string, tabFotografia?: string | null, tabVideomaking?: string | null, tabRegia?: string | null, tabMosaico?: string | null, filterFoto1?: string | null, filterFoto2?: string | null, filterVideoAll?: string | null, filterVideo1?: string | null, filterVideo2?: string | null, descFoto1?: string | null, descFoto2?: string | null, tabFotografia_en?: string | null, tabRegia_en?: string | null, tabMosaico_en?: string | null, filterFoto1_en?: string | null, filterFoto2_en?: string | null, filterVideoAll_en?: string | null, filterVideo1_en?: string | null, filterVideo2_en?: string | null, descFoto1_en?: string | null, descFoto2_en?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, imagesFoto1?: Array<{ __typename: 'PortfolioPageImagesFoto1', src: string, objectPosition?: string | null } | null> | null, imagesFoto2?: Array<{ __typename: 'PortfolioPageImagesFoto2', src: string, objectPosition?: string | null } | null> | null } | null } | null> | null } };
 
 export type BlogPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1602,8 +1647,11 @@ export const HomepagePartsFragmentDoc = gql`
     title
     title_en
     href
-    images
-    objectPosition
+    images {
+      __typename
+      src
+      objectPosition
+    }
   }
   chiSonoLabel
   chiSonoPreviewTitle
@@ -1635,8 +1683,16 @@ export const PortfolioPagePartsFragmentDoc = gql`
   filterVideoAll
   filterVideo1
   filterVideo2
-  imagesFoto1
-  imagesFoto2
+  imagesFoto1 {
+    __typename
+    src
+    objectPosition
+  }
+  imagesFoto2 {
+    __typename
+    src
+    objectPosition
+  }
   descFoto1
   descFoto2
   tabFotografia_en
@@ -2282,7 +2338,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/2.2/content/29b7382e-f1e4-4414-907a-3025f481fd84/github/main",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )

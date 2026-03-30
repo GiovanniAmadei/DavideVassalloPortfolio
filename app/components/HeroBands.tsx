@@ -7,8 +7,7 @@ interface HeroBandsProps {
   bands: {
     title?: string
     href?: string
-    images?: string[]
-    objectPosition?: string
+    images?: { src: string; objectPosition?: string }[]
   }[]
   tinaField?: any
   homepageData?: any
@@ -51,9 +50,9 @@ export default function HeroBands({ bands, tinaField, homepageData }: HeroBandsP
             className="hero-band-slider"
             ref={el => { refs.current[bandIdx] = el }}
           >
-            {(band.images || []).map((src, i) => (
+            {(band.images || []).map((imgObj, i) => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={`${src}-${i}`} src={src || ''} alt={band.title || ''} className={i === 0 ? 'active' : ''} style={{ objectPosition: band.objectPosition || 'center center' }} />
+              <img key={`${imgObj.src}-${i}`} src={imgObj.src || ''} alt={band.title || ''} className={i === 0 ? 'active' : ''} style={{ objectPosition: imgObj.objectPosition || 'center center' }} />
             ))}
           </div>
           <div className="hero-band-overlay" />

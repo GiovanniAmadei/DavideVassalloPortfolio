@@ -562,23 +562,34 @@ export default defineConfig({
               { type: "string", name: "title", label: "Titolo Pannello (IT)" },
               { type: "string", name: "title_en", label: "Panel Title (EN)" },
               { type: "string", name: "href", label: "Link Pannello (Es. /portfolio#fotografia)" },
-              { type: "image", name: "images", label: "Immagini Slider", list: true },
               {
-                type: "string",
-                name: "objectPosition",
-                label: "Posizione Immagine",
-                description: "Controlla il punto focale dell'immagine nella fascia.",
-                options: [
-                  { value: "center center", label: "Centro (default)" },
-                  { value: "top center", label: "Alto" },
-                  { value: "bottom center", label: "Basso" },
-                  { value: "center left", label: "Sinistra" },
-                  { value: "center right", label: "Destra" },
-                  { value: "20% center", label: "Sinistra-centro" },
-                  { value: "80% center", label: "Destra-centro" },
-                  { value: "center 30%", label: "Alto-centro" },
-                  { value: "center 70%", label: "Basso-centro" },
-                ],
+                type: "object",
+                name: "images",
+                label: "Immagini Slider",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item?.src || "Nuova Immagine" })
+                },
+                fields: [
+                  { type: "image", name: "src", label: "Immagine", required: true },
+                  {
+                    type: "string",
+                    name: "objectPosition",
+                    label: "Posizione Immagine",
+                    description: "Controlla il punto focale dell'immagine nella fascia.",
+                    options: [
+                      { value: "center center", label: "Centro (default)" },
+                      { value: "top center", label: "Alto" },
+                      { value: "bottom center", label: "Basso" },
+                      { value: "center left", label: "Sinistra" },
+                      { value: "center right", label: "Destra" },
+                      { value: "20% center", label: "Sinistra-centro" },
+                      { value: "80% center", label: "Destra-centro" },
+                      { value: "center 30%", label: "Alto-centro" },
+                      { value: "center 70%", label: "Basso-centro" },
+                    ],
+                  }
+                ]
               },
             ],
           },
@@ -628,8 +639,64 @@ export default defineConfig({
           { type: "string", name: "filterVideoAll", label: "Filtro Video: Tutto (IT)" },
           { type: "string", name: "filterVideo1", label: "Filtro Video 1 (IT)" },
           { type: "string", name: "filterVideo2", label: "Filtro Video 2 (IT)" },
-          { type: "image", name: "imagesFoto1", label: "Immagini Slider Foto 1", list: true },
-          { type: "image", name: "imagesFoto2", label: "Immagini Slider Foto 2", list: true },
+          {
+            type: "object",
+            name: "imagesFoto1",
+            label: "Immagini Slider Foto 1",
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.src || "Nuova Immagine" })
+            },
+            fields: [
+              { type: "image", name: "src", label: "Immagine", required: true },
+              {
+                type: "string",
+                name: "objectPosition",
+                label: "Posizione Immagine",
+                description: "Controlla il punto focale dell'immagine nella fascia.",
+                options: [
+                  { value: "center center", label: "Centro (default)" },
+                  { value: "top center", label: "Alto" },
+                  { value: "bottom center", label: "Basso" },
+                  { value: "center left", label: "Sinistra" },
+                  { value: "center right", label: "Destra" },
+                  { value: "20% center", label: "Sinistra-centro" },
+                  { value: "80% center", label: "Destra-centro" },
+                  { value: "center 30%", label: "Alto-centro" },
+                  { value: "center 70%", label: "Basso-centro" },
+                ],
+              }
+            ]
+          },
+          {
+            type: "object",
+            name: "imagesFoto2",
+            label: "Immagini Slider Foto 2",
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.src || "Nuova Immagine" })
+            },
+            fields: [
+              { type: "image", name: "src", label: "Immagine", required: true },
+              {
+                type: "string",
+                name: "objectPosition",
+                label: "Posizione Immagine",
+                description: "Controlla il punto focale dell'immagine nella fascia.",
+                options: [
+                  { value: "center center", label: "Centro (default)" },
+                  { value: "top center", label: "Alto" },
+                  { value: "bottom center", label: "Basso" },
+                  { value: "center left", label: "Sinistra" },
+                  { value: "center right", label: "Destra" },
+                  { value: "20% center", label: "Sinistra-centro" },
+                  { value: "80% center", label: "Destra-centro" },
+                  { value: "center 30%", label: "Alto-centro" },
+                  { value: "center 70%", label: "Basso-centro" },
+                ],
+              }
+            ]
+          },
           { type: "string", name: "descFoto1", label: "Testo Introduttivo Ritratti (IT)", ui: { component: "textarea" } },
           { type: "string", name: "descFoto2", label: "Testo Introduttivo Narrazione (IT)", ui: { component: "textarea" } },
           // ── English ──

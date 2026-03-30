@@ -34,7 +34,7 @@ const defaultTabTitles: Record<string, string> = {
 
 
 
-function FotoPanelSlider({ images, label }: { images: string[]; label: string }) {
+function FotoPanelSlider({ images, label }: { images: { src: string; objectPosition?: string }[]; label: string }) {
   const [current, setCurrent] = useState(0)
   useEffect(() => {
     if (images.length <= 1) return
@@ -43,9 +43,9 @@ function FotoPanelSlider({ images, label }: { images: string[]; label: string })
   }, [images.length])
   return (
     <div className="foto-panel-slider">
-      {images.map((src, i) => (
+      {images.map((imgObj, i) => (
         // eslint-disable-next-line @next/next/no-img-element
-        <img key={src} src={src} alt={label} className={i === current ? 'active' : ''} />
+        <img key={imgObj.src} src={imgObj.src} alt={label} className={i === current ? 'active' : ''} style={{ objectPosition: imgObj.objectPosition || 'center center' }} />
       ))}
     </div>
   )
@@ -69,7 +69,7 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
       imagesField: 'imagesFoto1',
       descField: 'descFoto1',
       desc: pageData?.descFoto1 || '',
-      images: pageData?.imagesFoto1?.length ? pageData.imagesFoto1 : ['/assets/DSC_3667-Enhanced-NR.jpg', '/assets/DSC_3643-Enhanced-NR.jpg', '/assets/DSC_3596-Enhanced-NR-2.jpg'],
+      images: pageData?.imagesFoto1?.length ? pageData.imagesFoto1 : [{ src: '/assets/DSC_3667-Enhanced-NR.jpg' }, { src: '/assets/DSC_3643-Enhanced-NR.jpg' }, { src: '/assets/DSC_3596-Enhanced-NR-2.jpg' }],
     },
     {
       id: 'narrazione',
@@ -78,7 +78,7 @@ export default function PortfolioTabs({ fotografiaData, videomakingData, regiaDa
       imagesField: 'imagesFoto2',
       descField: 'descFoto2',
       desc: pageData?.descFoto2 || '',
-      images: pageData?.imagesFoto2?.length ? pageData.imagesFoto2 : ['/assets/DSC_2852.jpg', '/assets/DSC_2620-2.jpg', '/assets/DSC_9738-Enhanced-NR-2.jpg'],
+      images: pageData?.imagesFoto2?.length ? pageData.imagesFoto2 : [{ src: '/assets/DSC_2852.jpg' }, { src: '/assets/DSC_2620-2.jpg' }, { src: '/assets/DSC_9738-Enhanced-NR-2.jpg' }],
     },
   ]
 
